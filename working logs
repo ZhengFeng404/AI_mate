@@ -1,0 +1,142 @@
+2025/2/5
+Completed:
+1. Basic LLM linked with live2D model on Unity.
+2. Live2D model selects and exhibits expression according to the generated response.
+3. TTS module ensures audio output at the same time.
+4. Basic UI with message input box, send button.
+
+Planning:
+1. Add live2d model motions linked to LLM response.
+2. Better TTS.
+3. More dynamic animation (i.e. eye-tracking of live2d model on mouse)
+
+
+2025/2/7
+1. Live2D model can execute motions with command from LLM. But the motion animation can not fade normally.
+2. Slightly better TTS, with edge_tts. Plan to replace it with VITS.
+
+Planning:
+More dynamic animation (i.e. eye-tracking of live2d model on mouse. Also lip sync)
+
+
+2025/2/10
+1. Implement basic long-term (or short?) memory with mem0. Need more testing and improvement.
+2. Half-way building UI for chat history.
+
+Planning:
+1. Fix UI for chat history
+2. More dynamic animation (i.e. eye-tracking of live2d model on mouse. Also lip sync)
+
+
+2025/2/11
+1. Have fixed UI for chat history
+2. Implement personality and background story prompt. Ha! It's truly excellent! 100% suitable for this project.
+3. Exciting! Memory module with MEM0 has also been greatly improved. Now she is much more like a human!
+4. Trying to deal with efficiency problem for hours but no real progress. Seems a problem with network.
+
+Planning:
+1. Use local TTS instead or other method to improve efficiency
+2. More dynamic animation (i.e. eye-tracking of live2d model on mouse. Also lip sync)
+
+
+2025/2/12
+1. Have improved efficiency (From 15s/response to 7s/response) with fixed asyncio execution.
+But still not satisfying. Api rate limit is a problem.
+Need google cloud membership but don't have credit card... Why debit card doesn't work?
+
+
+2025/2/13
+1. Learning Letta. Plan to transfer from Mem0 to Letta which seems to be more suitable and powerful for this project.
+
+
+2025/2/14
+1. Trying. Considering separate Letta and LLM response module to save execution time. Need more investigation with Letta.
+(Need to top up openai or google)
+
+
+2025/2/19
+Have gotten google cloud membership. Letta also has some problems:
+1. The assistant message seems to be too short.
+2. With gemini-2.0-pro, still occassionally stuck after storing memory.
+3. It seems not so proactive at storing memory, even if I delete most of the character-design prompt.
+4. Takes long time (more than 4s)
+
+Planning to check the first 3 problems tomorrow.
+
+
+2025/2/20
+So there should be 5 parallel execution:
+1. (Mem0+Dify memory search, then generate response)
+2. (recall memory: conversation content directly stored and added to prompt.)
+    -> after exceeding context window size, summarized. Summary like a diary, stored into long-term memory.
+3. (mid-term memory: Using Mem0, extract info from each interaction, adding to qdrant vector knowledge base.)
+    -> after exceeding its size threshold. LLM selects part of it to long-term memory.
+4. (long-term memory: Using Dify. More structured and large-scale database, storing and updating info from all other
+memory and can attach web knowledge.)
+5. (core memory: Shown to prompt. Regularly check if there are valuable information in memory that can be added to it,
+like main interest or goal of the user, or main information of the agent. Also, the intimacy value between the user
+and the agent. The agent's impression of the user. Recent emotion state of the user and the agent.
+So the added information can be highly structured.)
+
+Planning:
+llama_index (manually add a category for importing large dataset) + LLM + Weaviate for long-term memory. Replace Dify.
+(web knowledge may not need to be completely added to long-term memory)
+
+
+2025/2/21
+Tried directly insert data object but failed. A problem about connection to cohere api for embedding.
+Going to try
+1. Adding embedding vector with a vector prepared outside weaviate
+2. Implement local embedding method
+2. llama_index for processing
+
+
+2025/2/24
+Continue to implement weaviate for long-term memory (Have mainly implemented mem prompt.)
+
+Planning:
+Add function calling (decide which collection and how to search for related memory) to main agent response generation,
+This is in order to: with user saying "tomorrow is my birthday, hmm...", the agent would search for "preference",
+to give user some more informative advice.
+Because even hybrid (keyword + cos similarity) search may still not be sufficient.
+
+
+2025/2/26
+1. Letta still failed (with better config) after first attempt to summary conversation history。
+2. Meanwhile, Letta honestly takes too long. 1.7s for inserting a memory clip; 3s for querying memory.
+So I decided to forget Letta completely. Memory storage should be run in backend without wasting time during response.
+3. Continue to implement weaviate for long-term memory.
+(Finalize implementing mem prompt. Successfully tested collection creation + insert + query.)
+4. Trying adding conversation history
+
+
+2025/2/27
+1. Finally, implemented long-term memory with weaviate, accompanied with conversation history.
+At this moment, mem0 serves as mid-term memory
+2. Deal with total efficiency problem. Now mid-term and long-term memory have both been executed at the backend.
+Response time becomes 4 seconds on average.
+
+Planning:
+1. mem0 needs better prompt so that it distinguish the subject/object of a memory clip.
+2. Better prompt to guide LLM to make use of memory and conversation history. Currently memory has too high weight.
+3. Add Status (of human or other objects) collection to weaviate.
+4. Vision ability
+5. Check if google cloud provide computing resources for better TTS (i.e. VITS)
+
+
+2025/2/28
+1. Visual perception added. Related efficiency problem has been almost solved.
+2. Trying to adjust prompt to balance weights of different input parts.
+
+
+2025/3/2
+1，planning to add function calling:
+1. llm decide if it needs additional memory with its self designed keywords to query
+2. if it needs to query internet information
+
+
+Long-term plan (in February):
+3. AI proactive speaking
+7. ASR
+
+

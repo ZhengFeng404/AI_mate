@@ -1,0 +1,8 @@
+*.key
+*.secret
+*.env
+*.mp3
+*.wav
+.secrets/
+secrets/
+env/
