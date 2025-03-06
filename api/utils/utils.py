@@ -19,9 +19,9 @@ def load_api_key(key_name):
         if not api_key:
             logging.error(f"API Key 文件为空或读取失败")
             return False
-        os.environ[key_name] = api_key
+        #os.environ[key_name] = api_key
         logging.info("Gemini API Key 从文件成功加载并设置为环境变量。")
-        return True
+        return api_key
     except FileNotFoundError:
         logging.error(f"API Key 文件未找到")
         return False
