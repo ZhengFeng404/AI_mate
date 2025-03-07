@@ -1,5 +1,6 @@
 import os
 import logging
+import json
 
 logging.basicConfig(level=logging.INFO)
 
@@ -28,3 +29,19 @@ def load_api_key(key_name):
     except Exception as e:
         logging.error(f"读取 API Key 文件时发生错误: {e}")
         return False
+
+
+def format_conversation_history(chat_session, user_id):
+    history_text = ""
+    if chat_session.history:
+        for content in chat_session.history:
+            role = f"User {user_id}" if content.role == "user" else "AI"
+            text = content.parts[0].text.strip()
+            if role == "AI" and "response_text" in text:
+                try:
+                    response_json = json.loads(text.replace('`json', '').replace('`', '').strip())
+                    text = response_json.get("response_text", "回复内容解析失败")
+                except json.JSONDecodeError:
+                    pass
+            history_text += f"{role}: {text}\n"
+    return history_text

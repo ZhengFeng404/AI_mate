@@ -246,3 +246,163 @@ preference_class_definition = {
         },
     ]
 }
+
+profile_class_definition = {
+    "class": "Profile",
+    "description": "存储某个体的长期身份信息，包括基本信息、健康状况、社会身份、经济状况、居住情况等",
+    "properties": [
+        # 基本信息
+        {
+            "name": "fullName",
+            "dataType": ["text"],
+            "description": "完整姓名"
+        },
+        {
+            "name": "nickname",
+            "dataType": ["text"],
+            "description": "常用昵称"
+        },
+        {
+            "name": "dateOfBirth",
+            "dataType": ["date"],
+            "description": "出生日期"
+        },
+        {
+            "name": "age",
+            "dataType": ["number"],
+            "description": "年龄"
+        },
+        {
+            "name": "gender",
+            "dataType": ["text"],
+            "description": "性别"
+        },
+        {
+            "name": "height",
+            "dataType": ["number"],
+            "description": "身高 (cm)"
+        },
+        {
+            "name": "weight",
+            "dataType": ["number"],
+            "description": "体重 (kg)"
+        },
+
+        # 健康状况
+        {
+            "name": "chronicDiseases",
+            "dataType": ["text[]"],
+            "description": "慢性疾病（如：糖尿病、哮喘等）"
+        },
+        {
+            "name": "disabilities",
+            "dataType": ["text[]"],
+            "description": "身体残疾或特殊健康状况"
+        },
+        {
+            "name": "allergies",
+            "dataType": ["text[]"],
+            "description": "过敏源（如：花粉、海鲜等）"
+        },
+        {
+            "name": "bloodType",
+            "dataType": ["text"],
+            "description": "血型"
+        },
+        {
+            "name": "medicalHistory",
+            "dataType": ["text"],
+            "description": "过去的重大疾病或手术记录"
+        },
+
+        # 社会身份
+        {
+            "name": "educationLevel",
+            "dataType": ["text"],
+            "description": "受教育水平 (例如：小学、大学、研究生等)"
+        },
+        {
+            "name": "schoolOrUniversity",
+            "dataType": ["text"],
+            "description": "当前或过去就读的学校"
+        },
+        {
+            "name": "jobTitle",
+            "dataType": ["text"],
+            "description": "职业名称"
+        },
+        {
+            "name": "companyOrEmployer",
+            "dataType": ["text"],
+            "description": "工作单位"
+        },
+        {
+            "name": "jobLevel",
+            "dataType": ["text"],
+            "description": "职业等级 (例如：实习生、经理、高级工程师、副教授等)"
+        },
+        {
+            "name": "socialRole",
+            "dataType": ["text"],
+            "description": "社会角色 (例如：学生、教师、医生、艺术家)"
+        },
+
+        # 经济状况
+        {
+            "name": "incomeLevel",
+            "dataType": ["text"],
+            "description": "收入水平 (低收入、中等收入、高收入)"
+        },
+        {
+            "name": "financialDebts",
+            "dataType": ["text"],
+            "description": "负债情况"
+        },
+
+        # 居住情况
+        {
+            "name": "currentResidence",
+            "dataType": ["text"],
+            "description": "当前居住地 (城市、国家)"
+        },
+        {
+            "name": "hometown",
+            "dataType": ["text"],
+            "description": "家乡 (出生地)"
+        },
+        {
+            "name": "livingWith",
+            "dataType": ["text"],
+            "description": "与谁一起居住 (独居、与家人、与室友)"
+        },
+        {
+            "name": "housingType",
+            "dataType": ["text"],
+            "description": "住房类型 (公寓、独立屋、宿舍等)"
+        },
+
+        # 文化背景
+        {
+            "name": "nationality",
+            "dataType": ["text"],
+            "description": "国籍"
+        },
+        {
+            "name": "ethnicity",
+            "dataType": ["text"],
+            "description": "种族/民族"
+        },
+        {
+            "name": "religion",
+            "dataType": ["text"],
+            "description": "宗教信仰"
+        },
+
+        # 更新时间
+        {
+            "name": "profileLastUpdated",
+            "dataType": ["date"],
+            "description": "该档案的最近更新时间"
+        },
+    ]
+}

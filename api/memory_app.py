@@ -49,13 +49,16 @@ async def long_term_memory_endpoint(request: LongTermMemoryRequest):
             "timestamp": datetime.now().isoformat()
         }
 
+        last_two_long_term_memories.append(memory_data)
+        if len(last_two_long_term_memories) > 2:
+            last_two_long_term_memories.pop(0)
 
         asyncio.create_task(
             long_term_memory_async(
                 request.user_text,
                 request.response_text,
                 request.conversation_history_text,
-                #last_two_long_term_memories=last_two_long_term_memories
+                last_two_long_term_memories=last_two_long_term_memories
             )
         )
         return JSONResponse({"status": "success", "message": "长期记忆存储任务已启动, 并保存了记忆快照"})

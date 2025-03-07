@@ -1,4 +1,4 @@
-import google.generativeai as genai # 确保已导入 genai
+import google.generativeai as genai
 from dotenv import load_dotenv
 import os
 import json
@@ -15,7 +15,7 @@ GEMINI_API_KEY = load_api_key("GEMINI_API_KEY")
 genai.configure(api_key=GEMINI_API_KEY)
 os.environ["GEMINI_API_KEY"] = GEMINI_API_KEY
 #embedding_model_name = 'models/text-embedding-004'
-memory_process_model = genai.GenerativeModel('gemini-2.0-flash') # PRO?
+memory_process_model = genai.GenerativeModel('gemini-1.5-pro') # PRO?
 #gemini_embedding_model = genai.GenerativeModel(embedding_model_name) # 初始化 Gemini Embedding 模型
 
 # 初始化 Weaviate 客户端
@@ -27,7 +27,7 @@ except Exception as e:
     raise  # 重新抛出异常，以便在启动时尽早发现问题
 
 
-with open("Sunflower_character_profile.txt", "r", encoding="utf-8") as file:
+with open("../Prompt/Character/Lily.txt", "r", encoding="utf-8") as file:
     character_profile = file.read()
 
 with open("weaviate_class.txt", "r", encoding="utf-8") as file:
@@ -37,7 +37,7 @@ with open("weaviate_class.txt", "r", encoding="utf-8") as file:
 
 def query_long_term_memory(user_input, ai_response):
     related_memory = []
-    for collection_name in ["Events", "Relationships", "Knowledge", "Goals", "Preferences"]:
+    for collection_name in ["Events", "Relationships", "Knowledge", "Goals", "Preferences", "Profile"]:
         collection = client.collections.get(collection_name)
         existing_mem = collection.query.hybrid(
             query=f"User: {user_input}" + f"\nAI: {ai_response}",
@@ -51,7 +51,8 @@ def query_long_term_memory(user_input, ai_response):
 
     return related_memory
 
-async def long_term_memory_async(user_input, ai_response, conversation_history, user_id="default_user"):
+async def long_term_memory_async(user_input, ai_response, conversation_history,
+                                 last_two_long_term_memories=None, user_id="default_user"):
     """
     后台异步处理用户输入和 AI 回复，判断是否存储记忆，并存储到 Weaviate.
     """
@@ -276,22 +277,25 @@ async def long_term_memory_async(user_input, ai_response, conversation_history, 
         ## **记忆库相关内容**
         {related_memory}
         
-
+        ## **最近两轮记忆**
+        以下是最近两轮对话后，你生成的长期记忆条目，可以作为本次记忆生成任务的参考：
+        ```json
+        {last_two_long_term_memories}
+        ```
 
         ## **对话历史**
-        {conversation_history}
+        {conversation_text}
 
         **请开始分析用户输入和虚拟人格回复，判断是否需要存储记忆，并严格按照上述JSON格式输出结果，如果不需要存储任何记忆，则返回 `[]`。**
         """
 
-        # 将 last_two_long_term_memories 转换为 JSON 字符串，并处理可能的空列表情况
 
 
         prompt = memory_process_prompt_template.format(data_class_def=data_class_def,
                                                        user_input=user_input, ai_response=ai_response,
                                                        related_memory=related_memory,
-
-                                                       conversation_history=conversation_history)
+                                                       last_two_long_term_memories=last_two_long_term_memories,
+                                                       conversation_text=conversation_history)
 
         memory_entries = memory_process_model.generate_content(prompt)
 

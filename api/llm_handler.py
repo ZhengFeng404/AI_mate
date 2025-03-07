@@ -48,13 +48,13 @@ config = {
 #mem0 = Memory.from_config(config)
 
 # 读取角色设定文件 (保持不变)
-with open("Sunflower_character_profile.txt", "r", encoding="utf-8") as file:
+with open("../Prompt/Character/Lily.txt", "r", encoding="utf-8") as file:
     character_profile = file.read()
 
 # 查询长期记忆 (保持不变)
 def query_long_term_memory_input(user_input):
     related_memory = []
-    for collection_name in ["Events", "Relationships", "Knowledge", "Goals", "Preferences"]:
+    for collection_name in ["Events", "Relationships", "Knowledge", "Goals", "Preferences", "Profile"]:
         collection = client.collections.get(collection_name)
         existing_mem = collection.query.hybrid(
             query=f"User: {user_input}",
@@ -102,71 +102,61 @@ def get_gemini_response_with_history(user_input, user_id, manual_history, image_
         dict: 包含回复信息的字典 (response_text, expression, motion 等)
     """
     try:
-        # 初始化 Gemini 模型 (system instruction 部分保持不变)
-        system_instruction = f"""
-        {character_profile}
-
-        === 当前用户 ===
-        {user_id}
-
-        === LLM任务要求 ===
-        你将扮演你的角色。
-        请基于用户输入，和之前的*对话历史*，生成你的语言回复。
-        请注意，你会尝试联想回忆和目前互动有关的记忆，所以有**长期记忆**可以参考，但这些记忆中有时存在联想到的无关内容。
-        你收到的视觉图片输入来自你的摄像头，每次对话时都会获得一张当前摄像头看到的照相。
-        你应该自行判断记忆和图片信息是否与当前对话相关，并自然地将*真正相关*的信息融入到你的语言回复中。
-
-        选择合适的表情名称、动作名称加入到JSON输出中。
-
-        请按以下 JSON 格式返回，每个条目都只有一个元素：
-        {{
-            "expression": "表情名称",
-            "motion": "动作名称",
-            "response_text": "回复文本（只包括将要说出口的话语）",
-        }}
-
-        可用表情："黑脸", "白眼", "拿旗子", "眼泪"
-        可用动作："好奇", "瞌睡", "害怕", "举白旗", "摇头", "抱枕头"
-
-        """
-        gemini_model = genai.GenerativeModel('gemini-2.0-pro-exp-02-05',
-                                             system_instruction=system_instruction)
-        chat_session = gemini_model.start_chat(history=[]) #  创建一个临时的 chat_session，但 history 不会被自动维护
-
         # 1. 检索记忆 (中期和长期) -  每次都重新检索 (保持不变)
-        #mid_term_memories = mem0.search(query=user_input, user_id="default_user", limit=3)
-        #memories_str = "\n".join(f"- {entry['memory']}" for entry in mid_term_memories)
+        # mid_term_memories = mem0.search(query=user_input, user_id="default_user", limit=3)
+        # memories_str = "\n".join(f"- {entry['memory']}" for entry in mid_term_memories)
         long_term_memories = query_long_term_memory_input(user_input)
 
-        # 2. 构建动态 Prompt 模板 (修改部分 -  加入 manual_history)
-        prompt_template = f"""
-        === 对话历史 ===
-        {{manual_history}}
+        # 1. 构建对话历史的 JSON 结构
+        history_json = json.dumps(manual_history, ensure_ascii=False, indent=2)  # 保持 JSON 格式，避免 ASCII 转义
 
-        用户输入：{{user_input}}
+        # 2. 生成 Prompt
+        system_instruction = f"""
+                === 你的角色档案 ===
+                {character_profile}
 
-        长期记忆：
-        {{long_term_memories}}
+                === 当前用户 ===
+                {user_id}，身份是你曾经的同学。
 
-        请严格按照 JSON 格式返回结果。
-        """
+                === LLM 任务要求 ===
+                你将完全代入你的角色档案，成为你扮演的人，在此基础上：
+                - 请基于用户输入和 *对话历史* 生成你的回复。
+                - **对话历史**中你应该更关注最近的消息，但仍然可以结合整个对话历史来理解上下文。
+                - 请注意，你会尝试联想回忆和目前互动有关的记忆，所以有**长期记忆**可以参考，但这些记忆中有时存在联想到的无关内容。
+                - 若对话历史和长期记忆信息有冲突，优先使用对话历史的信息。
+                - 你收到的视觉图片输入来自你的摄像头，每次对话时都会获得一张当前摄像头看到的照相。
+                - 你应该自行判断历史和图片信息是否与当前对话相关，并自然地将*真正相关*的信息融入到你的语言回复中。
 
-        # 3. 准备内容 (parts -  保持不变)
-        parts = []
+                **对话历史**:
+                ```json
+                {history_json}
+                ```
+                **长期记忆**：
+                {long_term_memories}
 
-        # 格式化 manual_history 为文本
-        formatted_history = ""
-        if manual_history:
-            formatted_history = "\n".join(manual_history) #  假设 manual_history 是文本列表，每条记录就是一行对话
+                **当前用户输入**:
+                ```text
+                {user_input}
+                ```
 
-        parts.append({"text": prompt_template.format(
-            manual_history=formatted_history, #  使用格式化后的 manual_history
-            user_input=user_input,
-            long_term_memories=long_term_memories,
-            #mid_term_memories=memories_str
-        )})
+                选择合适的表情名称、动作名称加入到 JSON 输出中。
+                
+                请展示你的思考过程。
 
-        start_time_decode = time.time()
+                请按以下 JSON 格式返回，每个条目都只有一个元素：
+                {{
+                    "expression": "表情名称",
+                    "motion": "动作名称",
+                    "reasoning": 思考过程,
+                    "response_text": "回复文本（只包括将要说出口的话语）"
+                }}
+
+                可用表情："黑脸", "白眼", "拿旗子", "眼泪"
+                可用动作："好奇", "瞌睡", "害怕", "举白旗", "摇头", "抱枕头"
+                """
+
+        # 3. 准备内容 (parts)
+        parts = [{"text": system_instruction}]
         if image_base64:
             try:
                 image_data = base64.b64decode(image_base64)
@@ -178,21 +168,19 @@ def get_gemini_response_with_history(user_input, user_id, manual_history, image_
                 })
             except Exception as e:
                 print(f"Base64 图像数据解码失败: {str(e)}")
-        end_time_decode = time.time()
-        decode_time = end_time_decode - start_time_decode
-        print(f"Base64 图像数据解码成功. 耗时: {decode_time:.4f} 秒")
 
-        # 4. 使用 gemini_model.generate_content(parts=parts) 发送请求 (保持不变，或根据您使用的库版本调整)
-        gemini_response = chat_session.model.generate_content( #  仍然使用 generate_content
-            contents=parts)
+        # 4. 调用 LLM
+        gemini_model = genai.GenerativeModel('gemini-2.0-pro-exp-02-05', system_instruction=system_instruction)
+        chat_session = gemini_model.start_chat(history=[])
+        gemini_response = chat_session.model.generate_content(contents=parts)
 
-        # 5. 提取 JSON 内容并解析 (保持不变)
+        # 5. 解析 JSON 响应
         response_text = gemini_response.text
         json_str = response_text.replace('`json', '').replace('`', '').strip()
         result = json.loads(json_str)
 
-        # 6. 确保所有字段存在 (保持不变)
-        required_fields = ['expression', 'motion', 'response_text']
+        # 6. 确保所有字段存在
+        required_fields = ['expression', 'motion', 'reasoning', 'response_text']
         if not all(field in result for field in required_fields):
             raise ValueError("Missing required fields in response")
 
