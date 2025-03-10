@@ -30,14 +30,22 @@ except Exception as e:
 with open("../Prompt/Character/Lily.txt", "r", encoding="utf-8") as file:
     character_profile = file.read()
 
-with open("weaviate_class.txt", "r", encoding="utf-8") as file:
-    data_class_def = file.read()
+with open("weaviate_declarative_memory.txt", "r", encoding="utf-8") as file:
+    weaviate_declarative_memory = file.read()
+
+with open("weaviate_complex_memory.txt", "r", encoding="utf-8") as file:
+    weaviate_complex_memory = file.read()
 
 
 
-def query_long_term_memory(user_input, ai_response):
+def query_long_term_memory(user_input, ai_response, memory_type):
     related_memory = []
-    for collection_name in ["Events", "Relationships", "Knowledge", "Goals", "Preferences", "Profile"]:
+    if memory_type == "declarative":
+        # TODO: Goals and schedule will be put into prospective memory in the future
+        collections = ["Events", "Knowledge", "Goals", "Profile"]
+    elif memory_type == "complex":
+        collections = ["Relationships", "Preferences"]
+    for collection_name in collections:
         collection = client.collections.get(collection_name)
         existing_mem = collection.query.hybrid(
             query=f"User: {user_input}" + f"\nAI: {ai_response}",
@@ -51,8 +59,9 @@ def query_long_term_memory(user_input, ai_response):
 
     return related_memory
 
-async def long_term_memory_async(user_input, ai_response, conversation_history,
-                                 last_two_long_term_memories=None, user_id="default_user"):
+async def long_term_memory_async(user_input, ai_response, conversation_history, memory_type,
+                                 last_two_long_term_memories=None,
+                                 user_id="default_user"): # memory_type can be "declarative" or "complex"
     """
     后台异步处理用户输入和 AI 回复，判断是否存储记忆，并存储到 Weaviate.
     """
@@ -60,58 +69,58 @@ async def long_term_memory_async(user_input, ai_response, conversation_history,
 
     try:
         # Add related memory from all collections
-        related_memory = query_long_term_memory(user_input, ai_response)
+        related_memory = query_long_term_memory(user_input, ai_response, memory_type)
         print("related_memory: ", related_memory)
         print("success")
 
-        memory_process_prompt_template = """
-        ## **后台 LLM 记忆任务指示**
-        你是虚拟人格的长期记忆模块，负责分析虚拟人格与他人的对话，像人类一样筛选出需要记住的信息，结构化地存储到知识库 Weaviate 中。
-
-        你的任务是分析以下的用户输入和虚拟人格的回复，并判断是否需要将其作为记忆存储或更新到 Weaviate 知识库中。
+        declarative_memory_prompt = f"""
+        === 你的角色档案 ===
+        {character_profile}
+        
+        === **后台 LLM 记忆任务指示** ===
+        你是该虚拟人格的长期记忆模块的组件之一，
+        负责分析虚拟人格与他人的对话，包括近期**对话历史**，像人类一样筛选出需要记住的信息，结构化地存储或更新到知识库 Weaviate 中。
+        首先你需要判断是否有**Events** 或 **Knowledge** 或 **Goals** 或 **Profile**相关的长期记忆信息。
+        **注意**，你只能关注和**Events** 或 **Knowledge** 或 **Goals** 或 **Profile**有关的信息，若没有，则直接返回[]
+        
+        总计有六个记忆分类，而你负责处理的是**Events** 和 **Knowledge** 和 **Goals** 和 **Profile**：
+        **Class 定义**
+        当存储或更新记忆时，必须根据 class 生成结构化 JSON 数据，每个 \`property\` 只能填充 class 中允许的数据类型。
+        {weaviate_declarative_memory}
+        
+        首先你需要判断是否有**Events** 或 **Knowledge** 或 **Goals** 或 **Profile**相关的长期记忆信息。
         如果需要存储，你需要决定将记忆存储到哪个 Class，并为该 Class 的每个属性生成内容。
         如果需要更新，你需要决定更新哪条相关记忆，并根据该 Class 的属性生成内容。
         **记忆库相关内容**是运行长期记忆模块之前，根据用户输入和虚拟人格回复，从记忆库中搜索得到。
 
-
         ### **1. 记忆存储判断逻辑**
-        分析用户输入和虚拟人格回复，首先判断是否包含**值得长期记忆的信息**，然后选择是**新增（ADD）**或者**更新（UPDATE）**记忆：
+        分析用户输入和虚拟人格回复以及其他历史信息，
+        首先判断是否包含**Events** 或 **Knowledge** 或 **Goals** 或 **Profile**相关的值得长期记忆的信息，若没有，则直接返回[].
+        然后选择是**新增（ADD）**或者**更新（UPDATE）**记忆：
         ✅ **新增（ADD）**：
         - 记忆库相关内容中 **没有** 提及该信息，则选择新增记忆条目。
 
         ✅ **更新（UPDATE）**：
         - 记忆库相关内容中已有相似信息，但新的信息提供了更多细节，或者发生了某种改变，或与与新信息矛盾或被推翻，则选择更新现有条目。
         - **示例1**：
-          - **旧记忆**：用户喜欢奶茶。
-          - **需要更新的新信息**：用户特别喜欢 **少糖的** 奶茶。
+          - **旧记忆**：今年圣诞节用户要邀请父母一起去市中心的高档餐厅。
+          - **需要更新的新信息**：今年圣诞节用户要邀请父母和女朋友一起去市中心的高档餐厅。
         - **示例2**：
-          - **旧记忆**：用户A和用户B是朋友。
-          - **需要更新的新信息**：：用户A和用户B是恋人。
-        - **示例3**：
           - **旧记忆**：今年圣诞节用户要扮演精灵驯鹿。
           - **需要更新的新信息**：今年圣诞节用户要扮演圣诞老人。
-        - **示例4**：
-          - **旧记忆**：用户喜欢枪战游戏。
-          - **需要更新的新信息**：用户不喜欢枪战游戏了。
 
         ### **2. 选择适合的 Weaviate Class**
-        若需要**新增（ADD）**存储，归类到以下之一：
+        归类到以下之一：
         - **Events (事件)**：描述某个体经历的**具体事件**。
-        - **Relationships (关系)**：涉及人与人或实体间的**关系变化**。
         - **Knowledge (知识)**：虚拟人格获取的**新知识或信息**。
         - **Goals (目标)**：关于某个体的**目标、计划或愿望**。
-        - **Preferences (偏好)**：表达的**喜好、价值观**或**情感倾向**。
+        - **Profile (档案)**：记录个体的长期身份信息，包括基本信息、健康状况、社会身份、经济状况、居住情况等。
 
-        ### **3. Weaviate Class 定义 (重要！请LLM务必参考以下Class定义生成JSON)**
-        以下是 Weaviate 数据库 Class 结构定义，你必须严格遵循。
-        当存储记忆时，必须根据 class 生成结构化 JSON 数据，每个 \`property\` 只能填充 class 中允许的数据类型。
-        {data_class_def}
-
-        ### **4. 每条记忆JSON格式**
+        ### **3. 每条记忆JSON格式**
         每条记忆JSON格式如下：
         \`\`\`json
         {{
-            "class": "Events" / "Relationships" / "Knowledge" / "Goals" / "Preferences",
+            "class": "Events" / "Knowledge" / "Goals" / "Profile",
             "action": "ADD" / "UPDATE",
             "updated_object_id": "" // 如果是ADD操作，则留空；如果是UPDATE操作，则录入对应的被更新的记忆条目的uuid
             "properties_content": {{
@@ -120,7 +129,7 @@ async def long_term_memory_async(user_input, ai_response, conversation_history,
         }}
         \`\`\`
 
-        ### 5. **输出示例**
+        ### 4. **输出示例**
         #### **示例 1: 事件存储 (Events Class)**
         **对话内容**：
         - 用户：我上周去了一家新开的日式餐厅，食物很好吃，我点了鳗鱼饭。
@@ -146,53 +155,7 @@ async def long_term_memory_async(user_input, ai_response, conversation_history,
         ]
         \`\`\`
 
-        #### **示例 2: 关系更新 (Relationships Class)**
-        **对话内容**：
-        - 用户：我觉得你比之前更理解我了！我们已经聊了很多次了。
-        - 虚拟人格：我也觉得我们变得更熟悉了！
-
-        **记忆库相关内容**中发现的需要被更新的记忆条目：
-        \`\`\`json
-        {{
-                "class": "Relationships",
-                "updated_object_id": "abcd1234",
-                "properties_content": {{
-                    "subjectName": "用户",
-                    "relationshipDescription": "用户和虚拟人格初步成为朋友。",
-                    "objectName": "虚拟人格",
-                    "relationshipType": "朋友",
-                    "sentiment": "信任",
-                    "sentimentStrength": 0.5,
-                    "relationshipStage": "初识",
-                    "lastInteractionDate": "2024-07-01T10:00:00Z"
-                    “relationshipCreationTime”: "2024-07-01T10:00:00Z"
-                }}
-        }}
-        \`\`\`
-
-        **输出**
-        \`\`\`json
-        [
-            {{
-                "class": "Relationships",
-                "action": "UPDATE",
-                "updated_object_id": "abcd1234",
-                "properties_content": {{
-                    "subjectName": "用户",
-                    "relationshipDescription": "两人在24年7月初成为了朋友，现在用户认为虚拟人格比之前更理解自己，双方原有关系加深。",
-                    "objectName": "虚拟人格",
-                    "relationshipType": "朋友",
-                    "sentiment": "信任",
-                    "sentimentStrength": 0.8,
-                    "relationshipStage": "熟悉",
-                    "lastInteractionDate": "2024-08-05T11:21:00Z"
-                    “relationshipCreationTime”: "2024-07-01T10:00:00Z"
-                }}
-            }}
-        ]
-        \`\`\`
-
-        #### **示例 3: 同时存储事件 (Events) 和 偏好 (Preferences)，并更新目标 (Goals)**
+        #### **示例 2: 同时存储事件 (Events) 并更新目标 (Goals)**
         **对话内容**：
         - **用户**：昨天我和朋友去了一家新的猫咖啡馆，里面的猫超级可爱！我特别喜欢一只橘猫，它一直蹭我。然后我就决定了，我先不养兔子了，我要先养一只橘猫。
         - **虚拟人格**：听起来很温馨！这家猫咖叫什么名字？
@@ -204,14 +167,14 @@ async def long_term_memory_async(user_input, ai_response, conversation_history,
                 "updated_object_id": "vefd8239",
                 "properties_content": {{
                     "owner": "用户",
-                    "goalDescription": "养一只橘猫",
+                    "goalDescription": "养一只小白兔",
                     "goalType": "个人目标",
-                    "motivation": "用户在猫咖啡馆喜欢上了一只橘猫，决定先养猫而不是兔子。",
+                    "motivation": "用户小时候养过一只白兔，最近有些怀念。",
                     "status": "计划中",
                     "progress": 0.0,
-                    "obstacles": ["需要找到合适的猫舍或领养渠道", "需要准备养猫的环境"],
-                    "startingDate": "2024-08-10T00:00:00Z",
-                    "priority": "高"
+                    "obstacles": [],
+                    "startingDate": "2024-07-20T00:00:00Z",
+                    "priority": "中"
                 }}
         }}
         \`\`\`
@@ -234,6 +197,112 @@ async def long_term_memory_async(user_input, ai_response, conversation_history,
                 }}
             }},
             {{
+                "class": "Goals",
+                "action": "UPDATE",
+                "updated_object_id": "vefd8239",
+                "properties_content": {{
+                    "owner": "用户",
+                    "goalDescription": "养一只橘猫",
+                    "goalType": "个人目标",
+                    "motivation": "用户在猫咖啡馆喜欢上了一只橘猫，决定先养猫而不是兔子。",
+                    "status": "计划中",
+                    "progress": 0.0,
+                    "obstacles": ["需要找到合适的猫舍或领养渠道", "需要准备养猫的环境"],  // 如果不需要obstacles了，可以更新为空字符串 ""
+                    "startingDate": "2024-08-10T00:00:00Z",
+                    "priority": "高"
+                }}
+            }}
+        ]
+        \`\`\`
+
+        ---
+
+        ## **用户输入**
+        {user_input}
+
+        ## **虚拟人格的回复**
+        {ai_response}
+
+        ## **记忆库相关内容**
+        {related_memory}
+        
+        以下是最近两轮对话后，你生成的长期记忆条目，同样作为本次记忆库相关内容：
+        ```json
+        {last_two_long_term_memories}
+        ```
+
+        ## **对话历史**
+        {conversation_history}
+
+        **请开始分析用户输入和虚拟人格回复，判断是否需要存储记忆，并严格按照上述JSON格式输出结果，如果不需要存储任何记忆，则返回 `[]`。**
+        """
+
+        complex_memory_prompt = f"""
+        === 你的角色档案 ===
+        {character_profile}
+        
+        === **后台 LLM 记忆任务指示** ===
+        你是该虚拟人格的长期记忆模块的组件之一，
+        负责分析虚拟人格与他人的对话，包括**对话历史**，像人类一样筛选出需要记住的信息，结构化地存储或更新到知识库 Weaviate 中。
+        首先你需要判断是否有**Relationships** 或 **Preferences**相关的长期记忆信息，若没有，则直接返回[]。
+        **注意**，你只能关注和**关系**或**偏好**有关的信息。
+        
+        总计有六个记忆分类，而你负责处理的是**Relationships** 和 **Preferences**：
+        **Class 定义**
+        当存储或更新记忆时，必须根据 class 生成结构化 JSON 数据，每个 \`property\` 只能填充 class 中允许的数据类型。
+        {weaviate_complex_memory}
+        
+        如果需要存储，你需要决定将记忆存储到哪个 Class，并为该 Class 的每个属性生成内容。
+        如果需要更新，你需要决定更新哪条相关记忆，并根据该 Class 的属性生成内容。
+        **记忆库相关内容**是运行长期记忆模块之前，根据用户输入和虚拟人格回复，从记忆库中搜索得到。
+
+        ### **1. 记忆存储判断逻辑**
+        分析用户输入和虚拟人格回复以及其他历史信息，首先判断是否包含**Relationships** 或 **Preferences**相关的值得长期记忆的信息，
+        你只应该关注和**关系**或**偏好**有关的信息，若没有，则直接返回[]。
+        然后选择是**新增（ADD）**或者**更新（UPDATE）**记忆：
+        ✅ **新增（ADD）**：
+        - 记忆库相关内容中 **没有** 提及该信息，则选择新增记忆条目。
+
+        ✅ **更新（UPDATE）**：
+        - 记忆库相关内容中已有相似信息，但新的信息提供了更多细节，或者发生了某种改变，或与与新信息矛盾或被推翻，则选择更新现有条目。
+        - **示例1**：
+          - **旧记忆**：用户喜欢奶茶。
+          - **需要更新的新信息**：用户特别喜欢 **少糖的** 奶茶。
+        - **示例2**：
+          - **旧记忆**：用户喜欢枪战游戏。
+          - **需要更新的新信息**：用户不喜欢枪战游戏了。
+        - **示例3**：
+          - **旧记忆**：用户A和用户B是朋友。
+          - **需要更新的新信息**：：用户A和用户B是恋人。
+
+        ### **2. 选择适合的 Weaviate Class**
+        归类到以下之一：
+        - **Relationships (关系)**：涉及人与人或实体间的**关系变化**。
+        - **Preferences (偏好)**：表达的**喜好、价值观**或**情感倾向**。
+
+        ### **3. 每条记忆JSON格式**
+        每条记忆JSON格式如下：
+        \`\`\`json
+        {{
+            "class": "Relationships" / "Preferences",
+            "action": "ADD" / "UPDATE",
+            "updated_object_id": "" // 如果是ADD操作，则留空；如果是UPDATE操作，则录入对应的被更新的记忆条目的uuid
+            "properties_content": {{
+                // 此处填写具体的属性内容，严格遵循 class 结构
+            }}
+        }}
+        \`\`\`
+
+        ### 4. **输出示例**
+        #### **示例 1: 偏好存储 (Preferences)**
+        **对话内容**：
+        - **用户**：昨天我和朋友去了一家新的猫咖啡馆，里面的猫超级可爱！我特别喜欢一只橘猫，它一直蹭我。然后我就决定了，我先不养兔子了，我要先养一只橘猫。
+        - **虚拟人格**：听起来很温馨！这家猫咖叫什么名字？
+
+        **输出**
+        \`\`\`json
+        [
+            {{
                 "class": "Preferences",
                 "action": "ADD",
                 "updated_object_id": "",
@@ -246,21 +315,51 @@ async def long_term_memory_async(user_input, ai_response, conversation_history,
                     "confidenceLevel": 0.9
                     “preferenceCreationTime”: "2024-08-011T10:00:00Z"  // 注意此处时间日期格式的正确性，应该是YYYY-MM-DDTHH:mm:ssZ
                 }}
-            }},
-            {{
-                "class": "Goals",
-                "action": "UPDATE",
-                "updated_object_id": "vefd8239",
+            }}
+        ]
+        \`\`\`
+
+        #### **示例 2: 关系更新 (Relationships)**
+        **对话内容**：
+        - 用户：我觉得你比之前更理解我了！我们已经聊了很多次了。
+        - 虚拟人格：我也觉得我们变得更熟悉了！
+
+        **记忆库相关内容**中发现的需要被更新的记忆条目：
+        \`\`\`json
+        {{
+                "class": "Relationships",
+                "updated_object_id": "abcd1234",
                 "properties_content": {{
-                    "owner": "用户",
-                    "goalDescription": "养一只橘猫",
-                    "goalType": "个人目标",
-                    "motivation": "用户在猫咖啡馆喜欢上了一只橘猫，决定先养猫而不是兔子。",
-                    "status": "计划中",
-                    "progress": 0.0,
-                    "obstacles": "",  // 如果不需要obstacles了，可以更新为空字符串 "" 或 null，根据 Class 定义
-                    "startingDate": "2024-08-10T00:00:00Z",
-                    "priority": "高"
+                    "subjectName": "用户",
+                    "relationshipDescription": "用户和虚拟人格初步成为朋友。",
+                    "objectName": "虚拟人格名字",
+                    "relationshipType": "朋友",
+                    "sentiment": "信任",
+                    "sentimentStrength": 0.5,
+                    "relationshipStage": "初识",
+                    "lastInteractionDate": "2024-07-01T10:00:00Z"
+                    “relationshipCreationTime”: "2024-07-01T10:00:00Z"
+                }}
+        }}
+        \`\`\`
+
+        **输出**
+        \`\`\`json
+        [
+            {{
+                "class": "Relationships",
+                "action": "UPDATE",
+                "updated_object_id": "abcd1234",
+                "properties_content": {{
+                    "subjectName": "用户",
+                    "relationshipDescription": "两人在24年7月初成为了朋友，现在用户认为虚拟人格比之前更理解自己，双方原有关系加深。",
+                    "objectName": "虚拟人格名字",
+                    "relationshipType": "朋友",
+                    "sentiment": "信任",
+                    "sentimentStrength": 0.8,
+                    "relationshipStage": "熟悉",
+                    "lastInteractionDate": "2024-08-05T11:21:00Z"
+                    “relationshipCreationTime”: "2024-07-01T10:00:00Z"
                 }}
             }}
         ]
@@ -284,18 +383,17 @@ async def long_term_memory_async(user_input, ai_response, conversation_history,
         ```
 
         ## **对话历史**
-        {conversation_text}
+        {conversation_history}
 
         **请开始分析用户输入和虚拟人格回复，判断是否需要存储记忆，并严格按照上述JSON格式输出结果，如果不需要存储任何记忆，则返回 `[]`。**
         """
 
-
-
-        prompt = memory_process_prompt_template.format(data_class_def=data_class_def,
-                                                       user_input=user_input, ai_response=ai_response,
-                                                       related_memory=related_memory,
-                                                       last_two_long_term_memories=last_two_long_term_memories,
-                                                       conversation_text=conversation_history)
+        if memory_type == "declarative":
+            prompt = declarative_memory_prompt
+        elif memory_type == "complex":
+            prompt = complex_memory_prompt
+        else:
+            print("[Error] Wrong memory type in long term memory storage.")
 
         memory_entries = memory_process_model.generate_content(prompt)
 
@@ -342,6 +440,8 @@ async def long_term_memory_async(user_input, ai_response, conversation_history,
     except Exception as e:
         print(f"后台记忆处理 LLM 调用失败: {str(e)}") # 原始的错误打印，保留
         print(f"Exception details: {str(e)}") #  打印更详细的异常信息
+
+
 
 
 # 示例调用 (测试用，实际应用中可能需要从其他模块调用)

@@ -1,3 +1,4 @@
+# llm_handler.py
 import google.generativeai as genai
 from dotenv import load_dotenv
 import os
@@ -8,6 +9,8 @@ import logging
 import base64 # 导入 base64 库，虽然这里可能不是必须的，但在处理图像数据时，导入总是有备无患
 import time
 from utils.utils import load_api_key
+from datetime import datetime
+import asyncio
 
 load_dotenv()
 
@@ -109,7 +112,7 @@ def get_gemini_response_with_history(user_input, user_id, manual_history, image_
 
         # 1. 构建对话历史的 JSON 结构
         history_json = json.dumps(manual_history, ensure_ascii=False, indent=2)  # 保持 JSON 格式，避免 ASCII 转义
-
+        timestamp = datetime.now().isoformat()
         # 2. 生成 Prompt
         system_instruction = f"""
                 === 你的角色档案 ===
@@ -117,6 +120,9 @@ def get_gemini_response_with_history(user_input, user_id, manual_history, image_
 
                 === 当前用户 ===
                 {user_id}，身份是你曾经的同学。
+                
+                === 系统时间 ===
+                {timestamp}
 
                 === LLM 任务要求 ===
                 你将完全代入你的角色档案，成为你扮演的人，在此基础上：
@@ -141,7 +147,7 @@ def get_gemini_response_with_history(user_input, user_id, manual_history, image_
 
                 选择合适的表情名称、动作名称加入到 JSON 输出中。
                 
-                请展示你的思考过程。
+                请完全代入你的角色，展示你的思考过程。
 
                 请按以下 JSON 格式返回，每个条目都只有一个元素：
                 {{
@@ -172,7 +178,12 @@ def get_gemini_response_with_history(user_input, user_id, manual_history, image_
         # 4. 调用 LLM
         gemini_model = genai.GenerativeModel('gemini-2.0-pro-exp-02-05', system_instruction=system_instruction)
         chat_session = gemini_model.start_chat(history=[])
+
+        start_time_gemini = time.time()
         gemini_response = chat_session.model.generate_content(contents=parts)
+        end_time_gemini = time.time()
+        gemini_duration = end_time_gemini - start_time_gemini
+        print(f"[Timing] Gemini Pure Processing Time: {gemini_duration:.4f} seconds", flush=True)
 
         # 5. 解析 JSON 响应
         response_text = gemini_response.text

@@ -23,7 +23,7 @@ def save_history(history):
     with open(HISTORY_FILE, "w", encoding="utf-8") as f:
         json.dump(history, f, ensure_ascii=False, indent=4)
 
-async def add_to_history(user_id, user_text, response_text, history):
+def add_to_history(user_id, user_text, response_text, history):
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     entry = {
         "timestamp": timestamp,
@@ -35,7 +35,7 @@ async def add_to_history(user_id, user_text, response_text, history):
     manage_history_size(user_id, history)
     save_history(history)
 
-def manage_history_size(user_id, history, max_tokens=8000, summary_limit=2000, summary_sentence_limit=20):
+def manage_history_size(user_id, history, max_tokens=8000, summary_limit=2000, summary_sentence_limit=10):
     if user_id not in history:
         return
 

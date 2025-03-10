@@ -50,60 +50,6 @@ event_class_definition = {
     ]
 }
 
-
-relationship_class_definition = {
-    "class": "Relationships",
-    "description": "存储某个体与其他人或实体的关系",
-    "properties": [
-        {
-            "name": "subjectName",
-            "dataType": ["text"],
-            "description": "关系主体的姓名或实体名称"
-        },
-        {
-            "name": "relationshipDescription",
-            "dataType": ["text"],
-            "description": "关系描述"
-        },
-        {
-            "name": "objectName",
-            "dataType": ["text"],
-            "description": "相关人员姓名或实体名称"
-        },
-        {
-            "name": "relationshipType",
-            "dataType": ["text"],
-            "description": "关系类型 (例如：朋友，家人，恋爱，雇佣，同事，偶像)"
-        },
-        {
-            "name": "sentiment",
-            "dataType": ["text"],
-            "description": "对关系对象的情感倾向 (例如：喜欢，信任，依赖，厌恶，嫉妒)"
-        },
-        {
-            "name": "sentimentStrength",
-            "dataType": ["number"],
-            "description": "关系情感倾向强度 (例如 0-1 范围)"
-        },
-        {
-            "name": "relationshipStage",
-            "dataType": ["text"],
-            "description": "关系所处阶段 (例如：初识，熟悉，稳定，淡漠，崩溃)"
-        },
-        {
-            "name": "lastInteractionDate",
-            "dataType": ["date"],
-            "description": "最近一次互动时间"
-        },
-        {
-            "name": "relationshipCreationTime",
-            "dataType": ["date"],
-            "description": "该关系被记入记忆库的时间"
-        }
-    ]
-}
-
-
 knowledge_class_definition = {
     "class": "Knowledge",
     "description": "存储虚拟人格学习到的知识、事实、技能等",
@@ -200,49 +146,6 @@ goal_class_definition = {
             "name": "priority",
             "dataType": ["text"],
             "description": "目标优先级 (例如：高，中，低)"
-        },
-    ]
-}
-
-
-preference_class_definition = {
-    "class": "Preferences",
-    "description": "存储某个体的偏好、喜好、价值观等",
-    "properties": [
-        {
-            "name": "preferenceOwner",
-            "dataType": ["text"],
-            "description": "偏好拥有者"
-        },
-        {
-            "name": "preferenceType",
-            "dataType": ["text"],
-            "description": "偏好类型 (例如：食物偏好，音乐偏好，颜色偏好，价值观，道德观)"
-        },
-        {
-            "name": "preferenceDescription",
-            "dataType": ["text"],
-            "description": "偏好描述"
-        },
-        {
-            "name": "reasoning",
-            "dataType": ["text"],
-            "description": "偏好背后的原因或逻辑"
-        },
-        {
-            "name": "preferenceStrength",
-            "dataType": ["text"],
-            "description": "分为五档强度（轻微1，有些2，中等3，特别4，强烈5）"
-        },
-        {
-            "name": "confidenceLevel",
-            "dataType": ["number"],
-            "description": "偏好确信程度 (例如 0-1 范围)"
-        },
-        {
-            "name": "preferenceCreationTime",
-            "dataType": ["date"],
-            "description": "该偏好被记入记忆库的时间"
         },
     ]
 }

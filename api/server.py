@@ -42,7 +42,7 @@ class chatRequest(BaseModel):
     image_base64: Optional[str] = None
 
 user_chat_sessions = load_history()
-
+user_conversation_turns = {}
 camera_instance = None
 
 @app.on_event("startup")
@@ -147,7 +147,7 @@ if __name__ == '__main__':
 
                         conversation_text = "\n".join([
                             f"User: {entry['user_text']}\nAI: {entry['ai_response']}"
-                            for entry in manual_history[-5:]  # 只取最近 5 轮对话
+                            for entry in manual_history[-3:]  # 只取最近 3 轮对话
                         ])
                         # 长期记忆
                         long_term_memory_payload = {
@@ -155,12 +155,17 @@ if __name__ == '__main__':
                             "response_text": llm_response['response_text'],
                             "conversation_history_text": conversation_text
                         }
-                        response = await client.post(  # 注意这里仍然使用 await，但在 asyncio.create_task 中执行，不会阻塞主线程
-                            f"{MEMORY_APP_URL}/long_term_memory", json=long_term_memory_payload
+                        response1 = await client.post(  # 注意这里仍然使用 await，但在 asyncio.create_task 中执行，不会阻塞主线程
+                            f"{MEMORY_APP_URL}/long_term_memory_declarative", json=long_term_memory_payload
                         )
-                        response.raise_for_status()  # 强制抛出 HTTP 错误（如果有的话）
+                        response2 = await client.post(  # 注意这里仍然使用 await，但在 asyncio.create_task 中执行，不会阻塞主线程
+                            f"{MEMORY_APP_URL}/long_term_memory_complex", json=long_term_memory_payload
+                        )
+                        response1.raise_for_status()  # 强制抛出 HTTP 错误（如果有的话）
+                        response2.raise_for_status()
 
-                        print(f"[Timing] Memory Storage Response: {response.status_code} - {response.text}")
+                        print(f"[Timing] Memory Storage Response1: {response1.status_code} - {response1.text}")
+                        print(f"[Timing] Memory Storage Response2: {response2.status_code} - {response2.text}")
 
                 except httpx.HTTPStatusError as http_error:
                     print(
@@ -172,8 +177,19 @@ if __name__ == '__main__':
                 except Exception as e:
                     print(f"[Error] Unexpected exception in memory storage request: {str(e)}")
 
-            asyncio.create_task(send_memory_requests())  # 创建后台任务，异步执行记忆存储请求
-            print("[Timing] Memory Storage Task Started in Background (Non-blocking)")
+            if user_id not in user_conversation_turns:
+                user_conversation_turns[user_id] = 0  # 初始化用户对话轮数计数器
+            user_conversation_turns[user_id] += 1  # 每次对话轮数 + 1
+            print(f"[Debug] User {user_id} conversation turns: {user_conversation_turns[user_id]}")
+
+            if user_conversation_turns[user_id] % 2 == 0:  # 每两轮对话发送一次记忆存储请求
+                asyncio.create_task(
+                    send_memory_requests())  # 修改为传递 user_id 等参数
+                print("[Timing] Memory Storage Task Started in Background (Every 2 turns)")
+            else:
+                print("[Timing] Memory Storage Skipped (Not every 2 turns)")
+            #asyncio.create_task(send_memory_requests())  # 创建后台任务，异步执行记忆存储请求
+            #print("[Timing] Memory Storage Task Started in Background (Non-blocking)")
 
             end_time_endpoint = time.time()
             endpoint_duration = end_time_endpoint - start_time_endpoint

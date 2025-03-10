@@ -18,7 +18,8 @@ logger = logging.getLogger("memory_app")
 
 memory_app = FastAPI()
 
-last_two_long_term_memories = []
+last_two_long_term_memories_declarative = []
+last_two_long_term_memories_complex = []
 
 class MidTermMemoryRequest(BaseModel):
     user_id: str
@@ -39,8 +40,8 @@ async def mid_term_memory_endpoint(request: MidTermMemoryRequest):
         logger.error(f"短期记忆存储失败: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
-@memory_app.post("/long_term_memory")
-async def long_term_memory_endpoint(request: LongTermMemoryRequest):
+@memory_app.post("/long_term_memory_declarative")
+async def long_term_memory_endpoint_declarative(request: LongTermMemoryRequest):
     try:
         memory_data = {
             "user_text": request.user_text,
@@ -49,21 +50,50 @@ async def long_term_memory_endpoint(request: LongTermMemoryRequest):
             "timestamp": datetime.now().isoformat()
         }
 
-        last_two_long_term_memories.append(memory_data)
-        if len(last_two_long_term_memories) > 2:
-            last_two_long_term_memories.pop(0)
+        last_two_long_term_memories_declarative.append(memory_data)
+        if len(last_two_long_term_memories_declarative) > 2:
+            last_two_long_term_memories_declarative.pop(0)
 
         asyncio.create_task(
             long_term_memory_async(
                 request.user_text,
                 request.response_text,
                 request.conversation_history_text,
-                last_two_long_term_memories=last_two_long_term_memories
+                memory_type="declarative",
+                last_two_long_term_memories=last_two_long_term_memories_declarative
             )
         )
-        return JSONResponse({"status": "success", "message": "长期记忆存储任务已启动, 并保存了记忆快照"})
+        return JSONResponse({"status": "success", "message": "declarative长期记忆存储任务已启动, 并保存了记忆快照"})
     except Exception as e:
-        logger.error(f"长期记忆存储任务启动失败: {e}")
+        logger.error(f"declarative长期记忆存储任务启动失败: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@memory_app.post("/long_term_memory_complex")
+async def long_term_memory_endpoint_complex(request: LongTermMemoryRequest):
+    try:
+        memory_data = {
+            "user_text": request.user_text,
+            "response_text": request.response_text,
+            "conversation_history_text": request.conversation_history_text,
+            "timestamp": datetime.now().isoformat()
+        }
+
+        last_two_long_term_memories_complex.append(memory_data)
+        if len(last_two_long_term_memories_complex) > 2:
+            last_two_long_term_memories_complex.pop(0)
+
+        asyncio.create_task(
+            long_term_memory_async(
+                request.user_text,
+                request.response_text,
+                request.conversation_history_text,
+                memory_type="complex",
+                last_two_long_term_memories=last_two_long_term_memories_complex
+            )
+        )
+        return JSONResponse({"status": "success", "message": "complex长期记忆存储任务已启动, 并保存了记忆快照"})
+    except Exception as e:
+        logger.error(f"complex长期记忆存储任务启动失败: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":
