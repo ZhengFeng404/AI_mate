@@ -3,7 +3,7 @@ import asyncio
 from fastapi import FastAPI, Request, Response, HTTPException
 from fastapi.responses import JSONResponse
 from llm_handler import llm_response_generation # 导入 create_chat_session
-from tts import generate_tts  # 这是 async 函数
+from tts_handler import generate_tts  # 这是 async 函数
 from history_manager import load_history, add_to_history
 import os
 import json

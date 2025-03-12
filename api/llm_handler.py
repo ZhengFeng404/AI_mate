@@ -1,5 +1,6 @@
 # llm_handler.py
 import google.generativeai as genai
+#from google import genai
 from dotenv import load_dotenv
 import os
 import json
@@ -11,15 +12,17 @@ import time
 from utils.utils import load_api_key
 from datetime import datetime
 import asyncio
+from PIL import Image
+import io
 
 load_dotenv()
 
 # 初始化 Weaviate 客户端 (保持不变)
-client = weaviate.connect_to_local()
+weaviate_client = weaviate.connect_to_local()
 
 # 初始化 Gemini (保持不变)
 GEMINI_API_KEY = load_api_key("GEMINI_API_KEY")
-genai.configure(api_key=GEMINI_API_KEY)
+#client = genai.Client(api_key=GEMINI_API_KEY)
 os.environ["GEMINI_API_KEY"] = GEMINI_API_KEY
 
 # 初始化 Mem0 (保持不变)
@@ -58,7 +61,7 @@ with open("../Prompt/Character/Lily.txt", "r", encoding="utf-8") as file:
 def query_long_term_memory_input(user_input):
     related_memory = []
     for collection_name in ["Events", "Relationships", "Knowledge", "Goals", "Preferences", "Profile"]:
-        collection = client.collections.get(collection_name)
+        collection = weaviate_client.collections.get(collection_name)
         existing_mem = collection.query.hybrid(
             query=f"User: {user_input}",
             limit=2
@@ -91,7 +94,72 @@ def llm_response_generation(user_input, user_id, user_chat_sessions, manual_hist
     return gemini_response_dict
 
 
-def get_gemini_response_with_history(user_input, user_id, manual_history, image_base64=None): # 修改函数签名，添加 manual_history
+class MetadataParser:
+    def __init__(self):
+        self.meta_buffer = ""
+        self.in_meta_block = False
+        self.metadata = {"expression": "normal", "motion": "idle"}
+
+    def feed(self, chunk_text):
+        segments = []
+
+        if not self.in_meta_block:
+            # 检测元数据块起始标记
+            if "```meta" in chunk_text:
+                self.in_meta_block = True
+                chunk_text = chunk_text.split("```meta")[-1]
+
+        if self.in_meta_block:
+            # 检测元数据块结束标记
+            if "```" in chunk_text:
+                meta_part, remaining = chunk_text.split("```", 1)
+                self.meta_buffer += meta_part
+
+                try:
+                    self.metadata.update(json.loads(self.meta_buffer))
+                    print(f"🟢 成功解析元数据: {self.metadata}")
+                except Exception as e:
+                    print(f"🔴 元数据解析失败: {e}")
+
+                # 重置状态
+                self.in_meta_block = False
+                self.meta_buffer = ""
+
+                # 返回元数据后的剩余文本
+                return remaining.strip()
+            else:
+                self.meta_buffer += chunk_text
+                return ""
+        else:
+            return chunk_text
+
+
+def split_text_stream(buffer):
+    split_chars = ['，', '。', '！', '？', '...']
+    positions = []
+
+    # 查找所有可能的分割点
+    for char in split_chars:
+        pos = buffer.find(char)
+        while pos != -1:
+            positions.append(pos + len(char) - 1)
+            pos = buffer.find(char, pos + 1)
+
+    if not positions:
+        return None, buffer
+
+    # 选择最合适的分割点（优先后半部分的标点）
+    optimal_pos = max(
+        [p for p in positions if p < len(buffer) * 0.8],
+        default=max(positions, default=-1)
+    )
+
+    if optimal_pos == -1:
+        return None, buffer
+
+    return buffer[:optimal_pos + 1].strip(), buffer[optimal_pos + 1:].lstrip()
+
+async def get_gemini_response_with_history(user_input, user_id, manual_history, image_base64=None): # 修改函数签名，添加 manual_history
     """
     使用 手动维护的对话历史，调用 Gemini 生成回复.
 
@@ -100,11 +168,11 @@ def get_gemini_response_with_history(user_input, user_id, manual_history, image_
         user_id (str): 用户 ID
         manual_history (list): 手动维护的对话历史列表  <- 新增 manual_history 参数
         image_base64 (str, optional): 用户输入的图像 Base64 字符串，默认为 None
-
-    Returns:
-        dict: 包含回复信息的字典 (response_text, expression, motion 等)
     """
     try:
+        # 初始化状态
+        text_buffer = ""
+        meta_parser = MetadataParser()
         # 1. 检索记忆 (中期和长期) -  每次都重新检索 (保持不变)
         # mid_term_memories = mem0.search(query=user_input, user_id="default_user", limit=3)
         # memories_str = "\n".join(f"- {entry['memory']}" for entry in mid_term_memories)
@@ -121,9 +189,6 @@ def get_gemini_response_with_history(user_input, user_id, manual_history, image_
                 === 当前用户 ===
                 {user_id}，身份是你曾经的同学。
                 
-                === 系统时间 ===
-                {timestamp}
-
                 === LLM 任务要求 ===
                 你将完全代入你的角色档案，成为你扮演的人，在此基础上：
                 - 请基于用户输入和 *对话历史* 生成你的回复。
@@ -132,7 +197,19 @@ def get_gemini_response_with_history(user_input, user_id, manual_history, image_
                 - 若对话历史和长期记忆信息有冲突，优先使用对话历史的信息。
                 - 你收到的视觉图片输入来自你的摄像头，每次对话时都会获得一张当前摄像头看到的照相。
                 - 你应该自行判断历史和图片信息是否与当前对话相关，并自然地将*真正相关*的信息融入到你的语言回复中。
+                
+                - 选择合适的表情名称、动作名称加入到 JSON 结构中。
+                    可用表情：["黑脸", "白眼", "拿旗子", "眼泪"]
+                    可用动作：["好奇", "瞌睡", "害怕", "举白旗", "摇头", "抱枕头"]
 
+                请严格按以下格式返回响应：
+                1. 首先用 ```meta 包裹JSON元数据（必须单独成块）
+                2. 随后是自然语言回复（按标点分块输出）
+                ```meta
+                {{ "reasoning":"思考过程（拟人化思考）","expression":"表情名称", "motion":"动作名称"}}
+                [你的自然语言回复]
+                
+                === 动态信息 ===
                 **对话历史**:
                 ```json
                 {history_json}
@@ -144,21 +221,9 @@ def get_gemini_response_with_history(user_input, user_id, manual_history, image_
                 ```text
                 {user_input}
                 ```
-
-                选择合适的表情名称、动作名称加入到 JSON 输出中。
                 
-                请完全代入你的角色，展示你的思考过程。
-
-                请按以下 JSON 格式返回，每个条目都只有一个元素：
-                {{
-                    "expression": "表情名称",
-                    "motion": "动作名称",
-                    "reasoning": 思考过程,
-                    "response_text": "回复文本（只包括将要说出口的话语）"
-                }}
-
-                可用表情："黑脸", "白眼", "拿旗子", "眼泪"
-                可用动作："好奇", "瞌睡", "害怕", "举白旗", "摇头", "抱枕头"
+                **系统时间**
+                {timestamp}         
                 """
 
         # 3. 准备内容 (parts)
@@ -166,6 +231,7 @@ def get_gemini_response_with_history(user_input, user_id, manual_history, image_
         if image_base64:
             try:
                 image_data = base64.b64decode(image_base64)
+                image = Image.open(io.BytesIO(image_data))
                 parts.append({
                     "inline_data": {
                         "mime_type": "image/jpeg",
@@ -176,128 +242,60 @@ def get_gemini_response_with_history(user_input, user_id, manual_history, image_
                 print(f"Base64 图像数据解码失败: {str(e)}")
 
         # 4. 调用 LLM
-        gemini_model = genai.GenerativeModel('gemini-2.0-pro-exp-02-05', system_instruction=system_instruction)
-        chat_session = gemini_model.start_chat(history=[])
-
         start_time_gemini = time.time()
-        gemini_response = chat_session.model.generate_content(contents=parts)
-        end_time_gemini = time.time()
-        gemini_duration = end_time_gemini - start_time_gemini
-        print(f"[Timing] Gemini Pure Processing Time: {gemini_duration:.4f} seconds", flush=True)
+        #gemini_response = client.models.generate_content_stream(model="gemini-2.0-pro-exp-02-05",
+        #                                                        contents=[system_instruction, image])
+
 
         # 5. 解析 JSON 响应
-        response_text = gemini_response.text
-        json_str = response_text.replace('`json', '').replace('`', '').strip()
-        result = json.loads(json_str)
+        model = genai.GenerativeModel('gemini-2.0-pro-exp-02-05')
 
-        # 6. 确保所有字段存在
-        required_fields = ['expression', 'motion', 'reasoning', 'response_text']
-        if not all(field in result for field in required_fields):
-            raise ValueError("Missing required fields in response")
 
-        return result
-
-    except Exception as e:
-        print(f"Gemini处理失败: {str(e)}")
-        return {
+        # 异步处理流式响应
+        json_buffer = ""
+        response_text_buffer = ""
+        header_parsed = False
+        result = {
             "expression": "normal",
             "motion": "idle",
-            "response_text": f"出现了一些问题，{str(e)}"
+            "reasoning": "",
+            "response_text": ""
         }
 
+        async for chunk in await model.generate_content_async(contents=parts,stream=True):
+            raw_text = chunk.text
+            print(f"🔴 原始响应块: {repr(raw_text)}")
 
-def test_llm_image_input():
-    """
-    测试 LLM handler 的图像输入处理能力.
-    """
-    print("开始测试 LLM 图像输入处理...")
+            # 处理元数据块
+            processed_text = meta_parser.feed(raw_text)
 
-    # 1. 读取测试图片并 Base64 编码
-    try:
-        with open("test_image.jpg", "rb") as image_file:
-            image_data = image_file.read()
-            test_image_base64 = base64.b64encode(image_data).decode('utf-8')
-        print("测试图片 Base64 编码成功.")
-    except FileNotFoundError:
-        print("错误: 找不到测试图片 test_image.jpg. 请确保该文件与 llm_handler.py 在同一目录下.")
-        return
+            # 处理文本流
+            text_buffer += processed_text
+
+            # 实时分割
+            while True:
+                segment, remaining = split_text_stream(text_buffer)
+                if not segment:
+                    break
+
+                print(f"🟡 生成段落: {segment}")
+                yield {
+                    "type": "segment",
+                    "segment": segment,
+                    "expression": meta_parser.metadata["expression"],
+                    "motion": meta_parser.metadata["motion"]
+                }
+                text_buffer = remaining
+
+            # 处理剩余内容
+        if text_buffer.strip():
+            yield {
+                "type": "segment",
+                "segment": text_buffer.strip(),
+                "expression": meta_parser.metadata["expression"],
+                "motion": meta_parser.metadata["motion"]
+            }
     except Exception as e:
-        print(f"读取测试图片或编码失败: {e}")
-        return
-
-    # 2. 准备测试用户输入
-    test_user_input_text = "这是我上传的图片，请描述一下图片内容，并给我一个表情和一个动作。"
-    test_user_id = "test_user_image_input"
-    test_user_chat_sessions = {} #  使用空字典即可，因为测试用例是新的会话
-
-    # 3. 调用 llm_response_generation 函数
-    print("调用 llm_response_generation 函数...")
-    response_dict = llm_response_generation(
-        user_input=test_user_input_text,
-        user_id=test_user_id,
-        user_chat_sessions=test_user_chat_sessions,
-        image_base64=test_image_base64
-    )
-
-    # 4. 检查返回结果
-    print("检查返回结果...")
-    if response_dict and isinstance(response_dict, dict):
-        if all(key in response_dict for key in ["expression", "motion", "response_text"]):
-            if response_dict["response_text"]:
-                print("测试通过!")
-                print("返回结果:")
-                print(f"  表情: {response_dict['expression']}")
-                print(f"  动作: {response_dict['motion']}")
-                print(f"  回复文本: {response_dict['response_text']}")
-                if "图片" in response_dict["response_text"] or "图像" in response_dict["response_text"] or "描述" in response_dict["response_text"]:
-                    print("  回复文本中包含图片相关关键词，初步判断 Gemini 能够理解图像内容。")
-                else:
-                    print("  回复文本中 **没有** 包含图片相关关键词，可能 Gemini **未能理解图像内容**，请检查测试图片或 Prompt.")
-            else:
-                print("错误: 返回的 response_text 为空字符串.")
-        else:
-            print("错误: 返回结果字典缺少必要的字段 (expression, motion, response_text).")
-    else:
-        print("错误: llm_response_generation 函数没有返回字典，或返回值为 None.")
-
-    print("LLM 图像输入处理测试结束.")
-    test_user_id = "test_user_image_input_history_test"  # 修改 user_id 以区分测试
-    test_user_chat_sessions = {}  # 确保每次测试都使用新的 chat session 字典
-
-    # 第一轮对话
-    test_user_input_text_1 = "这是我上传的图片，请描述一下图片内容，并给我一个表情和一个动作。"
-    print("\n--- 第一轮对话 ---")
-    response_dict_1 = llm_response_generation(
-        user_input=test_user_input_text_1,
-        user_id=test_user_id,
-        user_chat_sessions=test_user_chat_sessions,
-        image_base64=test_image_base64
-    )
-    print("第一轮返回结果:")
-    print(response_dict_1)
-
-    # 第二轮对话 (基于第一轮对话之后)
-    test_user_input_text_2 = "谢谢你的描述，那这张图片里还有什么其他的细节吗？"  # 第二轮输入，追问细节
-    print("\n--- 第二轮对话 ---")
-    response_dict_2 = llm_response_generation(
-        user_input=test_user_input_text_2,
-        user_id=test_user_id,
-        user_chat_sessions=test_user_chat_sessions,
-        image_base64=test_image_base64
-    )
-    print("第二轮返回结果:")
-    print(response_dict_2)
-
-    # 检查对话历史 (在第二轮对话后检查)
-    chat_session = test_user_chat_sessions[test_user_id]
-    print("\n--- 检查对话历史 ---")
-    print("完整的对话历史:")
-    print(chat_session.history)
-
-    # ... (结果检查代码 - 可以保持不变或根据需要调整) ...
-    print("LLM 图像输入处理和对话历史更新测试结束.")
+        print(f"Stream error: {e}")
 
 
-if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO) #  设置日志级别为 INFO， 避免测试输出过于冗余
-    test_llm_image_input() # 调用测试函数
