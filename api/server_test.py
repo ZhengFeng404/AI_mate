@@ -4,7 +4,7 @@ from fastapi import FastAPI, Request, Response, HTTPException
 from fastapi.responses import JSONResponse
 from fastapi.responses import StreamingResponse
 from llm_handler import llm_response_generation, get_gemini_response_with_history
-from tts_handler import generate_tts, generate_tts_GS  # 这是 async 函数
+#from tts_handler import generate_tts, generate_tts_GS  # 这是 async 函数
 from history_manager import load_history, add_to_history
 import os
 import json
@@ -26,6 +26,7 @@ from queue import Queue
 import soundfile as sf
 import numpy as np
 import pygame
+from tts_handler import TTSGenerator
 
 logging.basicConfig(
     level=logging.DEBUG,
@@ -46,7 +47,6 @@ pygame.mixer.init()
 tts_queue = asyncio.Queue()
 is_playing = False
 
-
 class AudioBuffer:
     def __init__(self):
         self.buffer = []
@@ -57,6 +57,9 @@ class AudioBuffer:
 
     async def add_audio(self, path):
         async with self.lock:
+            if path is None:
+                logger.error("尝试添加的音频路径为 None")
+                return
             self.buffer.append(path)
             self.play_event.set()  # 触发播放循环
 
@@ -110,10 +113,14 @@ class AudioBuffer:
 
 # 初始化全局变量
 audio_buffer = AudioBuffer()
-tts_semaphore = asyncio.Semaphore(3)  # 并发控制
+tts_semaphore = asyncio.Semaphore(5)  # 并发控制
 
+tts_engine = TTSGenerator(
+    cache_dir="audio_cache",
+)
 
 async def tts_consumer():
+    global tts_engine
     logger.info("TTS消费者启动")
 
     # 启动播放循环
@@ -127,15 +134,14 @@ async def tts_consumer():
 
         async with tts_semaphore:  # 并发控制
             try:
-                timestamp = datetime.now().strftime("%Y%m%d%H%M%S%f")
-                audio_path = os.path.join(AUDIO_DIR, f"temp_{timestamp}.wav")
+                #timestamp = datetime.now().strftime("%Y%m%d%H%M%S%f")
+                #audio_path = os.path.join(AUDIO_DIR, f"temp_{timestamp}.wav")
 
                 # 带超时控制的TTS生成
                 try:
                     start_time = time.time()  # 记录 TTS 生成开始时间
-                    await asyncio.wait_for(
-                        generate_tts_GS(text_segment, audio_path),
-                        timeout=10
+                    audio_path = await tts_engine.generate_gpt_sovits(
+                        text_segment,
                     )
                     end_time = time.time()    # 记录 TTS 生成结束时间
                     tts_duration = end_time - start_time # 计算 TTS 生成耗时

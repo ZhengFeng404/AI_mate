@@ -1,60 +1,73 @@
-#tts_handler.py
-import edge_tts
-import asyncio
+# tts_handler.py
 import os
-from io import BytesIO
 import re
-import requests
-
-async def generate_tts(text, output_path):
-    try:
-        # 清理特殊符号
-        clean_text = text.replace("```", "").strip()
-        if not clean_text:
-            raise ValueError("空文本内容")
-        tts = edge_tts.Communicate(clean_text, voice="zh-CN-XiaoyiNeural")
-        await tts.save(output_path)
-
-        if not os.path.exists(output_path):
-            raise FileNotFoundError("TTS文件生成失败")
-
-        return True
-    except Exception as e:
-        print(f"TTS生成失败: {str(e)}")
-        return False
+import hashlib
+from pathlib import Path
+import aiohttp
+import edge_tts
 
 
-# GPT-SoVits
-async def generate_tts_GS(self, text, file_name_no_ext=None):
-        file_name = self.generate_cache_file_name(file_name_no_ext, self.media_type)
-        clean_text = text.replace("```", "").strip()
-        cleaned_text = re.sub(r"\[.*?\]", "", clean_text)
-        # Prepare the data for the POST request
-        data = {
-            "text": cleaned_text,
-            "text_lang": "zh",
-            "ref_audio_path": "それはそうかもだけど、こういうのって人からもらった方が嬉しくないあ.wav",
-            "prompt_lang": "ja",
-            "prompt_text": "それはそうかもだけど、こういうのって人からもらった方が嬉しくないあ",
-            #"text_split_method": self.text_split_method,
-            #"batch_size": self.batch_size,
-            #"media_type": self.media_type,
-            #"streaming_mode": self.streaming_mode,
-        }
+class TTSGenerator:
+    def __init__(self, cache_dir="tts_cache", ref_audio="サキちゃん、今どこにいるんだろう.wav"):
+        self.cache_dir = Path(cache_dir)
+        self.ref_audio = ref_audio
+        self.cache_dir.mkdir(parents=True, exist_ok=True)
 
-        # Send POST request to the TTS API
-        response = requests.get("http://127.0.0.1:9880/tts", params=data, timeout=120)
+    def generate_cache_name(self, text, prefix=None):
+        """生成带哈希的缓存文件名"""
+        text_hash = hashlib.md5(text.encode()).hexdigest()
+        if prefix:
+            return self.cache_dir / f"{prefix}_{text_hash}.wav"
+        return self.cache_dir / f"tts_{text_hash}.wav"
 
-        # Check if the request was successful
-        if response.status_code == 200:
-            # Save the audio content to a file
-            with open(file_name, "wb") as audio_file:
-                audio_file.write(response.content)
-            return file_name
-        else:
-            # Handle errors or unsuccessful requests
-            print(
-                f"Error: Failed to generate audio. Status code: {response.status_code}"
-            )
+    async def generate_tts(self, text, voice="zh-CN-XiaoyiNeural"):
+        """Edge-TTS生成器"""
+        clean_text = self._clean_text(text)
+        output_path = self.generate_cache_name(clean_text, "edge")
+
+        if output_path.exists():
+            return str(output_path)
+
+        try:
+            tts = edge_tts.Communicate(clean_text, voice=voice)
+            await tts.save(str(output_path))
+            return str(output_path)
+        except Exception as e:
+            print(f"Edge-TTS生成失败: {e}")
             return None
 
+    async def generate_gpt_sovits(self, text, prompt_text=None):
+        """GPT-SoVITS生成器"""
+        clean_text = self._clean_text(text)
+        output_path = self.generate_cache_name(clean_text, "sovits")
+
+        if output_path.exists():
+            return str(output_path)
+
+        params = {
+            "text": clean_text,
+            "text_lang": "zh",
+            "ref_audio_path": str(self.ref_audio),
+            "prompt_lang": "ja",
+            "prompt_text": prompt_text or "サキちゃん、今どこにいるんだろう"
+        }
+
+        try:
+            async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=120)) as session:
+                async with session.get(
+                        "http://127.0.0.1:9880/tts",
+                        params=params
+                ) as response:
+                    if response.status == 200:
+                        with open(output_path, "wb") as f:
+                            f.write(await response.read())
+                        return str(output_path)
+                    print(f"GPT-SoVITS API错误: {response.status}")
+                    return None
+        except Exception as e:
+            print(f"GPT-SoVITS请求失败: {e}")
+            return None
+
+    def _clean_text(self, text):
+        """统一文本清理"""
+        return re.sub(r"\[.*?\]|```", "", text).strip()
