@@ -5,7 +5,7 @@ from fastapi.responses import JSONResponse
 from fastapi.responses import StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from llm_handler import llm_response_generation, get_gemini_response_with_history
-#from tts_handler import generate_tts, generate_tts_GS  # 这是 async 函数
+# from tts_handler import generate_tts, generate_tts_GS  # 这是 async 函数
 from history_manager import load_history, add_to_history
 import os
 import json
@@ -18,7 +18,7 @@ from pydantic import BaseModel
 from typing import Optional
 import camera
 import logging
-import httpx # 导入 httpx 用于发送 HTTP 请求
+import httpx  # 导入 httpx 用于发送 HTTP 请求
 import uvicorn
 import base64
 import edge_tts
@@ -28,7 +28,6 @@ import soundfile as sf
 import numpy as np
 import pygame
 from tts_handler import TTSGenerator
-
 
 logging.basicConfig(
     level=logging.DEBUG,
@@ -43,12 +42,13 @@ load_dotenv()
 app = FastAPI()
 AUDIO_DIR = "audio_cache"
 os.makedirs(AUDIO_DIR, exist_ok=True)
-app.mount("/audio_cache", StaticFiles(directory=AUDIO_DIR), name="audio_cache") # TODO: Check
+app.mount("/audio_cache", StaticFiles(directory=AUDIO_DIR), name="audio_cache")  # TODO: Check
 
 # 初始化音频播放系统
 pygame.mixer.init()
 tts_queue = asyncio.Queue()
 is_playing = False
+
 
 class AudioBuffer:
     def __init__(self):
@@ -95,7 +95,7 @@ class AudioBuffer:
     async def stop(self):
         self.stop_flag = True
         async with self.lock:
-            for audio_item in self.buffer: # 修改: 循环buffer时处理字典
+            for audio_item in self.buffer:  # 修改: 循环buffer时处理字典
                 path = audio_item['path']
                 try:
                     os.remove(path)
@@ -112,6 +112,7 @@ tts_engine = TTSGenerator(
     cache_dir="audio_cache",
 )
 
+
 async def tts_consumer():
     global tts_engine
     logger.info("TTS消费者启动")
@@ -127,8 +128,8 @@ async def tts_consumer():
 
         async with tts_semaphore:  # 并发控制
             try:
-                #timestamp = datetime.now().strftime("%Y%m%d%H%M%S%f")
-                #audio_path = os.path.join(AUDIO_DIR, f"temp_{timestamp}.wav")
+                # timestamp = datetime.now().strftime("%Y%m%d%H%M%S%f")
+                # audio_path = os.path.join(AUDIO_DIR, f"temp_{timestamp}.wav")
 
                 # 带超时控制的TTS生成
                 try:
@@ -136,10 +137,10 @@ async def tts_consumer():
                     audio_path = await tts_engine.generate_gpt_sovits(
                         text_segment,
                     )
-                    end_time = time.time()    # 记录 TTS 生成结束时间
-                    tts_duration = end_time - start_time # 计算 TTS 生成耗时
+                    end_time = time.time()  # 记录 TTS 生成结束时间
+                    tts_duration = end_time - start_time  # 计算 TTS 生成耗时
 
-                    print(f"TTS生成耗时: {tts_duration:.4f} 秒, 文本: {text_segment}...") # 记录 TTS 耗时
+                    print(f"TTS生成耗时: {tts_duration:.4f} 秒, 文本: {text_segment}...")  # 记录 TTS 耗时
 
                 except asyncio.TimeoutError:
                     logger.warning(f"TTS生成超时: {text_segment[:20]}...")
@@ -167,14 +168,55 @@ def play_audio_sync(path):
     except Exception as e:
         logger.error(f"音频播放失败: {e}")
 
+
 class chatRequest(BaseModel):
     text: str
     user_id: str = "default_user"
     image_base64: Optional[str] = None
 
+
 user_chat_sessions = load_history()
 user_conversation_turns = {}
+user_conversation_turns_lock = asyncio.Lock()  # 添加锁
 camera_instance = None
+
+MEMORY_APP_URL = "http://localhost:5001"  # Memory App 的地址
+
+
+async def send_memory_requests(user_id, user_text, response_text, manual_history):
+    """异步发送记忆存储请求"""
+    try:
+        async with httpx.AsyncClient() as client:
+            # 构建对话历史文本
+            conversation_text = "\n".join([
+                f"User: {entry['user_text']}\nAI: {entry['ai_response']}"
+                for entry in manual_history[-3:]  # 最近3轮对话
+            ])
+            # 长期记忆的payload
+            long_term_memory_payload = {
+                "user_text": user_text,
+                "response_text": response_text,
+                "conversation_history_text": conversation_text
+            }
+            # 发送到两个不同的长期记忆端点
+            response1 = await client.post(
+                f"{MEMORY_APP_URL}/long_term_memory_declarative",
+                json=long_term_memory_payload
+            )
+            response2 = await client.post(
+                f"{MEMORY_APP_URL}/long_term_memory_complex",
+                json=long_term_memory_payload
+            )
+            # 检查响应状态
+            response1.raise_for_status()
+            response2.raise_for_status()
+            logger.info(f"Memory stored successfully for user {user_id}")
+    except httpx.HTTPStatusError as e:
+        logger.error(f"HTTP error occurred while storing memory: {e.response.text}")
+    except httpx.RequestError as e:
+        logger.error(f"Request error occurred while storing memory: {str(e)}")
+    except Exception as e:
+        logger.error(f"Unexpected error in send_memory_requests: {str(e)}")
 
 
 @app.on_event("startup")
@@ -211,7 +253,6 @@ async def async_queue_generator(queue):
         yield item
         queue.task_done()
 
-MEMORY_APP_URL = "http://localhost:5001" # Memory App 的地址，根据实际情况修改
 
 if __name__ == '__main__':
     user_provided_id = input("请输入您的名字以用作 user_id (直接回车使用默认 'default_user'): ")  # 提示用户输入
@@ -225,26 +266,30 @@ if __name__ == '__main__':
 
     @app.post('/chat')
     async def chat_endpoint(request: Request):
-        request_start_time = time.time() # 记录请求开始时间  <--  记录请求到达时间
+        request_start_time = time.time()  # 记录请求开始时间
 
         try:
-            # 先解析请求数据 --------------------------------------------------
+            # 解析请求数据
             data = await request.json()
             user_text = data.get('user_input')
-            #user_id = data.get('user_id', "default_user")
             user_id = user_id_to_use
             image_base64_uploaded = data.get('image_base64')
 
-            # 处理图像捕获逻辑 --------------------------------
+            # 处理图像捕获逻辑
             image_base64_camera = None
             if camera_instance:
                 image_base64_camera = camera.capture_and_encode_image(camera_instance)
             final_image_base64 = image_base64_uploaded or image_base64_camera
-            # 获取历史记录 ----------------------------------------------------
+
+            # 获取历史记录
             manual_history = user_chat_sessions.get(user_id, [])
 
-            # 创建流式生成器 --------------------------------------------------
+            # 收集AI回复的变量
+            collected_response = []
+
+            # 创建流式生成器
             async def generate_stream():
+                nonlocal collected_response
                 try:
                     llm_generator = get_gemini_response_with_history(
                         user_text,
@@ -254,31 +299,46 @@ if __name__ == '__main__':
                     )
 
                     async for chunk in llm_generator:
-                        chunk_gen_time = time.time() # 记录当前 chunk 生成完成的时间
-                        request_to_current_chunk_time = chunk_gen_time - request_start_time # 计算请求开始到当前 chunk 的时间
-                        #chunk["request_to_current_chunk_time"] = request_to_current_chunk_time # 加入 chunk
-                        print(
-                            f"Chunk 生成时间 (request_to_current_chunk_time): {request_to_current_chunk_time:.4f} 秒")  # <-- 打印每次 chunk 的时间
+                        chunk_gen_time = time.time()
+                        request_to_current_chunk_time = chunk_gen_time - request_start_time
+                        print(f"Chunk 生成时间: {request_to_current_chunk_time:.4f} 秒")
+
                         if chunk["type"] == "segment":
+                            collected_response.append(chunk["segment"])
                             chunk["user_id"] = user_id
                             chunk["ai_id"] = "白百合"
                             segment_text = chunk["segment"]
 
-                            tts_start_time = time.time() # 记录 TTS 生成开始时间
+                            tts_start_time = time.time()
                             audio_path = await tts_engine.generate_gpt_sovits(segment_text)
-                            tts_end_time = time.time() # 记录 TTS 生成结束时间
-                            tts_duration = tts_end_time - tts_start_time # 计算 TTS 生成时间
-                            #chunk["tts_produce_duration"] = tts_duration # 将 TTS 生成时间加入 chunk
+                            tts_end_time = time.time()
+                            tts_duration = tts_end_time - tts_start_time
+                            print(f"TTS Duration: {tts_duration:.4f} 秒, 文本: {segment_text}")
 
                             audio_filename = os.path.basename(audio_path)
                             chunk["audio_url"] = f"http://localhost:5000/audio_cache/{audio_filename}"
-
-                            print(f"  TTS Duration: {tts_duration:.4f} 秒, 文本: {segment_text}") #  <-- 打印 TTS 生成时间
-
-                            print("chunk: ", chunk)
+                            print("chunk", chunk)
                         yield json.dumps(chunk) + "\n"
-                except Exception as e:
-                    logger.error(f"Stream error: {e}")
+                finally:
+                    # 生成完成后处理历史记录和记忆存储
+                    full_response = ''.join(collected_response)
+                    print(f"Response: {full_response}")
+                    if full_response:
+                        add_to_history(user_id, user_text, full_response, user_chat_sessions)
+
+                        # 更新对话轮数
+                        async with user_conversation_turns_lock:
+                            if user_id not in user_conversation_turns:
+                                user_conversation_turns[user_id] = 0
+                            user_conversation_turns[user_id] += 1
+                            current_turn = user_conversation_turns[user_id]
+
+                        # 触发记忆存储（每两轮）
+                        if current_turn % 2 == 0:
+                            updated_history = user_chat_sessions.get(user_id, [])
+                            asyncio.create_task(
+                                send_memory_requests(user_id, user_text, full_response, updated_history)
+                            )
 
             return StreamingResponse(generate_stream(), media_type="text/event-stream")
 
@@ -287,4 +347,4 @@ if __name__ == '__main__':
             raise HTTPException(status_code=500, detail=str(e))
 
 
-    uvicorn.run(app, host="0.0.0.0", port=5000) # LLM+TTS App 运行在 5000 端口
+    uvicorn.run(app, host="0.0.0.0", port=5000)  # LLM+TTS App 运行在 5000 端口
