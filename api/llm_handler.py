@@ -96,68 +96,120 @@ def llm_response_generation(user_input, user_id, user_chat_sessions, manual_hist
 
 class MetadataParser:
     def __init__(self):
-        self.meta_buffer = ""
-        self.in_meta_block = False
+        self.state = "init"  # 状态：init | meta_started | meta_parsing
+        self.buffer = ""
         self.metadata = {"expression": "normal", "motion": "idle"}
 
-    def feed(self, chunk_text):
-        segments = []
+    def feed(self, chunk):
+        output = ""
+        self.buffer += chunk
 
-        if not self.in_meta_block:
-            # 检测元数据块起始标记
-            if "```meta" in chunk_text:
-                self.in_meta_block = True
-                chunk_text = chunk_text.split("```meta")[-1]
+        while True:
+            if self.state == "init":
+                # 第一阶段：检测初始反引号
+                idx = self.buffer.find('```')
+                if idx == -1:
+                    output += self.buffer
+                    self.buffer = ""
+                    break
 
-        if self.in_meta_block:
-            # 检测元数据块结束标记
-            if "```" in chunk_text:
-                meta_part, remaining = chunk_text.split("```", 1)
-                self.meta_buffer += meta_part
+                # 分离前导文本
+                output += self.buffer[:idx]
+                self.buffer = self.buffer[idx + 3:]
+                self.state = "meta_started"  # 进入第二阶段
 
-                try:
-                    self.metadata.update(json.loads(self.meta_buffer))
-                    print(f"🟢 成功解析元数据: {self.metadata}")
-                except Exception as e:
-                    print(f"🔴 元数据解析失败: {e}")
+            elif self.state == "meta_started":
+                # 第二阶段：检测后续meta关键字
+                if len(self.buffer) >= 4:
+                    if self.buffer.startswith("meta"):
+                        # 找到完整起始标记
+                        self.buffer = self.buffer[4:]
+                        self.state = "meta_parsing"
+                        self.meta_content = ""
+                    else:
+                        # 非meta块，回退初始状态
+                        output += '```' + self.buffer
+                        self.buffer = ""
+                        self.state = "init"
+                    break
+                else:
+                    # 保留不完整数据等待下个chunk
+                    break
 
-                # 重置状态
-                self.in_meta_block = False
-                self.meta_buffer = ""
+            elif self.state == "meta_parsing":
+                # 第三阶段：解析元数据内容
+                end_idx = self.buffer.find('```')
+                if end_idx == -1:
+                    self.meta_content += self.buffer
+                    self.buffer = ""
+                    break
 
-                # 返回元数据后的剩余文本
-                return remaining.strip()
-            else:
-                self.meta_buffer += chunk_text
-                return ""
-        else:
-            return chunk_text
+                # 提取完整元数据
+                self.meta_content += self.buffer[:end_idx]
+                self.buffer = self.buffer[end_idx + 3:]
+                self._parse_meta_content()
+                self.state = "init"  # 重置状态
+        return output
+
+    def _parse_meta_content(self):
+        try:
+            data = json.loads(self.meta_content.strip())
+            self.metadata.update({
+                "expression": data.get("expression", "normal"),
+                "motion": data.get("motion", "idle")
+            })
+            print(f"✅ 元数据更新: {self.metadata}")
+        except Exception as e:
+            print(f"❌ 元数据解析失败: {str(e)}")
+            print(f"错误内容: {self.meta_content}")
 
 
-def split_text_stream(buffer):
-    split_chars = ['，', '。', '！', '？', '...']
-    positions = []
+def split_text_stream(buffer, max_chunk=20, min_pause=3):
+    # 增强版自然停顿符号（带权重机制）
+    pause_rules = [
+        {'pattern': '\n\n', 'weight': 1.0, 'offset': 2},  # 段落分隔
+        {'pattern': '。', 'weight': 0.95, 'offset': 1},  # 句号
+        {'pattern': '！', 'weight': 0.9, 'offset': 1},  # 感叹号
+        {'pattern': '？', 'weight': 0.9, 'offset': 1},  # 问号
+        {'pattern': '...', 'weight': 0.85, 'offset': 3},  # 中文省略号
+        {'pattern': '……', 'weight': 0.85, 'offset': 2},  # 中文长省略
+        {'pattern': '，', 'weight': 0.7, 'offset': 1},  # 中文逗号
+        {'pattern': ',', 'weight': 0.65, 'offset': 1},  # 英文逗号
+        {'pattern': '、', 'weight': 0.6, 'offset': 1},  # 顿号
+        {'pattern': ' ', 'weight': 0.5, 'offset': 1}  # 空格
+    ]
 
-    # 查找所有可能的分割点
-    for char in split_chars:
-        pos = buffer.find(char)
-        while pos != -1:
-            positions.append(pos + len(char) - 1)
-            pos = buffer.find(char, pos + 1)
+    # 智能寻找最优分割点
+    def find_optimal_split(text):
+        candidates = []
 
-    if not positions:
-        return None, buffer
+        # 遍历所有可能的断点
+        for i in range(min(len(text), max_chunk + 25)):
+            for rule in pause_rules:
+                pattern_len = len(rule['pattern'])
+                if text[i:i + pattern_len] == rule['pattern']:
+                    score = rule['weight'] * (1 - abs(i - max_chunk) / max_chunk)
+                    pos = i + rule['offset']
+                    candidates.append((pos, score))
+                    break  # 优先匹配长pattern
 
-    # 选择最合适的分割点（优先后半部分的标点）
-    optimal_pos = max(
-        [p for p in positions if p < len(buffer) * 0.8],
-        default=max(positions, default=-1)
-    )
+        # 筛选有效候选
+        valid = [c for c in candidates if c[0] >= min_pause and c[0] <= max_chunk + 5]
+        if valid:
+            best = max(valid, key=lambda x: x[1])
+            return best[0]
 
-    if optimal_pos == -1:
-        return None, buffer
+        # 保底策略：在max_chunk处强制分割
+        return min(max_chunk, len(text))
 
-    return buffer[:optimal_pos + 1].strip(), buffer[optimal_pos + 1:].lstrip()
+    # 执行分割
+    if len(buffer) > max_chunk * 1.2:  # 允许10%溢出
+        split_pos = find_optimal_split(buffer)
+        if split_pos > min_pause:
+            return buffer[:split_pos].strip(), buffer[split_pos:].lstrip()
+
+    return None, buffer
+
 
 async def get_gemini_response_with_history(user_input, user_id, manual_history, image_base64=None): # 修改函数签名，添加 manual_history
     """
@@ -186,12 +238,14 @@ async def get_gemini_response_with_history(user_input, user_id, manual_history, 
                 === 你的角色档案 ===
                 {character_profile}
 
-                === 当前用户 ===
-                {user_id}，身份是你曾经的同学。
+                === 当前用户身份 ===
+                **名字**：{user_id}
+                身份：是你曾经的同学。
                 
                 === LLM 任务要求 ===
                 你将完全代入你的角色档案，成为你扮演的人，在此基础上：
-                - 请基于用户输入和 *对话历史* 生成你的回复。
+                - 像人一样思考。
+                - 基于用户输入和 *对话历史* 生成你的回复。
                 - **对话历史**中你应该更关注最近的消息，但仍然可以结合整个对话历史来理解上下文。
                 - 请注意，你会尝试联想回忆和目前互动有关的记忆，所以有**长期记忆**可以参考，但这些记忆中有时存在联想到的无关内容。
                 - 若对话历史和长期记忆信息有冲突，优先使用对话历史的信息。
@@ -202,11 +256,11 @@ async def get_gemini_response_with_history(user_input, user_id, manual_history, 
                     可用表情：["黑脸", "白眼", "拿旗子", "眼泪"]
                     可用动作：["好奇", "瞌睡", "害怕", "举白旗", "摇头", "抱枕头"]
 
-                请严格按以下格式返回响应：
-                1. 首先用 ```meta 包裹JSON元数据（必须单独成块）
-                2. 随后是自然语言回复（按标点分块输出）
+                请严格按以下格式返回：
+                1. 首先用 ```meta 包裹JSON元数据（必须独立成chunk）
+                2. 随后是自然语言回复
                 ```meta
-                {{ "reasoning":"思考过程（拟人化思考）","expression":"表情名称", "motion":"动作名称"}}
+                {{ "reasoning":“思考过程（拟人化思考）”, "expression":"表情名称", "motion":"动作名称"}}
                 [你的自然语言回复]
                 
                 === 动态信息 ===
@@ -250,17 +304,6 @@ async def get_gemini_response_with_history(user_input, user_id, manual_history, 
         # 5. 解析 JSON 响应
         model = genai.GenerativeModel('gemini-2.0-pro-exp-02-05')
 
-
-        # 异步处理流式响应
-        json_buffer = ""
-        response_text_buffer = ""
-        header_parsed = False
-        result = {
-            "expression": "normal",
-            "motion": "idle",
-            "reasoning": "",
-            "response_text": ""
-        }
 
         async for chunk in await model.generate_content_async(contents=parts,stream=True):
             raw_text = chunk.text

@@ -1,8 +1,9 @@
-# llm_tts_app.py (修改后的 app.py)
+# llm_tts_app_modified_with_print.py (修改后的 app.py)
 import asyncio
 from fastapi import FastAPI, Request, Response, HTTPException
 from fastapi.responses import JSONResponse
 from fastapi.responses import StreamingResponse
+from fastapi.staticfiles import StaticFiles
 from llm_handler import llm_response_generation, get_gemini_response_with_history
 #from tts_handler import generate_tts, generate_tts_GS  # 这是 async 函数
 from history_manager import load_history, add_to_history
@@ -28,6 +29,7 @@ import numpy as np
 import pygame
 from tts_handler import TTSGenerator
 
+
 logging.basicConfig(
     level=logging.DEBUG,
     format="%(asctime)s - %(levelname)s - %(message)s",
@@ -39,8 +41,9 @@ logger = logging.getLogger("uvicorn")
 
 load_dotenv()
 app = FastAPI()
-AUDIO_DIR = "audio"
+AUDIO_DIR = "audio_cache"
 os.makedirs(AUDIO_DIR, exist_ok=True)
+app.mount("/audio_cache", StaticFiles(directory=AUDIO_DIR), name="audio_cache") # TODO: Check
 
 # 初始化音频播放系统
 pygame.mixer.init()
@@ -60,7 +63,8 @@ class AudioBuffer:
             if path is None:
                 logger.error("尝试添加的音频路径为 None")
                 return
-            self.buffer.append(path)
+            # 修改: 添加音频路径时记录时间
+            self.buffer.append({'path': path, 'enqueue_time': time.time()})
             self.play_event.set()  # 触发播放循环
 
     async def play_loop(self):
@@ -72,38 +76,27 @@ class AudioBuffer:
                     self.play_event.clear()
                     continue
 
-                self.current_playing = self.buffer.pop(0)
+                audio_item = self.buffer.pop(0)
+                self.current_playing = audio_item['path']
 
-            # 修改预加载逻辑
-            def _preload_next():
-                if len(self.buffer) > 0:
-                    next_path = self.buffer[0]
-                    try:
-                        pygame.mixer.Sound(next_path)
-                    except Exception as e:
-                        logger.debug(f"预加载失败: {e}")
-
-            # 正确使用 run_in_executor
-            asyncio.get_event_loop().run_in_executor(None, _preload_next)  # 直接提交到线程池
-
-            # 播放当前音频
+            # 播放音频后删除文件
             def _play():
                 try:
-                    pygame.mixer.init()
                     sound = pygame.mixer.Sound(self.current_playing)
                     sound.play()
                     while pygame.mixer.get_busy() and not self.stop_flag:
                         pygame.time.wait(100)
-                    os.remove(self.current_playing)
+                    os.remove(self.current_playing)  # 播放完成后删除
                 except Exception as e:
                     logger.error(f"播放失败: {e}")
 
-            await asyncio.get_event_loop().run_in_executor(None, _play)  # 移除多余的create_task
+            await asyncio.get_event_loop().run_in_executor(None, _play)
 
     async def stop(self):
         self.stop_flag = True
         async with self.lock:
-            for path in self.buffer:
+            for audio_item in self.buffer: # 修改: 循环buffer时处理字典
+                path = audio_item['path']
                 try:
                     os.remove(path)
                 except:
@@ -232,19 +225,21 @@ if __name__ == '__main__':
 
     @app.post('/chat')
     async def chat_endpoint(request: Request):
+        request_start_time = time.time() # 记录请求开始时间  <--  记录请求到达时间
+
         try:
             # 先解析请求数据 --------------------------------------------------
             data = await request.json()
             user_text = data.get('user_input')
-            user_id = data.get('user_id', "default_user")
+            #user_id = data.get('user_id', "default_user")
+            user_id = user_id_to_use
             image_base64_uploaded = data.get('image_base64')
 
-            # 处理图像捕获逻辑 (保持原有代码不变) --------------------------------
+            # 处理图像捕获逻辑 --------------------------------
             image_base64_camera = None
             if camera_instance:
                 image_base64_camera = camera.capture_and_encode_image(camera_instance)
             final_image_base64 = image_base64_uploaded or image_base64_camera
-
             # 获取历史记录 ----------------------------------------------------
             manual_history = user_chat_sessions.get(user_id, [])
 
@@ -259,30 +254,29 @@ if __name__ == '__main__':
                     )
 
                     async for chunk in llm_generator:
-
-                        print(f"🟠 Yielding chunk: {chunk}")  # 流输出调试
-                        yield json.dumps(chunk) + "\n"
+                        chunk_gen_time = time.time() # 记录当前 chunk 生成完成的时间
+                        request_to_current_chunk_time = chunk_gen_time - request_start_time # 计算请求开始到当前 chunk 的时间
+                        #chunk["request_to_current_chunk_time"] = request_to_current_chunk_time # 加入 chunk
+                        print(
+                            f"Chunk 生成时间 (request_to_current_chunk_time): {request_to_current_chunk_time:.4f} 秒")  # <-- 打印每次 chunk 的时间
                         if chunk["type"] == "segment":
-                            if chunk["segment"] == "```":
-                                continue
-                            else:
-                                yield json.dumps({
-                                "type": "segment",
-                                "segment": chunk["segment"],
-                                "expression": chunk["expression"],
-                                "motion": chunk["motion"]
-                                }) + "\n"
-                                while tts_queue.qsize() > 5:
-                                    await asyncio.sleep(0.5)
-                                # 非阻塞放入 TTS 队列
-                                asyncio.create_task(tts_queue.put(chunk["segment"]))
+                            chunk["user_id"] = user_id
+                            chunk["ai_id"] = "白百合"
+                            segment_text = chunk["segment"]
 
-                        elif chunk["type"] == "complete":
-                            yield json.dumps({
-                                "type": "complete",
-                                "full_text": chunk["result"]["response_text"]
-                            }) + "\n"
+                            tts_start_time = time.time() # 记录 TTS 生成开始时间
+                            audio_path = await tts_engine.generate_gpt_sovits(segment_text)
+                            tts_end_time = time.time() # 记录 TTS 生成结束时间
+                            tts_duration = tts_end_time - tts_start_time # 计算 TTS 生成时间
+                            #chunk["tts_produce_duration"] = tts_duration # 将 TTS 生成时间加入 chunk
 
+                            audio_filename = os.path.basename(audio_path)
+                            chunk["audio_url"] = f"http://localhost:5000/audio_cache/{audio_filename}"
+
+                            print(f"  TTS Duration: {tts_duration:.4f} 秒, 文本: {segment_text}") #  <-- 打印 TTS 生成时间
+
+                            print("chunk: ", chunk)
+                        yield json.dumps(chunk) + "\n"
                 except Exception as e:
                     logger.error(f"Stream error: {e}")
 
@@ -293,6 +287,4 @@ if __name__ == '__main__':
             raise HTTPException(status_code=500, detail=str(e))
 
 
-
     uvicorn.run(app, host="0.0.0.0", port=5000) # LLM+TTS App 运行在 5000 端口
-

@@ -8,7 +8,7 @@ import edge_tts
 
 
 class TTSGenerator:
-    def __init__(self, cache_dir="tts_cache", ref_audio="サキちゃん、今どこにいるんだろう.wav"):
+    def __init__(self, cache_dir="tts_cache", ref_audio="还有，长生。她的鼻子，比狗狗灵.wav"):
         self.cache_dir = Path(cache_dir)
         self.ref_audio = ref_audio
         self.cache_dir.mkdir(parents=True, exist_ok=True)
@@ -48,8 +48,8 @@ class TTSGenerator:
             "text": clean_text,
             "text_lang": "zh",
             "ref_audio_path": str(self.ref_audio),
-            "prompt_lang": "ja",
-            "prompt_text": prompt_text or "サキちゃん、今どこにいるんだろう"
+            "prompt_lang": "zh",
+            "prompt_text": prompt_text or "还有，长生。她的鼻子，比狗狗灵"
         }
 
         try:
