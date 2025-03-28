@@ -296,5 +296,61 @@ client.collections.create(
 
 print("Preferences Collection Schema 创建成功")
 
+client.connect()
+client.collections.create(
+    name="Profile",
+    description="存储某个体的长期身份信息，包括基本信息、健康状况、社会身份、经济状况、居住情况等",
+    properties=[
+        # 基本信息
+        Property(name="fullName", data_type=DataType.TEXT, description="完整姓名"),
+        Property(name="nickname", data_type=DataType.TEXT, description="常用昵称"),
+        Property(name="dateOfBirth", data_type=DataType.DATE, description="出生日期"),
+        Property(name="age", data_type=DataType.NUMBER, description="年龄"),
+        Property(name="gender", data_type=DataType.TEXT, description="性别"),
+        Property(name="height", data_type=DataType.NUMBER, description="身高 (cm)"),
+        Property(name="weight", data_type=DataType.NUMBER, description="体重 (kg)"),
+
+        # 健康状况
+        Property(name="chronicDiseases", data_type=DataType.TEXT_ARRAY, description="慢性疾病（如：糖尿病、哮喘等）"),
+        Property(name="disabilities", data_type=DataType.TEXT_ARRAY, description="身体残疾或特殊健康状况"),
+        Property(name="allergies", data_type=DataType.TEXT_ARRAY, description="过敏源（如：花粉、海鲜等）"),
+        Property(name="bloodType", data_type=DataType.TEXT, description="血型"),
+        Property(name="medicalHistory", data_type=DataType.TEXT, description="过去的重大疾病或手术记录"),
+
+        # 社会身份
+        Property(name="educationLevel", data_type=DataType.TEXT, description="受教育水平 (例如：小学、大学、研究生等)"),
+        Property(name="schoolOrUniversity", data_type=DataType.TEXT, description="当前或过去就读的学校"),
+        Property(name="jobTitle", data_type=DataType.TEXT, description="职业名称"),
+        Property(name="companyOrEmployer", data_type=DataType.TEXT, description="工作单位"),
+        Property(name="jobLevel", data_type=DataType.TEXT,
+                 description="职业等级 (例如：实习生、经理、高级工程师、副教授等)"),
+        Property(name="socialRole", data_type=DataType.TEXT, description="社会角色 (例如：学生、教师、医生、艺术家)"),
+
+        # 经济状况
+        Property(name="incomeLevel", data_type=DataType.TEXT, description="收入水平 (低收入、中等收入、高收入)"),
+        Property(name="financialDebts", data_type=DataType.TEXT, description="负债情况"),
+
+        # 居住情况
+        Property(name="currentResidence", data_type=DataType.TEXT, description="当前居住地 (城市、国家)"),
+        Property(name="hometown", data_type=DataType.TEXT, description="家乡 (出生地)"),
+        Property(name="livingWith", data_type=DataType.TEXT, description="与谁一起居住 (独居、与家人、与室友)"),
+        Property(name="housingType", data_type=DataType.TEXT, description="住房类型 (公寓、独立屋、宿舍等)"),
+
+        # 文化背景
+        Property(name="nationality", data_type=DataType.TEXT, description="国籍"),
+        Property(name="ethnicity", data_type=DataType.TEXT, description="种族/民族"),
+        Property(name="religion", data_type=DataType.TEXT, description="宗教信仰"),
+
+        # 更新时间
+        Property(name="profileLastUpdated", data_type=DataType.DATE, description="该档案的最近更新时间"),
+    ],
+    vectorizer_config=
+    Configure.Vectorizer.text2vec_ollama(
+        api_endpoint="http://host.docker.internal:11434",
+        model="mxbai-embed-large:latest",
+    ),
+)
+print("Profile Collection Schema 创建成功")
+
 print("所有 Collection Schema 定义完成！")
 client.close()

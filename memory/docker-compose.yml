@@ -1,19 +1,19 @@
 ---
 services:
-  weaviate:
+  weaviate_soyo:
     command:
-    - --host
-    - 0.0.0.0
-    - --port
-    - '8080'
-    - --scheme
-    - http
+      - --host
+      - 0.0.0.0
+      - --port
+      - '8080'  # Soyo 实例使用 8081 端口
+      - --scheme
+      - http
     image: cr.weaviate.io/semitechnologies/weaviate:1.29.0
     ports:
-    - 8080:8080
-    - 50051:50051
+      - 8080:8080  # 外部访问端口
+      - 50051:50051
     volumes:
-    - weaviate_data:/var/lib/weaviate
+      - weaviate_data_soyo:/var/lib/weaviate  # Soyo 的独立数据存储
     restart: on-failure:0
     environment:
       QUERY_DEFAULTS_LIMIT: 25
@@ -22,8 +22,8 @@ services:
       ENABLE_MODULES: 'text2vec-ollama'
       DEFAULT_VECTORIZER_MODULE: 'none'
       ENABLE_API_BASED_MODULES: 'true'
-      CLUSTER_HOSTNAME: 'node1'
+      CLUSTER_HOSTNAME: 'soyo_node'
 
 volumes:
-  weaviate_data:
+  weaviate_data_soyo:
 ...

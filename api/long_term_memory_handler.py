@@ -14,9 +14,9 @@ load_dotenv()
 GEMINI_API_KEY = load_api_key("GEMINI_API_KEY")
 genai.configure(api_key=GEMINI_API_KEY)
 os.environ["GEMINI_API_KEY"] = GEMINI_API_KEY
-#embedding_model_name = 'models/text-embedding-004'
-memory_process_model = genai.GenerativeModel('gemini-1.5-pro') # PRO?
-#gemini_embedding_model = genai.GenerativeModel(embedding_model_name) # 初始化 Gemini Embedding 模型
+# embedding_model_name = 'models/text-embedding-004'
+memory_process_model = genai.GenerativeModel('gemini-1.5-pro')  # PRO?
+# gemini_embedding_model = genai.GenerativeModel(embedding_model_name) # 初始化 Gemini Embedding 模型
 
 # 初始化 Weaviate 客户端
 try:
@@ -26,7 +26,6 @@ except Exception as e:
     logging.error(f"Weaviate 客户端连接失败: {e}")
     raise  # 重新抛出异常，以便在启动时尽早发现问题
 
-
 with open("../Prompt/Character/Lily.txt", "r", encoding="utf-8") as file:
     character_profile = file.read()
 
@@ -35,7 +34,6 @@ with open("weaviate_declarative_memory.txt", "r", encoding="utf-8") as file:
 
 with open("weaviate_complex_memory.txt", "r", encoding="utf-8") as file:
     weaviate_complex_memory = file.read()
-
 
 
 def query_long_term_memory(user_input, ai_response, memory_type):
@@ -59,9 +57,10 @@ def query_long_term_memory(user_input, ai_response, memory_type):
 
     return related_memory
 
+
 async def long_term_memory_async(user_input, ai_response, conversation_history, memory_type,
                                  last_two_long_term_memories=None,
-                                 user_id="default_user"): # memory_type can be "declarative" or "complex"
+                                 user_id="default_user"):  # memory_type can be "declarative" or "complex"
     """
     后台异步处理用户输入和 AI 回复，判断是否存储记忆，并存储到 Weaviate.
     """
@@ -76,18 +75,18 @@ async def long_term_memory_async(user_input, ai_response, conversation_history, 
         declarative_memory_prompt = f"""
         === 你的角色档案 ===
         {character_profile}
-        
+
         === **后台 LLM 记忆任务指示** ===
         你是该虚拟人格的长期记忆模块的组件之一，
         负责分析虚拟人格与他人的对话，包括近期**对话历史**，像人类一样筛选出需要记住的信息，结构化地存储或更新到知识库 Weaviate 中。
         首先你需要判断是否有**Events** 或 **Knowledge** 或 **Goals** 或 **Profile**相关的长期记忆信息。
         **注意**，你只能关注和**Events** 或 **Knowledge** 或 **Goals** 或 **Profile**有关的信息，若没有，则直接返回[]
-        
+
         总计有六个记忆分类，而你负责处理的是**Events** 和 **Knowledge** 和 **Goals** 和 **Profile**：
         **Class 定义**
         当存储或更新记忆时，必须根据 class 生成结构化 JSON 数据，每个 \`property\` 只能填充 class 中允许的数据类型。
         {weaviate_declarative_memory}
-        
+
         首先你需要判断是否有**Events** 或 **Knowledge** 或 **Goals** 或 **Profile**相关的长期记忆信息。
         如果需要存储，你需要决定将记忆存储到哪个 Class，并为该 Class 的每个属性生成内容。
         如果需要更新，你需要决定更新哪条相关记忆，并根据该 Class 的属性生成内容。
@@ -225,7 +224,7 @@ async def long_term_memory_async(user_input, ai_response, conversation_history, 
 
         ## **记忆库相关内容**
         {related_memory}
-        
+
         以下是最近两轮对话后，你生成的长期记忆条目，同样作为本次记忆库相关内容：
         ```json
         {last_two_long_term_memories}
@@ -240,18 +239,18 @@ async def long_term_memory_async(user_input, ai_response, conversation_history, 
         complex_memory_prompt = f"""
         === 你的角色档案 ===
         {character_profile}
-        
+
         === **后台 LLM 记忆任务指示** ===
         你是该虚拟人格的长期记忆模块的组件之一，
         负责分析虚拟人格与他人的对话，包括**对话历史**，像人类一样筛选出需要记住的信息，结构化地存储或更新到知识库 Weaviate 中。
         首先你需要判断是否有**Relationships** 或 **Preferences**相关的长期记忆信息，若没有，则直接返回[]。
         **注意**，你只能关注和**关系**或**偏好**有关的信息。
-        
+
         总计有六个记忆分类，而你负责处理的是**Relationships** 和 **Preferences**：
         **Class 定义**
         当存储或更新记忆时，必须根据 class 生成结构化 JSON 数据，每个 \`property\` 只能填充 class 中允许的数据类型。
         {weaviate_complex_memory}
-        
+
         如果需要存储，你需要决定将记忆存储到哪个 Class，并为该 Class 的每个属性生成内容。
         如果需要更新，你需要决定更新哪条相关记忆，并根据该 Class 的属性生成内容。
         **记忆库相关内容**是运行长期记忆模块之前，根据用户输入和虚拟人格回复，从记忆库中搜索得到。
@@ -375,7 +374,7 @@ async def long_term_memory_async(user_input, ai_response, conversation_history, 
 
         ## **记忆库相关内容**
         {related_memory}
-        
+
         ## **最近两轮记忆**
         以下是最近两轮对话后，你生成的长期记忆条目，可以作为本次记忆生成任务的参考：
         ```json
@@ -397,8 +396,8 @@ async def long_term_memory_async(user_input, ai_response, conversation_history, 
 
         memory_entries = memory_process_model.generate_content(prompt)
 
-        print("--- Raw Response from Memory Processing LLM ---") # 调试打印 LLM 原始回复
-        print(memory_entries.text) # 打印 LLM 原始回复文本
+        print("--- Raw Response from Memory Processing LLM ---")  # 调试打印 LLM 原始回复
+        print(memory_entries.text)  # 打印 LLM 原始回复文本
 
         # ---  [调试]  打印尝试解析 JSON 前的字符串  ---
         json_str_to_parse = memory_entries.text.replace('`json', '').replace('`', '').strip()
@@ -407,23 +406,22 @@ async def long_term_memory_async(user_input, ai_response, conversation_history, 
         try:
             memory_entries_json = json.loads(json_str_to_parse)
 
-            if not isinstance(memory_entries_json, list): #  检查解析结果是否是列表
-                print(f"[Error] Parsed JSON is NOT a list, but: {type(memory_entries_json)}") #  如果不是列表，报错
+            if not isinstance(memory_entries_json, list):  # 检查解析结果是否是列表
+                print(f"[Error] Parsed JSON is NOT a list, but: {type(memory_entries_json)}")  # 如果不是列表，报错
 
             #  --- [调试]  检查每个条目是否包含 'class' ---
-            if isinstance(memory_entries_json, list): #  再次检查以避免类型错误
+            if isinstance(memory_entries_json, list):  # 再次检查以避免类型错误
                 for entry in memory_entries_json:
                     if "class" not in entry:
-                        print(f"[Error] Missing 'class' in JSON entry: {entry}") #  如果缺少 'class'，报错
+                        print(f"[Error] Missing 'class' in JSON entry: {entry}")  # 如果缺少 'class'，报错
 
         except json.JSONDecodeError as e:
-            print(f"[Error] JSON Decode Error: {e}") # 打印 JSON 解析错误信息
-            print(f"[Error] JSON String that caused error: {json_str_to_parse}") #  打印导致解析错误的 JSON 字符串
-            return #  如果 JSON 解析失败，直接返回，避免后续代码报错
+            print(f"[Error] JSON Decode Error: {e}")  # 打印 JSON 解析错误信息
+            print(f"[Error] JSON String that caused error: {json_str_to_parse}")  # 打印导致解析错误的 JSON 字符串
+            return  # 如果 JSON 解析失败，直接返回，避免后续代码报错
 
-
-        for entry in memory_entries_json: #  使用解析后的 JSON 数据
-            class_name = entry["class"] #  <--  错误可能发生在这里，如果 JSON 格式不正确 或 缺少 class
+        for entry in memory_entries_json:  # 使用解析后的 JSON 数据
+            class_name = entry["class"]  # <--  错误可能发生在这里，如果 JSON 格式不正确 或 缺少 class
             collection = client.collections.get(class_name)
             properties_content = entry["properties_content"]
             action = entry["action"]
@@ -438,10 +436,8 @@ async def long_term_memory_async(user_input, ai_response, conversation_history, 
 
 
     except Exception as e:
-        print(f"后台记忆处理 LLM 调用失败: {str(e)}") # 原始的错误打印，保留
-        print(f"Exception details: {str(e)}") #  打印更详细的异常信息
-
-
+        print(f"后台记忆处理 LLM 调用失败: {str(e)}")  # 原始的错误打印，保留
+        print(f"Exception details: {str(e)}")  # 打印更详细的异常信息
 
 
 # 示例调用 (测试用，实际应用中可能需要从其他模块调用)
@@ -451,7 +447,6 @@ async def main():
     conversation_history_text = "用户之前提到过想养兔子。"
 
     await long_term_memory_async(user_input_text, ai_response_text, conversation_history_text)
-
 
 
 if __name__ == "__main__":

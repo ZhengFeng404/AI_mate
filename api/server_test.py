@@ -15,7 +15,7 @@ import sys
 import io
 import time
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, List
 import camera
 import logging
 import httpx  # 导入 httpx 用于发送 HTTP 请求
@@ -28,6 +28,11 @@ import soundfile as sf
 import numpy as np
 import pygame
 from tts_handler import TTSGenerator
+
+# 导入语音识别相关库
+import speech_recognition as sr
+from scipy.io import wavfile
+import tempfile
 
 logging.basicConfig(
     level=logging.DEBUG,
@@ -111,6 +116,36 @@ tts_semaphore = asyncio.Semaphore(5)  # 并发控制
 tts_engine = TTSGenerator(
     cache_dir="audio_cache",
 )
+
+# 语音识别请求模型
+class VoiceRecognitionRequest(BaseModel):
+    user_id: str
+    audio_data: str  # base64编码的WAV音频数据
+
+# 语音识别响应模型
+class VoiceRecognitionResponse(BaseModel):
+    text: str
+    confidence: float = 0.0
+
+# 初始化语音识别器
+recognizer = sr.Recognizer()
+# 配置VAD参数 - 针对短音频段优化
+recognizer.energy_threshold = 300  # 能量阈值
+recognizer.dynamic_energy_threshold = True
+recognizer.pause_threshold = 1.5  # 减小停顿阈值以适应分段音频
+recognizer.non_speaking_duration = 0.8  # 非说话持续时间
+recognizer.phrase_threshold = 0.2  # 短语阈值，降低以更快开始录音
+recognizer.operation_timeout = 10  # 操作超时时间
+recognizer.dynamic_energy_adjustment_ratio = 1.5  # 动态能量调整比率
+
+# 最大音频段长度 - 新增
+MAX_AUDIO_SEGMENT_LENGTH = 20  # 秒
+MAX_RECOGNITION_TIMEOUT = 15    # 秒
+
+# 新增: 语音处理配置
+NOISE_REDUCTION_STRENGTH = 0.7  # 噪声抑制强度
+MIN_AUDIO_LENGTH = 0.5  # 最小有效音频长度(秒)
+MAX_SILENCE_FOR_TRIM = 0.3  # 裁剪音频时允许的前后静音最大长度(秒)
 
 
 async def tts_consumer():
@@ -254,6 +289,155 @@ async def async_queue_generator(queue):
         queue.task_done()
 
 
+@app.post('/voice_recognition', response_model=VoiceRecognitionResponse)
+async def voice_recognition_endpoint(request: VoiceRecognitionRequest):
+    """处理语音识别请求"""
+    start_time = time.time()
+    temp_file_path = None
+    try:
+        # 解码Base64音频数据
+        audio_data = base64.b64decode(request.audio_data)
+        
+        # 创建临时WAV文件
+        with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as temp_file:
+            temp_file.write(audio_data)
+            temp_file_path = temp_file.name
+        
+        logger.info(f"保存临时音频文件: {temp_file_path}")
+        
+        # 使用speech_recognition处理音频
+        text = ""
+        confidence = 0.0
+        
+        # 确保资源正确释放
+        try:
+            # 读取原始音频以获取音频长度信息
+            try:
+                sample_rate, audio_samples = wavfile.read(temp_file_path)
+                audio_duration = len(audio_samples) / sample_rate
+                logger.info(f"接收到的音频长度: {audio_duration:.2f}秒")
+                
+                # 如果音频太短，可能是误触，直接返回
+                if audio_duration < MIN_AUDIO_LENGTH:
+                    logger.warning(f"音频太短 ({audio_duration:.2f}秒)，可能是误触")
+                    return VoiceRecognitionResponse(text="", confidence=0.0)
+                
+                # 如果音频过长，截取前面部分以避免超时
+                if audio_duration > MAX_AUDIO_SEGMENT_LENGTH:
+                    logger.warning(f"音频过长 ({audio_duration:.2f}秒)，将只处理前{MAX_AUDIO_SEGMENT_LENGTH}秒")
+                    # 注意：这里我们只记录警告，但仍然处理完整文件
+                    # 实际截取将在后续的recognize_google中使用timeout参数来控制
+            except Exception as e:
+                logger.warning(f"无法获取音频长度信息: {e}")
+            
+            with sr.AudioFile(temp_file_path) as source:
+                # 调整音频源为环境噪音
+                recognizer.adjust_for_ambient_noise(source, duration=0.5)
+                
+                # 应用噪声消除
+                audio = recognizer.record(source)
+            
+            # 在源文件关闭后执行识别
+            try:
+                # 为较长音频设置更短的超时时间，避免卡住
+                timeout_seconds = min(MAX_RECOGNITION_TIMEOUT, audio_duration * 0.8)  # 动态调整：音频长度*0.8或最大15秒
+                logger.info(f"设置识别超时: {timeout_seconds:.1f}秒")
+                
+                # 使用超时参数包装识别调用
+                try:
+                    # 修复：不使用httpx.Timeout作为上下文管理器，而是直接设置超时
+                    text = recognizer.recognize_google(
+                        audio, 
+                        language="zh-CN",
+                        show_all=False  # 只返回最佳结果
+                    )
+                    confidence = 0.9
+                except (httpx.TimeoutException, TimeoutError):
+                    logger.warning("Google语音识别超时，音频可能过长")
+                    # 返回一个友好的错误消息
+                    return VoiceRecognitionResponse(
+                        text="识别超时，请说话简短一些。", 
+                        confidence=0.5
+                    )
+                except sr.UnknownValueError:
+                    # 第一次识别失败时，尝试降低能量阈值再试一次
+                    logger.warning("第一次识别失败，调整阈值后重试...")
+                    
+                    temp_energy = recognizer.energy_threshold
+                    recognizer.energy_threshold = 200  # 临时降低阈值
+                    
+                    try:
+                        # 修复：不使用httpx.Timeout作为上下文管理器
+                        text = recognizer.recognize_google(
+                            audio, 
+                            language="zh-CN"
+                        )
+                        confidence = 0.7  # 降低置信度
+                    except (httpx.TimeoutException, TimeoutError):
+                        logger.warning("二次识别尝试超时")
+                        return VoiceRecognitionResponse(
+                            text="识别超时，请说话简短一些。", 
+                            confidence=0.5
+                        )
+                    except sr.UnknownValueError:
+                        logger.warning("第二次识别仍然失败")
+                    except Exception as e:
+                        logger.error(f"第二次识别其他错误: {e}")
+                    
+                    # 恢复原始阈值
+                    recognizer.energy_threshold = temp_energy
+                    
+                if text:
+                    logger.info(f"语音识别成功: '{text}'")
+                else:
+                    logger.warning("无法识别语音内容")
+                
+            except sr.RequestError as e:
+                logger.error(f"语音识别服务错误: {e}")
+                raise HTTPException(status_code=500, detail=f"语音识别服务错误: {str(e)}")
+            
+        except Exception as e:
+            logger.error(f"音频处理异常: {str(e)}")
+            raise
+        finally:
+            # 确保完全关闭资源后再尝试删除文件
+            try:
+                # 添加一个小延迟，确保所有文件句柄都已释放
+                await asyncio.sleep(0.1)
+                if temp_file_path and os.path.exists(temp_file_path):
+                    os.unlink(temp_file_path)
+                    logger.debug(f"已删除临时文件: {temp_file_path}")
+            except Exception as del_err:
+                logger.warning(f"删除临时文件失败，将在系统清理时自动删除: {del_err}")
+                # 不中断主流程，继续返回识别结果
+                
+        process_time = time.time() - start_time
+        logger.info(f"语音识别处理时间: {process_time:.2f}秒")
+        
+        # 如果识别出的文本是无意义的短语，返回空字符串
+        if text and len(text) <= 2 and text in ["啊", "嗯", "哦", "呃", "噢", "哎"]:
+            logger.info(f"忽略无意义短语: '{text}'")
+            text = ""
+            
+        return VoiceRecognitionResponse(text=text, confidence=confidence)
+    
+    except Exception as e:
+        logger.error(f"语音识别处理错误: {e}")
+        import traceback
+        logger.error(traceback.format_exc())
+        
+        # 尽力确保临时文件被删除
+        if temp_file_path and os.path.exists(temp_file_path):
+            try:
+                # 尝试使用系统调用删除文件
+                import subprocess
+                subprocess.run(["cmd", "/c", "del", "/F", temp_file_path], shell=True, check=False)
+            except:
+                pass  # 忽略错误，依赖操作系统最终清理
+        
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 if __name__ == '__main__':
     user_provided_id = input("请输入您的名字以用作 user_id (直接回车使用默认 'default_user'): ")  # 提示用户输入
     if user_provided_id.strip():  # 检查用户是否输入了有效字符，strip()去除首尾空格
@@ -286,7 +470,9 @@ if __name__ == '__main__':
 
             # 收集AI回复的变量
             collected_response = []
-
+            other_time = time.time()
+            request_to_other_time = other_time - request_start_time
+            print(f"Other 生成时间: {request_to_other_time:.4f} 秒")
             # 创建流式生成器
             async def generate_stream():
                 nonlocal collected_response

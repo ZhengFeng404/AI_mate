@@ -54,10 +54,10 @@ data_object_5 = {
     "keyMoments": "成功同步用户的所有日程安排到虚拟日历系统，并设置了多个提醒。",
 }
 # 添加单个对象
-jeopardy = client.collections.get("Events")
+jeopardy = client.collections.get("Relationships")
 
 start_time = time.time()
-response = jeopardy.query.near_text(query="阿姆斯特丹", limit=3,
+response = jeopardy.query.near_text(query="劳伦斯", limit=3,
                                     return_metadata=MetadataQuery(distance=True))
 end_time = time.time()
 run_time = end_time - start_time

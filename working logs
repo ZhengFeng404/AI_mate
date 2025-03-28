@@ -131,12 +131,88 @@ Planning:
 
 2025/3/2
 1，planning to add function calling:
-1. llm decide if it needs additional memory with its self designed keywords to query
-2. if it needs to query internet information
+1). llm decide if it needs additional memory with its self designed keywords to query
+2). if it needs to query internet information
 
 
-Long-term plan (in February):
+2025/3/6
+1. Fixed api key leakage problem
+2. Add recent generated memory to related_memory in long-term memory module. It's to deal with cases like
+"User: Part A of the Event". "AI: And then?" "User: Part B of the event, which doesn't involve sufficient information
+point to part A." When querying, memory of part A can not be found, so it can not be updated with part B.
+3. Separate LLM+TTS and Memory into two server ports. Make it easier for future development. This also make it possible
+to realize the 2nd point above without harming the concurrent structure (to save response time).
+4. Implement manually maintained chat history to replace gemini chat history, for future development without gemini.
+5. Remove the effect of mid-term memory Mem0. Now memory is realized by conversation history (short-term) and
+weaviate vector database (long-term).
+
+planning:
+1. identity issue (user can be more than 1 person), partially solved now
+2. try function calling for querying memory
+3. try another personality prompt which is more dutiful
+
+
+2025/3/7
+1. Add Profile class to memory database
+2. Build a more supportive prompt and test
+3. Better manipulation of conversation history (writing to json files with timestamps)
+4. Trigger reasoning process.
+
+planning:
+1. considering separate the memory process of Relationships and Profile from the main memory process
+i.e. Every 10 signals received, generate and update Relationships and Profile
+Confirmed. After adding one more collection Profile, gemini-1.5-pro can not perfectly classify collection,
+although it still works in many cases.
+Have to separate or use better model.
+
+2. adjust prompt by adding original anime character dialog? Currently it's kinda robotic (now partially solved)
+3. add agent name to conversation history so that the memory system won't record the agent as "ai". It may be important
+for making it more human-like.
+
+Problem:
+1. After adding image input (and also reasoning process?),
+LLM generation becomes kinda too long sometimes (i.e. 6 seconds). Need a good solution.
+
+
+2025/3/8
+planning:
+1. implementing Streaming or Incremental Generation
+
+
+2025/3/10
+1. Separate the memory process into Declarative memory
+and Complex memory (Relationships and Preferences. They involves more subtle feeling analysis.)
+
+
+2025/3/12
+1. Continue to implement streaming process.
+2. Going to add both GPT-SoVits and Fish TTS (and cosyvoice2 ?). (Both local and good at emotion)
+3. GPT-SoVITS added with streaming LLM process.
+
+
+2025/3/13
+1. Streaming work mostly completed. For the first chunk, GPT-SoVITS TTS can use 2-3 seconds.
+Now the project can use local GPT-SoVITS + cloud Gemini (4-6 seconds), giving response within 7 seconds on average.
+Unity live2D model controller (frontend) has also been adapted with streaming process.
+
+planning:
+1. Implement a method that can allow AI to modify its own character profile (like core memory in Letta)
+i.e. after end of a session? or right after summary conversation history, another LLM call to analyze if there are
+significant memory that should be put into character profile (system prompt)
+2. conversation history should better be 1 user 1 file.
+3. better prompt for memory process
+
+
+2025/3/14
+planning:
+1. separate Relationships and Preferences. Relationship memory requires stronger ability to understand.
+
+
+2025/3/27
+1. add ASR+VAD, tried to adjust but still has some problem
+- The first sentence of the whole conversation usually needs to be repeated to be recognized.
+- The first/last word(s) can be lost.
+
+
+Long-term plan:
 3. AI proactive speaking
-7. ASR
-
-

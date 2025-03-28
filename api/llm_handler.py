@@ -1,19 +1,20 @@
 # llm_handler.py
 import google.generativeai as genai
-#from google import genai
+# from google import genai
 from dotenv import load_dotenv
 import os
 import json
 import weaviate
 from mem0 import Memory  # 导入 Mem0
 import logging
-import base64 # 导入 base64 库，虽然这里可能不是必须的，但在处理图像数据时，导入总是有备无患
+import base64  # 导入 base64 库，虽然这里可能不是必须的，但在处理图像数据时，导入总是有备无患
 import time
 from utils.utils import load_api_key
 from datetime import datetime
 import asyncio
 from PIL import Image
 import io
+import re
 
 load_dotenv()
 
@@ -22,8 +23,9 @@ weaviate_client = weaviate.connect_to_local()
 
 # 初始化 Gemini (保持不变)
 GEMINI_API_KEY = load_api_key("GEMINI_API_KEY")
-#client = genai.Client(api_key=GEMINI_API_KEY)
+# client = genai.Client(api_key=GEMINI_API_KEY)
 os.environ["GEMINI_API_KEY"] = GEMINI_API_KEY
+model = genai.GenerativeModel('gemini-1.5-pro')
 
 # 初始化 Mem0 (保持不变)
 config = {
@@ -51,11 +53,12 @@ config = {
         }
     }
 }
-#mem0 = Memory.from_config(config)
+# mem0 = Memory.from_config(config)
 
 # 读取角色设定文件 (保持不变)
 with open("../Prompt/Character/Lily.txt", "r", encoding="utf-8") as file:
     character_profile = file.read()
+
 
 # 查询长期记忆 (保持不变)
 def query_long_term_memory_input(user_input):
@@ -71,7 +74,8 @@ def query_long_term_memory_input(user_input):
 
 
 # TODO: check if adding user_id in prompt can let AI distinguish user identity in future memory
-def llm_response_generation(user_input, user_id, user_chat_sessions, manual_history, image_base64=None): # 添加 manual_history 参数
+def llm_response_generation(user_input, user_id, user_chat_sessions, manual_history,
+                            image_base64=None):  # 添加 manual_history 参数
     """
     主 LLM 回复生成函数 (使用手动维护的对话历史).
 
@@ -88,7 +92,8 @@ def llm_response_generation(user_input, user_id, user_chat_sessions, manual_hist
     # 1.  不再需要获取或创建 ChatSession 对象
 
     # 2. 调用 get_gemini_response_with_history 获取 Gemini 回复 (修改部分)
-    gemini_response_dict = get_gemini_response_with_history(user_input, user_id, manual_history, image_base64=image_base64) # 传递 manual_history
+    gemini_response_dict = get_gemini_response_with_history(user_input, user_id, manual_history,
+                                                            image_base64=image_base64)  # 传递 manual_history
 
     # 3. 返回结果 (保持不变)
     return gemini_response_dict
@@ -98,7 +103,7 @@ class MetadataParser:
     def __init__(self):
         self.state = "init"  # 状态：init | meta_started | meta_parsing
         self.buffer = ""
-        self.metadata = {"expression": "normal", "motion": "idle"}
+        self.metadata = {"expression": "normal", "motion": "idle", "reasoning": ""}
 
     def feed(self, chunk):
         output = ""
@@ -156,7 +161,8 @@ class MetadataParser:
             data = json.loads(self.meta_content.strip())
             self.metadata.update({
                 "expression": data.get("expression", "normal"),
-                "motion": data.get("motion", "idle")
+                "motion": data.get("motion", "idle"),
+                "reasoning": data.get("reasoning", "")
             })
             print(f"✅ 元数据更新: {self.metadata}")
         except Exception as e:
@@ -211,7 +217,65 @@ def split_text_stream(buffer, max_chunk=20, min_pause=3):
     return None, buffer
 
 
-async def get_gemini_response_with_history(user_input, user_id, manual_history, image_base64=None): # 修改函数签名，添加 manual_history
+def might_need_visual_info(user_input, recent_history=None):
+    """
+    判断当前对话是否可能需要视觉信息
+
+    Args:
+        user_input: 用户输入文本
+        recent_history: 最近的对话历史 (可选)
+
+    Returns:
+        bool: 是否可能需要视觉信息
+    """
+    # 视觉相关关键词
+    visual_keywords = [
+        "看", "瞧", "观察", "图", "照片", "图像", "图片", "相片", "样子", "长相",
+        "外表", "外貌", "衣服", "穿着", "颜色", "见到", "眼前", "画面", "屏幕",
+        "看到", "看见", "图中", "显示", "出现", "observe", "see", "look", "photo",
+        "picture", "image", "appearance", "camera", "screen", "visible", "show"
+    ]
+
+    # 视觉询问模式
+    visual_patterns = [
+        r"你[能看]*?看[到见]*?[了吗什么]",
+        r"[能可][以否]看[到见]",
+        r"[能可][以否]描述",
+        r"[能可][以否]告诉我你[看见]*?到[了什么]",
+        r"这[是长看]什么",
+        r"这个[东西物]是",
+        r"我[的穿戴拿]着",
+        r"[能可][否以]认出",
+        r"你觉得[这我][个人]?[怎样如何]",
+        r"[你有].*[摄像头相机]"
+    ]
+
+    # 1. 检查关键词匹配
+    for keyword in visual_keywords:
+        if keyword in user_input:
+            return True
+
+    # 2. 检查语义模式匹配
+    for pattern in visual_patterns:
+        if re.search(pattern, user_input):
+            return True
+
+    # 3. 检查最近的对话历史是否与视觉相关 (如有)
+    if recent_history and len(recent_history) > 0:
+        last_exchange = recent_history[-1]
+        if "ai_response" in last_exchange:
+            last_response = last_exchange["ai_response"]
+            # 如果AI最近回复中提到了视觉内容，用户可能在跟进视觉话题
+            for keyword in visual_keywords:
+                if keyword in last_response:
+                    return True
+
+    # 默认情况下，不需要视觉信息
+    return False
+
+
+async def get_gemini_response_with_history(user_input, user_id, manual_history,
+                                           image_base64=None):  # 修改函数签名，添加 manual_history
     """
     使用 手动维护的对话历史，调用 Gemini 生成回复.
 
@@ -225,6 +289,13 @@ async def get_gemini_response_with_history(user_input, user_id, manual_history, 
         # 初始化状态
         text_buffer = ""
         meta_parser = MetadataParser()
+        has_yielded_first_chunk = False  # 跟踪是否已输出首个文本块
+        default_metadata = {"expression": "normal", "motion": "idle"}  # 默认元数据
+
+        # 设置更短的文本分段长度，使对话更自然
+        max_chunk_length = 15  # 默认分段长度减少到15个字符
+        min_pause_length = 3  # 默认最小暂停长度保持3个字符
+
         # 1. 检索记忆 (中期和长期) -  每次都重新检索 (保持不变)
         # mid_term_memories = mem0.search(query=user_input, user_id="default_user", limit=3)
         # memories_str = "\n".join(f"- {entry['memory']}" for entry in mid_term_memories)
@@ -233,7 +304,8 @@ async def get_gemini_response_with_history(user_input, user_id, manual_history, 
         # 1. 构建对话历史的 JSON 结构
         history_json = json.dumps(manual_history, ensure_ascii=False, indent=2)  # 保持 JSON 格式，避免 ASCII 转义
         timestamp = datetime.now().isoformat()
-        # 2. 生成 Prompt
+
+        # 2. 生成 Prompt - 保持原有格式不变，以确保模型理解
         system_instruction = f"""
                 === 你的角色档案 ===
                 {character_profile}
@@ -241,28 +313,49 @@ async def get_gemini_response_with_history(user_input, user_id, manual_history, 
                 === 当前用户身份 ===
                 **名字**：{user_id}
                 身份：是你曾经的同学。
-                
+
                 === LLM 任务要求 ===
                 你将完全代入你的角色档案，成为你扮演的人，在此基础上：
                 - 像人一样思考。
-                - 基于用户输入和 *对话历史* 生成你的回复。
-                - **对话历史**中你应该更关注最近的消息，但仍然可以结合整个对话历史来理解上下文。
-                - 请注意，你会尝试联想回忆和目前互动有关的记忆，所以有**长期记忆**可以参考，但这些记忆中有时存在联想到的无关内容。
+                - 基于用户输入和对话历史生成你的回复。
+                - 对话历史中你应该更关注最近的消息，但仍然可以结合整个对话历史来理解上下文。
+                - 请注意，你会尝试联想回忆和目前互动有关的记忆，所以有长期记忆可以参考，但这些记忆中有时存在联想到的无关内容。
                 - 若对话历史和长期记忆信息有冲突，优先使用对话历史的信息。
-                - 你收到的视觉图片输入来自你的摄像头，每次对话时都会获得一张当前摄像头看到的照相。
-                - 你应该自行判断历史和图片信息是否与当前对话相关，并自然地将*真正相关*的信息融入到你的语言回复中。
-                
+
+                === 回复风格指南 ===
+                - **保持简短自然**：这是实时对话，请像真人聊天一样简洁自然。
+                - **控制回复长度**：一般情况下，回复保持在2句话以内，除非用户明确要求详细解释。
+                - **像日常对话一样**：使用口语化、轻松的表达方式，避免长篇大论。
+                - **简洁回应**：如果是简单问候或询问，用简短1句话回应即可。
+                - **记住你是真人对话**：真实的人在聊天时很少一次性说很多话。
+
+                === 视觉信息处理指南 ===
+                - 你收到的视觉图片输入来自你的摄像头，每次对话时都会获得一张当前摄像头看到的照片。
+                - 重要：仅在以下情况分析视觉信息：
+                  1. 用户明确询问关于视觉内容的问题（如"你看到什么？"、"能描述一下我的样子吗？"）
+                  2. 用户出示特定物品并询问相关信息
+                  3. 用户的问题与环境、外观或视觉上下文直接相关
+                - 如果当前对话主题是抽象概念、情感交流或不涉及视觉内容，请完全忽略图像信息，直接回答问题。
+                - 不需要在回复中提及你看到或没看到图像，除非用户直接询问视觉内容。
+                - 优先考虑对话的文本内容和历史，只有在真正需要时才分析视觉信息。
+
                 - 选择合适的表情名称、动作名称加入到 JSON 结构中。
-                    可用表情：["黑脸", "白眼", "拿旗子", "眼泪"]
-                    可用动作：["好奇", "瞌睡", "害怕", "举白旗", "摇头", "抱枕头"]
+                    可用表情：["黑脸", "白眼", "拿旗子", "眼泪", "normal"]
+                    可用动作：["好奇", "瞌睡", "害怕", "举白旗", "摇头", "抱枕头", "idle"]
 
                 请严格按以下格式返回：
-                1. 首先用 ```meta 包裹JSON元数据（必须独立成chunk）
+                1. 首先用 ```meta 包裹JSON元数据（包含表情和动作，必须独立成chunk）
                 2. 随后是自然语言回复
+                3. 最后再用 ```meta 包裹推理过程（可选）
                 ```meta
-                {{ "reasoning":“思考过程（拟人化思考）”, "expression":"表情名称", "motion":"动作名称"}}
+                {{ "expression":"表情名称", "motion":"动作名称"}}
+                ```
                 [你的自然语言回复]
                 
+                ```meta
+                {{ "reasoning":"思考过程（拟人化思考）"}}
+                ```
+
                 === 动态信息 ===
                 **对话历史**:
                 ```json
@@ -275,14 +368,21 @@ async def get_gemini_response_with_history(user_input, user_id, manual_history, 
                 ```text
                 {user_input}
                 ```
-                
+
                 **系统时间**
                 {timestamp}         
                 """
 
         # 3. 准备内容 (parts)
         parts = [{"text": system_instruction}]
-        if image_base64:
+
+        # 判断是否需要包含图像
+        recent_history = manual_history[-3:] if len(manual_history) >= 3 else manual_history
+        needs_visual = might_need_visual_info(user_input, recent_history)
+
+        if image_base64 and needs_visual:
+            start_time = time.time()
+            print(f"✅ 检测到可能需要视觉信息，将包含图像数据")
             try:
                 image_data = base64.b64decode(image_base64)
                 image = Image.open(io.BytesIO(image_data))
@@ -292,53 +392,110 @@ async def get_gemini_response_with_history(user_input, user_id, manual_history, 
                         "data": image_data
                     }
                 })
+                print(f"图像处理耗时: {time.time() - start_time:.4f}秒")
             except Exception as e:
                 print(f"Base64 图像数据解码失败: {str(e)}")
+        else:
+            if image_base64:
+                print(f"⏩ 本次对话可能不需要视觉信息，跳过图像处理")
 
         # 4. 调用 LLM
         start_time_gemini = time.time()
-        #gemini_response = client.models.generate_content_stream(model="gemini-2.0-pro-exp-02-05",
-        #                                                        contents=[system_instruction, image])
+
+        # 使用设置更高响应性的参数
+        generation_config = {
+            "temperature": 0.7,  # 保持一定的创造性
+            "top_p": 0.95,
+            "top_k": 40,
+            "candidate_count": 1,
+            "max_output_tokens": 1024,  # 减少最大token数，鼓励简短回复
+        }
 
 
-        # 5. 解析 JSON 响应
-        model = genai.GenerativeModel('gemini-2.0-pro-exp-02-05')
 
+        # 5. 处理流式响应 - 优化初始响应速度
+        fast_start_buffer = ""
+        meta_seen = False
 
-        async for chunk in await model.generate_content_async(contents=parts,stream=True):
+        async for chunk in await model.generate_content_async(
+                contents=parts,
+                generation_config=generation_config,
+                stream=True
+        ):
             raw_text = chunk.text
-            print(f"🔴 原始响应块: {repr(raw_text)}")
+            if not raw_text:  # 跳过空响应
+                continue
+
+            # 记录接收时间
+            chunk_receive_time = time.time()
+            chunk_latency = chunk_receive_time - start_time_gemini
+            print(f"🔴 原始响应块: {repr(raw_text)} (延迟: {chunk_latency:.4f}s)")
+
+            # 优化初始响应：检测元数据与文本的分离
+            if not meta_seen and "```meta" in raw_text:
+                meta_seen = True
 
             # 处理元数据块
             processed_text = meta_parser.feed(raw_text)
 
-            # 处理文本流
-            text_buffer += processed_text
+            # 收集快速启动文本
+            if not has_yielded_first_chunk:
+                fast_start_buffer += processed_text
 
-            # 实时分割
+                # 快速返回第一个有意义的文本 - 如果满足条件
+                if (len(fast_start_buffer) >= 5 and meta_seen) or len(fast_start_buffer) >= 10:  # 降低到10个字符就开始输出
+                    # 检查是否有足够文本可以分割
+                    segment, remaining = split_text_stream(fast_start_buffer, max_chunk=max_chunk_length,
+                                                           min_pause=min_pause_length)
+                    if segment:
+                        first_chunk_time = time.time() - start_time_gemini
+                        print(f"🟢 快速首次响应: {segment} (总耗时: {first_chunk_time:.4f}s)")
+                        yield {
+                            "type": "segment",
+                            "segment": segment,
+                            "expression": meta_parser.metadata.get("expression", default_metadata["expression"]),
+                            "motion": meta_parser.metadata.get("motion", default_metadata["motion"])
+                        }
+                        has_yielded_first_chunk = True
+                        text_buffer = remaining
+                    else:
+                        text_buffer = fast_start_buffer
+                        has_yielded_first_chunk = True
+                else:
+                    continue
+            else:
+                # 处理后续正常流文本
+                text_buffer += processed_text
+
+            # 正常处理文本分段，使用较短的分段长度
             while True:
-                segment, remaining = split_text_stream(text_buffer)
+                segment, remaining = split_text_stream(text_buffer, max_chunk=max_chunk_length,
+                                                       min_pause=min_pause_length)
                 if not segment:
                     break
 
-                print(f"🟡 生成段落: {segment}")
+                # 记录输出时间
+                segment_time = time.time() - start_time_gemini
+                print(f"🟡 生成段落: {segment} (总耗时: {segment_time:.4f}s)")
                 yield {
                     "type": "segment",
                     "segment": segment,
-                    "expression": meta_parser.metadata["expression"],
-                    "motion": meta_parser.metadata["motion"]
+                    "expression": meta_parser.metadata.get("expression", default_metadata["expression"]),
+                    "motion": meta_parser.metadata.get("motion", default_metadata["motion"])
                 }
                 text_buffer = remaining
 
-            # 处理剩余内容
+        # 处理剩余内容
         if text_buffer.strip():
+            final_chunk_time = time.time() - start_time_gemini
+            print(f"🟡 最终段落: {text_buffer.strip()} (总耗时: {final_chunk_time:.4f}s)")
             yield {
                 "type": "segment",
                 "segment": text_buffer.strip(),
-                "expression": meta_parser.metadata["expression"],
-                "motion": meta_parser.metadata["motion"]
+                "expression": meta_parser.metadata.get("expression", default_metadata["expression"]),
+                "motion": meta_parser.metadata.get("motion", default_metadata["motion"])
             }
+
+        print(f"✅ 完成生成，总用时: {time.time() - start_time_gemini:.2f}秒")
     except Exception as e:
         print(f"Stream error: {e}")
-
-
