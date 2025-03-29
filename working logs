@@ -207,11 +207,22 @@ significant memory that should be put into character profile (system prompt)
 planning:
 1. separate Relationships and Preferences. Relationship memory requires stronger ability to understand.
 
+2025/3/21
+1. Refactor the front-end code.
+2. Add harmonic motion and eye-blinking.
+3. Add eye-tracking on mouse.
+4. Add Lip-sync.
+5. Upgrade the current UI.
+6. Upgrade the live2D model.
+
+planning:
+1. ASR
 
 2025/3/27
 1. add ASR+VAD, tried to adjust but still has some problem
 - The first sentence of the whole conversation usually needs to be repeated to be recognized.
 - The first/last word(s) can be lost.
+
 
 
 Long-term plan:
