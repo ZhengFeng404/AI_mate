@@ -24,6 +24,31 @@ services:
       ENABLE_API_BASED_MODULES: 'true'
       CLUSTER_HOSTNAME: 'soyo_node'
 
+  weaviate_experiment: # 新的 Weaviate 服务名称
+    command:
+      - --host
+      - 0.0.0.0
+      - --port
+      - '8080' # 容器内部端口可以相同
+      - --scheme
+      - http
+    image: cr.weaviate.io/semitechnologies/weaviate:1.29.0 # 可以使用相同的镜像版本，也可以选择不同的
+    ports:
+      - 8081:8080  # 外部访问端口 (another)，需要与第一个服务不同
+      - 50052:50051 # 外部 gRPC 端口，也需要不同
+    volumes:
+      - weaviate_data_experiment:/var/lib/weaviate # 使用不同的 volume 名称
+    restart: on-failure:0
+    environment:
+      QUERY_DEFAULTS_LIMIT: 25
+      AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: 'true'
+      PERSISTENCE_DATA_PATH: '/var/lib/weaviate'
+      ENABLE_MODULES: 'text2vec-ollama'
+      DEFAULT_VECTORIZER_MODULE: 'none'
+      ENABLE_API_BASED_MODULES: 'true'
+      CLUSTER_HOSTNAME: 'experiment_node' # 使用不同的集群主机名
+
 volumes:
   weaviate_data_soyo:
+  weaviate_data_experiment:
 ...

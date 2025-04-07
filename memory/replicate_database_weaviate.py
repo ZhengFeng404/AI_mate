@@ -1,9 +1,13 @@
 import weaviate
-import weaviate.classes as wvc  # 导入 v4 版本 client classes 用于配置
+import weaviate.classes as wvc
 import weaviate.classes.config as wc
 from weaviate.classes.config import Property, DataType, Configure
+import os
+import json
+import shutil
 
-client = weaviate.connect_to_local()
+client = weaviate.connect_to_local(port=8081,
+    grpc_port=50052,) # for the experiment database setting
 
 # 检查 Collection 是否已存在，如果存在则删除 (方便示例运行，实际应用中按需处理)
 collection_names = ["Events", "Relationships", "Knowledge", "Goals", "Preferences", "Profile"]
@@ -72,7 +76,7 @@ client.collections.create(
         Configure.Vectorizer.text2vec_ollama(
             api_endpoint="http://host.docker.internal:11434",
             # If using Docker, use this to contact your local Ollama instance
-            model="mxbai-embed-large:latest",
+            model="shaw/dmeta-embedding-zh:latest",
         ),
 )
 
@@ -114,7 +118,7 @@ client.collections.create(
         Configure.Vectorizer.text2vec_ollama(
             api_endpoint="http://host.docker.internal:11434",
             # If using Docker, use this to contact your local Ollama instance
-            model="mxbai-embed-large:latest",
+            model="shaw/dmeta-embedding-zh:latest",
         ),
 )
 
@@ -167,7 +171,7 @@ client.collections.create(
         Configure.Vectorizer.text2vec_ollama(
             api_endpoint="http://host.docker.internal:11434",
             # If using Docker, use this to contact your local Ollama instance
-            model="mxbai-embed-large:latest",
+            model="shaw/dmeta-embedding-zh:latest",
         ),
 )
 
@@ -237,7 +241,7 @@ client.collections.create(
         Configure.Vectorizer.text2vec_ollama(
             api_endpoint="http://host.docker.internal:11434",
             # If using Docker, use this to contact your local Ollama instance
-            model="mxbai-embed-large:latest",
+            model="shaw/dmeta-embedding-zh:latest",
         ),
 )
 
@@ -290,7 +294,7 @@ client.collections.create(
         Configure.Vectorizer.text2vec_ollama(
             api_endpoint="http://host.docker.internal:11434",
             # If using Docker, use this to contact your local Ollama instance
-            model="mxbai-embed-large:latest",
+            model="shaw/dmeta-embedding-zh:latest",
         ),
 )
 
@@ -347,10 +351,55 @@ client.collections.create(
     vectorizer_config=
     Configure.Vectorizer.text2vec_ollama(
         api_endpoint="http://host.docker.internal:11434",
-        model="mxbai-embed-large:latest",
+        model="shaw/dmeta-embedding-zh:latest",
     ),
 )
 print("Profile Collection Schema 创建成功")
 
 print("所有 Collection Schema 定义完成！")
-client.close()
+
+file_path = "30_turns_memory_entries.json"
+
+try:
+    with open(file_path, 'r', encoding='utf-8') as f:  # 指定使用utf-8编码
+        loaded_memory_entries_json = json.load(f)
+    print("成功从文件加载 JSON 数据。")
+
+    for entry in loaded_memory_entries_json:  # 使用解析后的 JSON 数据
+        if isinstance(entry, dict):  # 确保 entry 是一个字典
+            if "class" in entry:  # 检查 "class" 键是否存在
+                class_name = entry["class"]
+                collection = client.collections.get(class_name)
+                # ... 你的其他代码 ...
+                print(f"处理类名: {class_name}") # 示例输出
+                if "properties_content" in entry:
+                    properties_content = entry["properties_content"]
+                    print(f"属性内容: {properties_content}") # 示例输出
+                if "action" in entry:
+                    action = entry["action"]
+                    print(f"操作: {action}") # 示例输出
+                    if action == "UPDATE":
+                        if "updated_object_id" in entry:
+                            uuid = entry["updated_object_id"]
+                            print(f"更新的 UUID: {uuid}") # 示例输出
+                            collection.data.update(uuid=uuid, properties=properties_content)
+                        else:
+                            print("警告: 'UPDATE' 操作缺少 'updated_object_id'")
+                    elif action == "ADD":
+                        collection.data.insert(properties_content)
+                        print("执行添加操作") # 示例输出
+                    else:
+                        print(f"未知操作: {action}")
+                else:
+                    print("警告: 缺少 'action' 键")
+            else:
+                print("警告: JSON 条目缺少 'class' 键")
+        else:
+            print("警告: JSON 条目不是一个字典")
+
+except FileNotFoundError:
+    print(f"错误: 文件 {file_path} 未找到。")
+except json.JSONDecodeError as e:
+    print(f"错误: 解析 JSON 文件时发生错误: {e}")
+except Exception as e:
+    print(f"读取和处理 JSON 文件时发生错误: {e}")

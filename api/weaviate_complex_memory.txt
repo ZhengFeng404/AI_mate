@@ -40,12 +40,12 @@ relationship_class_definition = {
         {
             "name": "lastInteractionDate",
             "dataType": ["date"],
-            "description": "最近一次互动时间"
+            "description": "最近一次互动发生的日期时间"
         },
         {
             "name": "relationshipCreationTime",
             "dataType": ["date"],
-            "description": "该关系被记入记忆库的时间"
+            "description": "该关系被记入记忆库的日期时间"
         }
     ]
 }

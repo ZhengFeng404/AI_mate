@@ -12,10 +12,10 @@ config = {
     "vector_store": {
         "provider": "qdrant",  # docker run -p 6333:6333 qdrant/qdrant
         "config": {
-            "collection_name": "test1",
+            "collection_name": "experiment",
             "host": "localhost",
             "port": 6333,
-            "embedding_model_dims": 768,
+            "embedding_model_dims": 3072,
         }
     },
     "llm": {
@@ -27,9 +27,9 @@ config = {
         }
     },
     "embedder": {
-        "provider": "ollama",
+        "provider": "gemini",
         "config": {
-            "model": "mxbai-embed-large:latest",
+            "model": "models/gemini-embedding-exp-03-07",
         }
     }
 }
@@ -41,7 +41,7 @@ mem0 = Memory.from_config(config)  # 初始化 Mem0 (同步)
 #sync_mem0_add_ai = functools.partial(mem0.add, metadata={"identity": "ai"})
 
 
-async def add_to_mem0(user_id, user_input, ai_response):
+async def add_to_mem0(user_id, user_input, ai_response, conversation_history):
     """异步存储用户输入和 AI 回复到 Mem0 (使用 asyncio.to_thread)"""
     try:
         mem0.add(f"user:-> {user_input}\nai:-> {ai_response}", user_id=user_id)

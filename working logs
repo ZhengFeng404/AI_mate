@@ -222,6 +222,7 @@ planning:
 1. add ASR+VAD, tried to adjust but still has some problem
 - The first sentence of the whole conversation usually needs to be repeated to be recognized.
 - The first/last word(s) can be lost.
+2. Test and match the parameters of new live2D model with current settings.
 
 
 

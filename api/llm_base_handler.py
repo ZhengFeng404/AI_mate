@@ -18,60 +18,17 @@ import re
 
 load_dotenv()
 
-# 初始化 Weaviate 客户端 (保持不变)
-weaviate_client = weaviate.connect_to_local(port=8081,
-    grpc_port=50052,)
 
 # 初始化 Gemini (保持不变)
 GEMINI_API_KEY = load_api_key("GEMINI_API_KEY")
 # client = genai.Client(api_key=GEMINI_API_KEY)
 os.environ["GEMINI_API_KEY"] = GEMINI_API_KEY
-model = genai.GenerativeModel('gemini-1.5-pro') # gemini-2.5-pro-exp-03-25
+model = genai.GenerativeModel('gemini-1.5-pro')
 
-# 初始化 Mem0 (保持不变)
-config = {
-    "vector_store": {
-        "provider": "qdrant",
-        "config": {
-            "collection_name": "test1",
-            "host": "localhost",
-            "port": 6333,
-            "embedding_model_dims": 1024,
-        }
-    },
-    "llm": {
-        "provider": "gemini",
-        "config": {
-            "model": "gemini-2.0-flash",
-            "temperature": 0.2,
-            "max_tokens": 1500,
-        }
-    },
-    "embedder": {
-        "provider": "ollama",
-        "config": {
-            "model": "mxbai-embed-large:latest",
-        }
-    }
-}
-# mem0 = Memory.from_config(config)
 
 # 读取角色设定文件 (保持不变)
 with open("../Prompt/Character/Lily.txt", "r", encoding="utf-8") as file:
     character_profile = file.read()
-
-
-# 查询长期记忆 (保持不变)
-def query_long_term_memory_input(user_id, user_input):
-    related_memory = []
-    for collection_name in ["Events", "Relationships", "Knowledge", "Goals", "Preferences", "Profile"]:
-        collection = weaviate_client.collections.get(collection_name)
-        existing_mem = collection.query.hybrid(
-            query=f"{user_id}: {user_input}",
-            limit=3
-        )
-        related_memory.append(existing_mem)
-    return related_memory
 
 
 # TODO: check if adding user_id in prompt can let AI distinguish user identity in future memory
@@ -300,7 +257,7 @@ async def get_gemini_response_with_history(user_input, user_id, manual_history,
         # 1. 检索记忆 (中期和长期) -  每次都重新检索 (保持不变)
         # mid_term_memories = mem0.search(query=user_input, user_id="default_user", limit=3)
         # memories_str = "\n".join(f"- {entry['memory']}" for entry in mid_term_memories)
-        long_term_memories = query_long_term_memory_input(user_id, user_input)
+        # long_term_memories = query_long_term_memory_input(user_id, user_input)
 
         # 1. 构建对话历史的 JSON 结构
         history_json = json.dumps(manual_history, ensure_ascii=False, indent=2)  # 保持 JSON 格式，避免 ASCII 转义
@@ -363,7 +320,7 @@ async def get_gemini_response_with_history(user_input, user_id, manual_history,
                 {history_json}
                 ```
                 **长期记忆**：
-                {long_term_memories}
+                无
 
                 **当前用户输入**:
                 ```text

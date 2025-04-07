@@ -1,0 +1,1092 @@
+[
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾利克斯",
+      "description": "艾利克斯和老同学王思明在米纸餐厅一起吃了东南亚风味套餐，两人都很喜欢酸辣口味，并且聊天很开心。",
+      "date": "2025-04-01T00:00:00Z",
+      "location": "米纸餐厅",
+      "participants": [
+        "艾利克斯",
+        "王思明"
+      ],
+      "emotionalTone": "开心",
+      "keyMoments": "品尝东南亚风味套餐，两人都喜欢酸辣口味"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾利克斯",
+      "preferenceType": "口味偏好",
+      "preferenceDescription": "艾利克斯喜欢酸辣口味的食物",
+      "reasoning": "和老同学王思明在米纸餐厅吃了东南亚风味套餐，感觉很开心",
+      "preferenceStrength": "特别4",
+      "confidenceLevel": 0.9,
+      "preferenceCreationTime": "2025-04-07T15:27:56Z"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "王思明",
+      "preferenceType": "口味偏好",
+      "preferenceDescription": "王思明喜欢酸辣口味的食物",
+      "reasoning": "和老同学艾利克斯在米纸餐厅吃了东南亚风味套餐，两人都很喜欢",
+      "preferenceStrength": "特别4",
+      "confidenceLevel": 0.9,
+      "preferenceCreationTime": "2025-04-07T15:27:56Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾利克斯",
+      "description": "艾利克斯去听了AI未来趋势讲座，讲师预测通用人工智能可能五年内突破。",
+      "date": "2025-04-06T00:00:00Z",
+      "location": "未提及",
+      "participants": [
+        "艾利克斯",
+        "讲师"
+      ],
+      "emotionalTone": "感兴趣",
+      "keyMoments": "通用人工智能可能五年内突破"
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "艾利克斯",
+      "goalDescription": "转行到AI领域",
+      "goalType": "事业发展",
+      "motivation": "对AI领域感兴趣，并且参加了AI未来趋势讲座",
+      "status": "计划中",
+      "progress": 0.0,
+      "obstacles": [],
+      "startingDate": "2025-04-07T00:00:00Z",
+      "priority": "高"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾利克斯",
+      "description": "艾利克斯计划下个月去巴黎自由行，主要参观卢浮宫和埃菲尔铁塔，并为此做了十页攻略。",
+      "date": "2025-05-01T00:00:00Z",
+      "location": "巴黎",
+      "participants": [
+        "艾利克斯"
+      ],
+      "emotionalTone": "期待",
+      "keyMoments": "文化深度游，做了十页攻略"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾利克斯",
+      "preferenceType": "旅行偏好",
+      "preferenceDescription": "艾利克斯喜欢文化深度游，喜欢参观博物馆和著名景点。",
+      "reasoning": "艾利克斯为了巴黎自由行做了十页攻略，主要目标是卢浮宫和埃菲尔铁塔。",
+      "preferenceStrength": "特别4",
+      "confidenceLevel": 0.9,
+      "preferenceCreationTime": "2025-04-07T15:29:11Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾利克斯",
+      "description": "艾利克斯最近报名参加了瑜伽私教课程，每周二和周四下班后上课。教练称赞艾利克斯的柔韧性超过了程序员的平均水平。",
+      "date": "2025-04-07T00:00:00Z",
+      "location": "未提及",
+      "participants": [
+        "艾利克斯",
+        "瑜伽教练"
+      ],
+      "emotionalTone": "积极",
+      "keyMoments": "教练称赞艾利克斯柔韧性好"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾利克斯",
+      "preferenceType": "运动偏好",
+      "preferenceDescription": "艾利克斯喜欢瑜伽。",
+      "reasoning": "艾利克斯最近报了瑜伽私教班，每周坚持练习，并且柔韧性得到了教练的肯定。",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.7,
+      "preferenceCreationTime": "2025-04-07T15:29:46Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾利克斯",
+      "description": "艾利克斯上周陪母亲过生日，在西湖边散步，发现母亲迷上了广场舞，并被母亲拉着学习广场舞步法。",
+      "date": "2025-04-01T00:00:00Z",
+      "location": "西湖边",
+      "participants": [
+        "艾利克斯",
+        "艾利克斯的母亲"
+      ],
+      "emotionalTone": "温馨",
+      "keyMoments": "艾利克斯的母亲迷上广场舞，并拉艾利克斯学习新步法"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾利克斯的母亲",
+      "preferenceType": "娱乐活动偏好",
+      "preferenceDescription": "艾利克斯的母亲喜欢广场舞",
+      "reasoning": "艾利克斯的母亲最近迷上广场舞",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-07T15:30:19Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾利克斯",
+      "description": "艾利克斯在周末的同学聚会上遇到了老同学李华，得知李华在华为从事5G研发工作，并约定下周参观李华的实验室。",
+      "date": "2025-04-06T00:00:00Z",
+      "location": "未提及",
+      "participants": [
+        "艾利克斯",
+        "李华"
+      ],
+      "emotionalTone": "期待",
+      "keyMoments": "与在华为从事5G研发的李华见面并约定参观实验室"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "李华的工作信息",
+      "content": "李华在华为从事5G研发工作。",
+      "source": "同学聚会上的对话",
+      "keywords": [
+        "李华",
+        "华为",
+        "5G",
+        "研发"
+      ],
+      "relevanceScore": 1,
+      "confidenceLevel": 1
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾利克斯",
+      "description": "艾利克斯在星巴克遇到一位穿红裙的女士，并得到推荐购买《人类简史》。",
+      "date": "2025-04-07T00:00:00Z",
+      "location": "星巴克",
+      "participants": [
+        "艾利克斯",
+        "穿红裙的女士"
+      ],
+      "emotionalTone": "中性",
+      "keyMoments": "得到《人类简史》的推荐"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "人类简史",
+      "content": "一本被推荐给创业者的书籍。",
+      "category": "书籍",
+      "source": "一位穿红裙的女士在星巴克的推荐",
+      "keywords": [
+        "人类简史",
+        "创业",
+        "书籍"
+      ],
+      "relevanceScore": 1.0,
+      "confidenceLevel": 0.8
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "Python数据科学",
+      "content": "一本关于Python数据科学的书籍，其中讲解了神经网络调参方法。",
+      "category": "学习",
+      "source": "用户阅读",
+      "keywords": [
+        "Python",
+        "数据科学",
+        "神经网络",
+        "调参"
+      ],
+      "relevanceScore": 1.0,
+      "confidenceLevel": 1.0
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾利克斯",
+      "preferenceType": "书籍偏好",
+      "preferenceDescription": "艾利克斯认为《Python数据科学》这本书实用，特别是其中关于神经网络调参的内容。",
+      "reasoning": "书中教授的神经网络调参方法对艾利克斯的毕业设计有帮助。",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-07T15:31:58Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾利克斯",
+      "description": "艾利克斯准备参加腾讯AI研究员岗位的面试，正在练习自我介绍，并计划重点强调专利成果。",
+      "date": "2025-04-08T00:00:00Z",
+      "location": "未提及",
+      "participants": [
+        "艾利克斯",
+        "导师"
+      ],
+      "emotionalTone": "期待",
+      "keyMoments": "导师建议强调专利成果"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾利克斯",
+      "preferenceType": "职业偏好",
+      "preferenceDescription": "艾利克斯想成为AI研究员。",
+      "reasoning": "艾利克斯准备参加腾讯AI研究员岗位的面试。",
+      "preferenceStrength": "特别4",
+      "confidenceLevel": 0.9,
+      "preferenceCreationTime": "2025-04-07T15:32:49Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾利克斯",
+      "description": "艾利克斯和女友一起观看了电影《星际穿越》。女友被电影感动哭泣，现在经常向艾利克斯询问黑洞理论。",
+      "date": "2025-03-07T00:00:00Z",
+      "location": "电影院",
+      "participants": [
+        "艾利克斯",
+        "艾利克斯的女友"
+      ],
+      "emotionalTone": "感动",
+      "keyMoments": "女友哭花了妆",
+      "duration": null,
+      "locationDetails": null
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "黑洞理论",
+      "content": "女友对黑洞理论产生兴趣，艾利克斯需要学习相关知识。",
+      "category": "物理学",
+      "source": "女友对电影《星际穿越》的反应",
+      "keywords": [
+        "黑洞",
+        "理论",
+        "物理学",
+        "星际穿越"
+      ],
+      "relevanceScore": 1.0,
+      "confidenceLevel": 0.0
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾利克斯",
+      "description": "艾利克斯全家去崇明岛烧烤，父亲新买的无人机在拍全家福时差点掉进芦苇荡。",
+      "date": "2025-04-01T00:00:00Z",
+      "location": "崇明岛",
+      "participants": [
+        "艾利克斯",
+        "艾利克斯的父亲",
+        "艾利克斯的家人"
+      ],
+      "emotionalTone": "温馨",
+      "keyMoments": "无人机差点掉进芦苇荡"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾利克斯",
+      "description": "艾利克斯在健身房尝试了HIIT暴汗套餐，教练建议增肌，体脂率22%。",
+      "date": "2025-04-07T00:00:00Z",
+      "location": "健身房",
+      "participants": [
+        "艾利克斯",
+        "教练"
+      ],
+      "emotionalTone": "积极",
+      "keyMoments": "购买蛋白粉"
+    }
+  },
+  {
+    "class": "Profile",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "fullName": "艾利克斯",
+      "weight": null,
+      "bloodType": null,
+      "nickname": null,
+      "dateOfBirth": null,
+      "age": null,
+      "gender": null,
+      "height": null,
+      "chronicDiseases": [],
+      "disabilities": [],
+      "allergies": [],
+      "medicalHistory": null,
+      "educationLevel": null,
+      "schoolOrUniversity": null,
+      "jobTitle": null,
+      "companyOrEmployer": null,
+      "jobLevel": null,
+      "socialRole": null,
+      "incomeLevel": null,
+      "financialDebts": null,
+      "currentResidence": null,
+      "hometown": null,
+      "livingWith": null,
+      "housingType": null,
+      "nationality": null,
+      "ethnicity": null,
+      "religion": null,
+      "profileLastUpdated": null
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "艾利克斯",
+      "goalDescription": "参加上海马拉松",
+      "goalType": "个人目标",
+      "motivation": "锻炼身体",
+      "status": "进行中",
+      "progress": 0.2,
+      "obstacles": [],
+      "startingDate": "2025-04-07T00:00:00Z",
+      "endingDate": "2025-12-31T00:00:00Z",
+      "priority": "高"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾利克斯",
+      "description": "艾利克斯为了备战上海马拉松，每天6点晨跑5公里。",
+      "date": "2025-04-07T00:00:00Z",
+      "duration": 50,
+      "location": "未提及",
+      "locationDetails": null,
+      "participants": [
+        "艾利克斯"
+      ],
+      "emotionalTone": "积极",
+      "keyMoments": "同事说艾利克斯黑了三度"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾利克斯",
+      "description": "艾利克斯在图书馆碰见张教授，张教授建议艾利克斯申请MIT媒体实验室，并肯定了其AR项目的潜力。",
+      "date": "2025-04-06T00:00:00Z",
+      "location": "图书馆",
+      "participants": [
+        "艾利克斯",
+        "张教授"
+      ],
+      "emotionalTone": "积极",
+      "keyMoments": "张教授推荐申请MIT媒体实验室"
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "艾利克斯",
+      "goalDescription": "申请MIT媒体实验室",
+      "goalType": "事业发展",
+      "motivation": "张教授的推荐和对AR项目潜力的认可",
+      "status": "计划中",
+      "progress": 0.0,
+      "obstacles": [],
+      "startingDate": "2025-04-07T00:00:00Z",
+      "priority": "中"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "意大利菜烹饪技巧",
+      "content": "艾利克斯学习意大利菜烹饪，并发现多加罗勒叶可以提升香味，他的女朋友也对此表示赞赏。",
+      "category": "烹饪",
+      "source": "抖音",
+      "keywords": [
+        "意大利菜",
+        "烹饪",
+        "罗勒叶"
+      ],
+      "relevanceScore": 1.0,
+      "confidenceLevel": 1.0
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾利克斯",
+      "preferenceType": "口味偏好",
+      "preferenceDescription": "艾利克斯喜欢在意大利菜里多加罗勒叶",
+      "reasoning": "艾利克斯觉得罗勒叶加多点特香",
+      "preferenceStrength": "特别4",
+      "confidenceLevel": 0.9,
+      "preferenceCreationTime": "2025-04-07T15:36:26Z"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "Trello软件",
+      "content": "Trello软件对项目进度管理很有帮助。",
+      "category": "软件",
+      "source": "同事强子的推荐",
+      "keywords": [
+        "Trello",
+        "项目管理",
+        "软件"
+      ],
+      "relevanceScore": 1.0,
+      "confidenceLevel": 1.0
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾利克斯",
+      "preferenceType": "软件偏好",
+      "preferenceDescription": "艾利克斯认为Trello软件巨好用。",
+      "reasoning": "使用Trello软件后，项目进度再没拖过后腿。",
+      "preferenceStrength": "强烈5",
+      "confidenceLevel": 0.9,
+      "preferenceCreationTime": "2025-04-07T15:37:18Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾利克斯",
+      "description": "艾利克斯计划明天与大学室友撸串，讨论AI与区块链结合的智能合约项目。",
+      "date": "2025-04-08T00:00:00Z",
+      "location": "未提及",
+      "participants": [
+        "艾利克斯",
+        "大学室友"
+      ],
+      "emotionalTone": "期待",
+      "keyMoments": "AI与区块链结合的智能合约项目"
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "艾利克斯",
+      "goalDescription": "AI与区块链结合的智能合约项目",
+      "goalType": "事业发展",
+      "motivation": "与搞区块链的大学室友讨论",
+      "status": "计划中",
+      "progress": 0.0,
+      "obstacles": [],
+      "startingDate": "2025-04-07T00:00:00Z",
+      "priority": "中"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾利克斯",
+      "description": "艾利克斯购买了AJ芝加哥限定款球鞋，花费了他半个月的工资。",
+      "date": "2025-04-07T00:00:00Z",
+      "location": "未提及",
+      "participants": [
+        "艾利克斯"
+      ],
+      "emotionalTone": "兴奋",
+      "keyMoments": "花费半个月工资购买收藏品"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾利克斯",
+      "preferenceType": "收藏偏好",
+      "preferenceDescription": "艾利克斯喜欢收藏经典复刻的AJ球鞋，例如芝加哥限定款。",
+      "reasoning": "艾利克斯认为AJ芝加哥限定款是经典复刻，必须收藏。",
+      "preferenceStrength": "特别4",
+      "confidenceLevel": 0.95,
+      "preferenceCreationTime": "2025-04-07T15:38:38Z"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "办公室绿植墙能耗降低效果",
+      "content": "办公室绿植墙可以降低15%的能耗。",
+      "category": "环保节能",
+      "source": "碳中和论坛",
+      "keywords": [
+        "绿植墙",
+        "节能",
+        "环保",
+        "碳中和"
+      ],
+      "relevanceScore": 1.0,
+      "confidenceLevel": 1.0
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "艾利克斯",
+      "goalDescription": "说服老板在办公室安装绿植墙",
+      "goalType": "事业发展",
+      "motivation": "降低公司能耗，以及美化办公环境",
+      "status": "计划中",
+      "progress": 0.0,
+      "obstacles": [],
+      "startingDate": "2025-04-07T00:00:00Z",
+      "priority": "中"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾利克斯",
+      "description": "艾利克斯和投行朋友讨论基金投资，朋友建议定投科创板指数。",
+      "date": "2025-04-06T00:00:00Z",
+      "location": "未提及",
+      "participants": [
+        "艾利克斯",
+        "投行朋友"
+      ],
+      "emotionalTone": "犹豫",
+      "keyMoments": "朋友建议定投科创板指数"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "科创板指数投资建议",
+      "content": "当前定投科创板指数正当时。",
+      "category": "投资",
+      "source": "艾利克斯的投行朋友",
+      "keywords": [
+        "科创板",
+        "指数",
+        "定投",
+        "投资"
+      ],
+      "relevanceScore": 1.0,
+      "confidenceLevel": 0.8
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾利克斯",
+      "description": "艾利克斯在佘山观星，并拍到了英仙座流星雨。天文台APP显示这是英仙座流星雨每年最大规模的一次。",
+      "date": "2025-04-06T00:00:00Z",
+      "location": "佘山",
+      "participants": [
+        "艾利克斯"
+      ],
+      "emotionalTone": "兴奋",
+      "keyMoments": "拍到流星雨"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾利克斯",
+      "preferenceType": "兴趣爱好",
+      "preferenceDescription": "艾利克斯喜欢观星。",
+      "reasoning": "艾利克斯昨晚去佘山观星并拍到了流星雨。",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.7,
+      "preferenceCreationTime": "2025-04-07T15:40:28Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾利克斯",
+      "description": "艾利克斯参加了积极心理学讲座，并学习了ABC情绪疗法。",
+      "date": "2025-04-07T00:00:00Z",
+      "location": "未提及",
+      "participants": [
+        "艾利克斯"
+      ],
+      "emotionalTone": "积极",
+      "keyMoments": "尝试用ABC情绪疗法，怼甲方时居然没上火"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "ABC情绪疗法",
+      "content": "ABC情绪疗法是一种认知行为疗法，用于帮助人们管理情绪。",
+      "category": "心理学",
+      "source": "积极心理学讲座",
+      "keywords": [
+        "ABC情绪疗法",
+        "情绪管理",
+        "认知行为疗法"
+      ],
+      "relevanceScore": 1.0,
+      "confidenceLevel": 1.0
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾利克斯",
+      "description": "艾利克斯计划周末在滨江公园烧烤，并特意购买了低脂牛肉串。",
+      "date": "2025-04-12T00:00:00Z",
+      "location": "滨江公园",
+      "participants": [
+        "艾利克斯"
+      ],
+      "emotionalTone": "期待",
+      "keyMoments": "为了健身保持低脂饮食，特意选择了低脂牛肉。"
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "艾利克斯",
+      "goalDescription": "保持健身",
+      "goalType": "个人目标",
+      "motivation": "为了健康和身材管理",
+      "status": "进行中",
+      "progress": null,
+      "obstacles": [],
+      "startingDate": null,
+      "priority": null
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾利克斯",
+      "description": "艾利克斯尝试了Green Monday的素食汉堡和羽衣甘蓝汁，觉得意外好喝，认为自己的健康饮食flag立住了。",
+      "date": "2025-04-07T00:00:00Z",
+      "location": "Green Monday",
+      "participants": [
+        "艾利克斯"
+      ],
+      "emotionalTone": "积极",
+      "keyMoments": "对素食汉堡和羽衣甘蓝汁的喜爱"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾利克斯",
+      "preferenceType": "食物偏好",
+      "preferenceDescription": "艾利克斯喜欢Green Monday的素食汉堡和羽衣甘蓝汁。",
+      "reasoning": "艾利克斯觉得Green Monday的素食汉堡和羽衣甘蓝汁意外好喝。",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-07T15:43:30Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾利克斯",
+      "description": "艾利克斯参加了手机摄影班，老师评价其构图具有韦斯·安德森风格。",
+      "date": "2025-04-07T00:00:00Z",
+      "location": "手机摄影班",
+      "participants": [
+        "艾利克斯",
+        "摄影老师"
+      ],
+      "emotionalTone": "开心",
+      "keyMoments": "老师评价艾利克斯的构图有韦斯·安德森风格"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "韦斯·安德森风格的构图",
+      "content": "用户艾利克斯的构图被评价为具有韦斯·安德森风格。",
+      "category": "摄影",
+      "source": "摄影老师",
+      "keywords": [
+        "韦斯·安德森",
+        "构图",
+        "摄影"
+      ],
+      "relevanceScore": 1.0,
+      "confidenceLevel": 1.0
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾利克斯",
+      "description": "艾利克斯昨晚和室友聊到深夜两点，室友劝他放弃996的工作模式，并建议他去留学。",
+      "date": "2025-04-06T00:00:00Z",
+      "duration": 120,
+      "location": "艾利克斯的住所",
+      "locationDetails": null,
+      "participants": [
+        "艾利克斯",
+        "艾利克斯的室友"
+      ],
+      "emotionalTone": "兴奋",
+      "keyMoments": "室友劝艾利克斯放弃996去留学"
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "艾利克斯",
+      "goalDescription": "出国留学",
+      "goalType": "个人目标",
+      "motivation": "室友的建议，以及对996工作模式的不满",
+      "status": "考虑中",
+      "progress": 0.0,
+      "obstacles": [],
+      "startingDate": null,
+      "endingDate": null,
+      "priority": null
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾利克斯",
+      "description": "艾利克斯正在阅读《罗马帝国衰亡史》，并从中获得灵感，准备撰写一篇关于凯撒改革与当代企业转型之间联系的推文。",
+      "date": "2025-04-07T00:00:00Z",
+      "participants": [
+        "艾利克斯"
+      ],
+      "emotionalTone": "兴奋",
+      "keyMoments": "将凯撒改革与当代企业转型联系起来"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "凯撒改革与当代企业转型",
+      "content": "艾利克斯发现凯撒改革和当代企业转型之间存在相似之处，可以作为推文主题。",
+      "category": "历史/商业",
+      "source": "《罗马帝国衰亡史》",
+      "keywords": [
+        "凯撒改革",
+        "企业转型",
+        "罗马帝国衰亡史"
+      ],
+      "relevanceScore": 1.0,
+      "confidenceLevel": 0.8
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾利克斯",
+      "description": "艾利克斯上月参加部门团建玩密室逃脱，发现财务部Lisa是剧本杀高玩。",
+      "date": "2025-03-01T00:00:00Z",
+      "location": "未提及",
+      "participants": [
+        "艾利克斯",
+        "Lisa",
+        "其他部门同事"
+      ],
+      "emotionalTone": "积极",
+      "keyMoments": "发现Lisa是剧本杀高玩"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾利克斯",
+      "description": "艾利克斯这周约Lisa组局玩剧本杀。",
+      "date": "2025-04-12T00:00:00Z",
+      "location": "未提及",
+      "participants": [
+        "艾利克斯",
+        "Lisa"
+      ],
+      "emotionalTone": "期待",
+      "keyMoments": "与Lisa一起玩剧本杀"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "Lisa的爱好",
+      "content": "Lisa是剧本杀高玩。",
+      "category": "人物信息",
+      "source": "部门团建密室逃脱",
+      "keywords": [
+        "Lisa",
+        "剧本杀",
+        "高玩"
+      ],
+      "relevanceScore": 1.0,
+      "confidenceLevel": 1.0
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "301室阿姨的家族故事",
+      "content": "301室阿姨的祖上是荣毅仁家管家。",
+      "source": "用户艾利克斯",
+      "keywords": [
+        "301室阿姨",
+        "荣毅仁",
+        "管家"
+      ],
+      "confidenceLevel": 0.8
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subjectName": "艾利克斯",
+      "relationshipDescription": "艾利克斯与301室阿姨在小区相遇交谈。",
+      "objectName": "301室阿姨",
+      "relationshipType": "邻居",
+      "sentiment": "无",
+      "sentimentStrength": 0.1,
+      "relationshipStage": "初识",
+      "lastInteractionDate": "2025-04-07T15:46:20Z",
+      "relationshipCreationTime": "2025-04-07T15:46:20Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "UPDATE",
+    "updated_object_id": "e0ab3b6b-c348-43b9-ba41-650b2109e081",
+    "properties_content": {
+      "subject": "艾利克斯",
+      "description": "艾利克斯上周参加了同学聚会，并遇到了老同学李华。",
+      "date": "2025-04-06T00:00:00Z",
+      "participants": [
+        "艾利克斯",
+        "李华"
+      ],
+      "location": "未提及"
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subjectName": "艾利克斯",
+      "relationshipDescription": "艾利克斯和李华是老同学，两人在上周的同学聚会上相遇。",
+      "objectName": "李华",
+      "relationshipType": "同学",
+      "sentiment": "无",
+      "sentimentStrength": 0.5,
+      "relationshipStage": "初识",
+      "lastInteractionDate": "2025-04-07T20:36:38Z",
+      "relationshipCreationTime": "2025-04-07T20:36:38Z"
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "UPDATE",
+    "updated_object_id": "13fe37d9-042b-467f-8e85-bdfc22a86306",
+    "properties_content": {
+      "subjectName": "艾利克斯",
+      "relationshipDescription": "艾利克斯和李华是老同学，两人在上周的同学聚会上相遇，李华邀请艾利克斯参观他的实验室。",
+      "objectName": "李华",
+      "relationshipType": "同学",
+      "sentiment": "无",
+      "sentimentStrength": 0.5,
+      "relationshipStage": "初识",
+      "lastInteractionDate": "2025-04-07T20:38:02Z",
+      "relationshipCreationTime": "2025-04-07T20:36:38Z"
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subjectName": "艾利克斯",
+      "relationshipDescription": "艾利克斯在星巴克遇到一位穿红裙子的姐姐，她推荐艾利克斯阅读《人类简史》。",
+      "objectName": "红裙子姐姐",
+      "relationshipType": "陌生人",
+      "sentiment": "无",
+      "sentimentStrength": 0.1,
+      "relationshipStage": "初识",
+      "lastInteractionDate": "2025-04-07T20:39:46Z",
+      "relationshipCreationTime": "2025-04-07T20:39:46Z"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "UPDATE",
+    "updated_object_id": "3dc4cbe3-4171-4a7b-9f4c-e93840829c4b",
+    "properties_content": {
+      "preferenceOwner": "艾利克斯",
+      "preferenceType": "兴趣爱好",
+      "preferenceDescription": "艾利克斯喜欢观星。",
+      "reasoning": "艾利克斯昨晚去佘山观星，看到了美丽的英仙座流星雨。",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-07T15:40:28Z"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "静夜思 英译",
+      "content": "Bedside moonlight,\nI suspect it is frost on the ground.\nI raise my head to gaze at the bright moon,\nThen lower my head and think of home.",
+      "category": "诗歌/文学",
+      "source": "用户请求翻译",
+      "keywords": [
+        "静夜思",
+        "李白",
+        "英译",
+        "诗歌",
+        "文学"
+      ],
+      "relevanceScore": 1,
+      "confidenceLevel": 1
+    }
+  }
+]

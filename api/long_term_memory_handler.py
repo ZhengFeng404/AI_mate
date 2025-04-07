@@ -20,7 +20,8 @@ memory_process_model = genai.GenerativeModel('gemini-1.5-pro')  # PRO?
 
 # 初始化 Weaviate 客户端
 try:
-    client = weaviate.connect_to_local()
+    client = weaviate.connect_to_local(port=8081,
+                                       grpc_port=50052,)
     logging.info("Weaviate 客户端连接成功。")
 except Exception as e:
     logging.error(f"Weaviate 客户端连接失败: {e}")
@@ -36,7 +37,7 @@ with open("weaviate_complex_memory.txt", "r", encoding="utf-8") as file:
     weaviate_complex_memory = file.read()
 
 
-def query_long_term_memory(user_input, ai_response, memory_type):
+def query_long_term_memory(user_id, user_input, ai_response, memory_type):
     related_memory = []
     if memory_type == "declarative":
         # TODO: Goals and schedule will be put into prospective memory in the future
@@ -46,7 +47,7 @@ def query_long_term_memory(user_input, ai_response, memory_type):
     for collection_name in collections:
         collection = client.collections.get(collection_name)
         existing_mem = collection.query.hybrid(
-            query=f"User: {user_input}" + f"\nAI: {ai_response}",
+            query=f"{user_id}: {user_input}" + f"\nAI: {ai_response}",
             limit=2  # TODO: Figure out whether 1 or 2 would be better. Or 3?
         )
         for mem in existing_mem.objects:
@@ -68,7 +69,7 @@ async def long_term_memory_async(user_input, ai_response, conversation_history, 
 
     try:
         # Add related memory from all collections
-        related_memory = query_long_term_memory(user_input, ai_response, memory_type)
+        related_memory = query_long_term_memory(user_id, user_input, ai_response, memory_type)
         print("related_memory: ", related_memory)
         print("success")
 
@@ -124,6 +125,7 @@ async def long_term_memory_async(user_input, ai_response, conversation_history, 
             "updated_object_id": "" // 如果是ADD操作，则留空；如果是UPDATE操作，则录入对应的被更新的记忆条目的uuid
             "properties_content": {{
                 // 此处填写具体的属性内容，严格遵循 class 结构
+                // 如果是时间日期类型的属性，格式应该是RFC3339格式，YYYY-MM-DDTHH:mm:ssZ
             }}
         }}
         \`\`\`
@@ -217,10 +219,10 @@ async def long_term_memory_async(user_input, ai_response, conversation_history, 
         ---
 
         ## **用户输入**
-        {user_input}
+        用户{user_id}: {user_input}
 
         ## **虚拟人格的回复**
-        {ai_response}
+        AI回复: {ai_response}
 
         ## **记忆库相关内容**
         {related_memory}
@@ -288,6 +290,7 @@ async def long_term_memory_async(user_input, ai_response, conversation_history, 
             "updated_object_id": "" // 如果是ADD操作，则留空；如果是UPDATE操作，则录入对应的被更新的记忆条目的uuid
             "properties_content": {{
                 // 此处填写具体的属性内容，严格遵循 class 结构
+                // 如果是时间日期类型的属性，格式应该是RFC3339格式，YYYY-MM-DDTHH:mm:ssZ
             }}
         }}
         \`\`\`
@@ -367,10 +370,10 @@ async def long_term_memory_async(user_input, ai_response, conversation_history, 
         ---
 
         ## **用户输入**
-        {user_input}
+        用户{user_id}: {user_input}
 
         ## **虚拟人格的回复**
-        {ai_response}
+        AI回复: {ai_response}
 
         ## **记忆库相关内容**
         {related_memory}
@@ -405,6 +408,40 @@ async def long_term_memory_async(user_input, ai_response, conversation_history, 
         # 尝试解析 JSON
         try:
             memory_entries_json = json.loads(json_str_to_parse)
+
+            file_path = "30_turns_memory_entries.json"  # 你可以自定义文件名和路径
+
+            def save_memory_entries(new_entries, filename):
+                """纯追加模式存储，保留所有历史记录"""
+                try:
+                    # 读取现有数据
+                    existing_data = []
+                    if os.path.exists(filename):
+                        with open(filename, 'r', encoding='utf-8') as f:
+                            try:
+                                existing_data = json.load(f)
+                                if not isinstance(existing_data, list):  # 处理单条数据格式
+                                    existing_data = [existing_data]
+                            except json.JSONDecodeError:  # 处理空文件情况
+                                existing_data = []
+
+                    # 合并新旧数据
+                    combined_data = existing_data + new_entries
+
+                    # 写入更新后的完整数据集
+                    with open(filename, 'w', encoding='utf-8') as f:
+                        json.dump(combined_data, f,
+                                  ensure_ascii=False,
+                                  indent=2,
+                                  separators=(',', ': '))
+
+                    print(f"成功追加 {len(new_entries)} 条，当前总数 {len(combined_data)}")
+
+                except Exception as e:
+                    print(f"保存失败: {str(e)}")
+                    raise
+
+            save_memory_entries(memory_entries_json, file_path)
 
             if not isinstance(memory_entries_json, list):  # 检查解析结果是否是列表
                 print(f"[Error] Parsed JSON is NOT a list, but: {type(memory_entries_json)}")  # 如果不是列表，报错
