@@ -189,10 +189,10 @@ namespace AI_Mate
             }
 
             // 添加Escape键作为取消录音的快捷键
-            if (Input.GetKeyDown(KeyCode.Escape) && voiceManager != null)
-            {
-                voiceManager.ToggleVoiceRecognition();
-            }
+            //if (Input.GetKeyDown(KeyCode.P) && voiceManager != null)
+            //{
+            //    voiceManager.ToggleVoiceRecognition();
+            //}
         }
 
         // 公共方法：显示用户ID面板

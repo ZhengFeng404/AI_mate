@@ -23,6 +23,7 @@ import uvicorn
 import base64
 import edge_tts
 import google.generativeai as genai
+from google.cloud import speech_v1 as speech
 from queue import Queue
 import soundfile as sf
 import numpy as np

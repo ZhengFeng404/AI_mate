@@ -31,13 +31,27 @@ namespace AI_Mate
 
         // 初始化
         public void Initialize(Action<string, string> sendMessageCallback)
+    {
+        onSendMessage = sendMessageCallback;
+        
+        sendButton.onClick.AddListener(OnSendButtonClick);
+        chatInput.onSubmit.AddListener((text) => OnSendButtonClick()); // 添加回车键提交监听
+        chatInput.lineType = TMP_InputField.LineType.SingleLine; // 设置为单行模式
+        chatHistory.Clear();
+        UpdateChatUI();
+    }
+
+    private void Update()
+    {
+        // 检测Shift+Enter组合键
+        if (Input.GetKey(KeyCode.Return) || Input.GetKey(KeyCode.KeypadEnter))
         {
-            onSendMessage = sendMessageCallback;
-            
-            sendButton.onClick.AddListener(OnSendButtonClick);
-            chatHistory.Clear();
-            UpdateChatUI();
+            if (!Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.RightShift))
+            {
+                OnSendButtonClick();
+            }
         }
+    }
 
         // 发送按钮点击
         public void OnSendButtonClick()

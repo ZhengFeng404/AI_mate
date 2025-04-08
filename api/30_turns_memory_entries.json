@@ -1192,5 +1192,23 @@
       "confidenceLevel": 0.5,
       "preferenceCreationTime": "2025-04-08T11:50:38Z"
     }
+  },
+  {
+    "class": "Profile",
+    "action": "UPDATE",
+    "updated_object_id": "4ce5b09f-19ee-4f7d-91fc-8a30476e61bb",
+    "properties_content": {
+      "educationLevel": "大学",
+      "profileLastUpdated": "2025-04-08T15:38:40.253765Z"
+    }
+  },
+  {
+    "class": "Profile",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "nickname": "小猪",
+      "profileLastUpdated": "2025-04-08T16:00:07Z"
+    }
   }
 ]
