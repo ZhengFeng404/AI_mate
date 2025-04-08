@@ -1,0 +1,311 @@
+event_class_definition_en = {
+    "class": "Events",
+    "description": "Stores events experienced by an individual",
+    "properties": [
+        {
+            "name": "subject",
+            "dataType": ["text"],
+            "description": "The main person involved in the event"
+        },
+        {
+            "name": "description",
+            "dataType": ["text"],
+            "description": "Textual description of the event"
+        },
+        {
+            "name": "date",
+            "dataType": ["date"],
+            "description": "Time the event occurred"
+        },
+        {
+            "name": "duration",
+            "dataType": ["number"],
+            "description": "Duration of the event (e.g., minutes, hours)"
+        },
+        {
+            "name": "location",
+            "dataType": ["text"],
+            "description": "Location where the event occurred"
+        },
+        {
+            "name": "locationDetails",
+            "dataType": ["text"],
+            "description": "More detailed location description (e.g., which area of the park, seat in the cafe)"
+        },
+        {
+            "name": "participants",
+            "dataType": ["text[]"],
+            "description": "Participants in the event"
+        },
+        {
+            "name": "emotionalTone",
+            "dataType": ["text"],
+            "description": "Emotional tone of the event (e.g., happy, sad, excited)"
+        },
+        {
+            "name": "keyMoments",
+            "dataType": ["text"],
+            "description": "Key details of the event"
+        },
+    ]
+}
+
+knowledge_class_definition_en = {
+    "class": "Knowledge",
+    "description": "Stores knowledge, facts, skills, etc., learned by the virtual persona",
+    "properties": [
+        {
+            "name": "title",
+            "dataType": ["text"],
+            "description": "Title or name of the knowledge entry"
+        },
+        {
+            "name": "content",
+            "dataType": ["text"],
+            "description": "Detailed content of the knowledge entry"
+        },
+        {
+            "name": "category",
+            "dataType": ["text"],
+            "description": "Category the knowledge belongs to (e.g., games, anime, medicine, law)"
+        },
+        {
+            "name": "source",
+            "dataType": ["text"],
+            "description": "Source of the knowledge (e.g., books, websites, conversations)"
+        },
+        {
+            "name": "keywords",
+            "dataType": ["text[]"],
+            "description": "Keywords"
+        },
+        {
+            "name": "relevanceScore",
+            "dataType": ["number"],
+            "description": "Relevance score of the knowledge entry"
+        },
+        {
+            "name": "confidenceLevel",
+            "dataType": ["number"],
+            "description": "Confidence level in the knowledge (range 0-1)"
+        },
+    ]
+}
+
+
+goal_class_definition_en = {
+    "class": "Goals",
+    "description": "Used to store an individual's goals, plans, wishes, or decisions",
+    "properties": [
+        {
+            "name": "owner",
+            "dataType": ["text"],
+            "description": "The owner of this goal"
+        },
+        {
+            "name": "goalDescription",
+            "dataType": ["text"],
+            "description": "Description of the goal"
+        },
+        {
+            "name": "goalType",
+            "dataType": ["text"],
+            "description": "Type of goal (e.g., short-term goal, long-term goal, personal development, career development)"
+        },
+        {
+            "name": "motivation",
+            "dataType": ["text"],
+            "description": "Motivation and reasons for setting the goal"
+        },
+        {
+            "name": "status",
+            "dataType": ["text"],
+            "description": "Status of the goal (e.g., planning, in progress, completed, abandoned)"
+        },
+        {
+            "name": "progress",
+            "dataType": ["number"],
+            "description": "Progress of goal completion (range 0-1)"
+        },
+        {
+            "name": "obstacles",
+            "dataType": ["text[]"],
+            "description": "Obstacles and challenges encountered in the process of achieving the goal"
+        },
+        {
+            "name": "startingDate",
+            "dataType": ["date"],
+            "description": "Date the goal was set"
+        },
+        {
+            "name": "endingDate",
+            "dataType": ["date"],
+            "description": "Date the goal is expected to end"
+        },
+        {
+            "name": "priority",
+            "dataType": ["text"],
+            "description": "Priority of the goal (e.g., high, medium, low)"
+        },
+    ]
+}
+
+profile_class_definition_en = {
+    "class": "Profile",
+    "description": "Stores an individual's long-term identity information, including basic information, health status, social identity, economic status, living situation, etc.",
+    "properties": [
+        # Basic Information
+        {
+            "name": "fullName",
+            "dataType": ["text"],
+            "description": "Full name"
+        },
+        {
+            "name": "nickname",
+            "dataType": ["text"],
+            "description": "Common nickname"
+        },
+        {
+            "name": "dateOfBirth",
+            "dataType": ["date"],
+            "description": "Date of birth"
+        },
+        {
+            "name": "age",
+            "dataType": ["number"],
+            "description": "Age"
+        },
+        {
+            "name": "gender",
+            "dataType": ["text"],
+            "description": "Gender"
+        },
+        {
+            "name": "height",
+            "dataType": ["number"],
+            "description": "Height (cm)"
+        },
+        {
+            "name": "weight",
+            "dataType": ["number"],
+            "description": "Weight (kg)"
+        },
+
+        # Health Status
+        {
+            "name": "chronicDiseases",
+            "dataType": ["text[]"],
+            "description": "Chronic diseases (e.g., diabetes, asthma, etc.)"
+        },
+        {
+            "name": "disabilities",
+            "dataType": ["text[]"],
+            "description": "Physical disabilities or special health conditions"
+        },
+        {
+            "name": "allergies",
+            "dataType": ["text[]"],
+            "description": "Allergens (e.g., pollen, seafood, etc.)"
+        },
+        {
+            "name": "bloodType",
+            "dataType": ["text"],
+            "description": "Blood type"
+        },
+        {
+            "name": "medicalHistory",
+            "dataType": ["text"],
+            "description": "Past major illnesses or surgery records"
+        },
+
+        # Social Identity
+        {
+            "name": "educationLevel",
+            "dataType": ["text"],
+            "description": "Education level (e.g., primary school, university, postgraduate, etc.)"
+        },
+        {
+            "name": "schoolOrUniversity",
+            "dataType": ["text"],
+            "description": "Current or past school attended"
+        },
+        {
+            "name": "jobTitle",
+            "dataType": ["text"],
+            "description": "Job title"
+        },
+        {
+            "name": "companyOrEmployer",
+            "dataType": ["text"],
+            "description": "Work unit"
+        },
+        {
+            "name": "jobLevel",
+            "dataType": ["text"],
+            "description": "Job level (e.g., intern, manager, senior engineer, associate professor, etc.)"
+        },
+        {
+            "name": "socialRole",
+            "dataType": ["text"],
+            "description": "Social role (e.g., student, teacher, doctor, artist)"
+        },
+
+        # Economic Status
+        {
+            "name": "incomeLevel",
+            "dataType": ["text"],
+            "description": "Income level (low income, middle income, high income)"
+        },
+        {
+            "name": "financialDebts",
+            "dataType": ["text"],
+            "description": "Financial debts"
+        },
+
+        # Living Situation
+        {
+            "name": "currentResidence",
+            "dataType": ["text"],
+            "description": "Current place of residence (city, country)"
+        },
+        {
+            "name": "hometown",
+            "dataType": ["text"],
+            "description": "Hometown (place of birth)"
+        },
+        {
+            "name": "livingWith",
+            "dataType": ["text"],
+            "description": "Living with whom (living alone, with family, with roommates)"
+        },
+        {
+            "name": "housingType",
+            "dataType": ["text"],
+            "description": "Housing type (apartment, detached house, dormitory, etc.)"
+        },
+
+        # Cultural Background
+        {
+            "name": "nationality",
+            "dataType": ["text"],
+            "description": "Nationality"
+        },
+        {
+            "name": "ethnicity",
+            "dataType": ["text"],
+            "description": "Ethnicity"
+        },
+        {
+            "name": "religion",
+            "dataType": ["text"],
+            "description": "Religious beliefs"
+        },
+
+        # Update Time
+        {
+            "name": "profileLastUpdated",
+            "dataType": ["date"],
+            "description": "Last updated time of this profile"
+        },
+    ]
+}

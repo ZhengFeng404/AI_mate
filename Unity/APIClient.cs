@@ -10,9 +10,9 @@ namespace AI_Mate
     public class APIClient : MonoBehaviour
     {
         [Header("API 配置")]
-        public string apiEndpoint = "http://127.0.0.1:5000/chat";
+        public string apiEndpoint = "https://15d7-80-112-169-174.ngrok-free.app/chat";
         public string apiKey = "";
-        public string voiceRecognitionEndpoint = "http://127.0.0.1:5000/voice_recognition";
+        public string voiceRecognitionEndpoint = "https://15d7-80-112-169-174.ngrok-free.app/voice_recognition";
 
         private Action<string> onErrorCallback;
         private Action<AIMessage> onMessageCallback;

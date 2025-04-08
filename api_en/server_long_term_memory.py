@@ -4,7 +4,7 @@ from fastapi import FastAPI, Request, Response, HTTPException
 from fastapi.responses import JSONResponse
 from fastapi.responses import StreamingResponse
 from fastapi.staticfiles import StaticFiles
-from llm_base_handler import llm_response_generation, get_gemini_response_with_history
+from llm_handler import llm_response_generation, get_gemini_response_with_history
 # from tts_handler import generate_tts, generate_tts_GS  # 这是 async 函数
 from history_manager import load_history, add_to_history
 import os
@@ -28,6 +28,7 @@ import soundfile as sf
 import numpy as np
 import pygame
 from tts_handler import TTSGenerator
+from fastapi.middleware.cors import CORSMiddleware
 
 # 导入语音识别相关库
 import speech_recognition as sr
@@ -48,6 +49,24 @@ app = FastAPI()
 AUDIO_DIR = "audio_cache"
 os.makedirs(AUDIO_DIR, exist_ok=True)
 app.mount("/audio_cache", StaticFiles(directory=AUDIO_DIR), name="audio_cache")  # TODO: Check
+
+# 添加CORS中间件配置
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # 允许所有来源，生产环境应该限制为特定域名
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# 添加安全头部
+@app.middleware("http")
+async def add_security_headers(request: Request, call_next):
+    response = await call_next(request)
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["X-XSS-Protection"] = "1; mode=block"
+    return response
 
 # 初始化音频播放系统
 pygame.mixer.init()
@@ -224,7 +243,7 @@ async def send_memory_requests(user_id, user_text, response_text, manual_history
         async with httpx.AsyncClient() as client:
             # 构建对话历史文本
             conversation_text = "\n".join([
-                f"User{user_id}: {entry['user_text']}\nAI: {entry['ai_response']}"
+                f"User: {entry['user_text']}\nAI: {entry['ai_response']}"
                 for entry in manual_history[-3:]  # 最近3轮对话
             ])
             # 长期记忆的payload
@@ -235,12 +254,21 @@ async def send_memory_requests(user_id, user_text, response_text, manual_history
                 "conversation_history_text": conversation_text
             }
             # 发送到两个不同的长期记忆端点
-
+            response1 = await client.post(
+                f"{MEMORY_APP_URL}/long_term_memory_declarative",
+                json=long_term_memory_payload
+            )
+            response2 = await client.post(
+                f"{MEMORY_APP_URL}/long_term_memory_complex",
+                json=long_term_memory_payload
+            )
             response3 = await client.post(
                 f"{MEMORY_APP_URL}/mid_term_memory",
                 json=long_term_memory_payload
             )
             # 检查响应状态
+            response1.raise_for_status()
+            response2.raise_for_status()
             response3.raise_for_status()
             logger.info(f"Memory stored successfully for user {user_id}")
     except httpx.HTTPStatusError as e:
@@ -489,7 +517,7 @@ if __name__ == '__main__':
                         if chunk["type"] == "segment":
                             collected_response.append(chunk["segment"])
                             chunk["user_id"] = user_id
-                            chunk["ai_id"] = "白百合"
+                            chunk["ai_id"] = "Lily"
                             segment_text = chunk["segment"]
 
                             tts_start_time = time.time()
@@ -515,6 +543,13 @@ if __name__ == '__main__':
                                 user_conversation_turns[user_id] = 0
                             user_conversation_turns[user_id] += 1
                             current_turn = user_conversation_turns[user_id]
+
+                        # 触发记忆存储（每两轮）
+                        if current_turn % 1 == 0:
+                            updated_history = user_chat_sessions.get(user_id, [])
+                            asyncio.create_task(
+                                send_memory_requests(user_id, user_text, full_response, updated_history)
+                            )
 
             return StreamingResponse(generate_stream(), media_type="text/event-stream")
 

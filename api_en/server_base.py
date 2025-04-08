@@ -489,7 +489,7 @@ if __name__ == '__main__':
                         if chunk["type"] == "segment":
                             collected_response.append(chunk["segment"])
                             chunk["user_id"] = user_id
-                            chunk["ai_id"] = "白百合"
+                            chunk["ai_id"] = "Lily"
                             segment_text = chunk["segment"]
 
                             tts_start_time = time.time()

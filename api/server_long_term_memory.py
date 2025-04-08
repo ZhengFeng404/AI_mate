@@ -462,7 +462,7 @@ if __name__ == '__main__':
             # 解析请求数据
             data = await request.json()
             user_text = data.get('user_input')
-            user_id = user_id_to_use
+            user_id = data.get('user_id')
             image_base64_uploaded = data.get('image_base64')
 
             # 处理图像捕获逻辑
@@ -505,7 +505,7 @@ if __name__ == '__main__':
                             audio_path = await tts_engine.generate_gpt_sovits(segment_text)
                             tts_end_time = time.time()
                             tts_duration = tts_end_time - tts_start_time
-                            print(f"TTS Duration: {tts_duration:.4f} 秒, 文本: {segment_text}")
+                            print(f"TTS Generation Duration: {tts_duration:.4f} 秒, 文本: {segment_text}")
 
                             audio_filename = os.path.basename(audio_path)
                             chunk["audio_url"] = f"http://localhost:5000/audio_cache/{audio_filename}"

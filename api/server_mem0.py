@@ -453,7 +453,7 @@ if __name__ == '__main__':
             # 解析请求数据
             data = await request.json()
             user_text = data.get('user_input')
-            user_id = user_id_to_use
+            user_id = data.get('user_id')
             image_base64_uploaded = data.get('image_base64')
 
             # 处理图像捕获逻辑

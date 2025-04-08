@@ -19,24 +19,22 @@ import re
 load_dotenv()
 
 # 初始化 Weaviate 客户端 (保持不变)
-weaviate_client = weaviate.connect_to_local(port=8081,
-    grpc_port=50052,)
 
 # 初始化 Gemini (保持不变)
 GEMINI_API_KEY = load_api_key("GEMINI_API_KEY")
 # client = genai.Client(api_key=GEMINI_API_KEY)
 os.environ["GEMINI_API_KEY"] = GEMINI_API_KEY
-model = genai.GenerativeModel('gemini-1.5-pro') # gemini-2.5-pro-exp-03-25
+model = genai.GenerativeModel('gemini-1.5-pro')
 
 # 初始化 Mem0 (保持不变)
 config = {
     "vector_store": {
         "provider": "qdrant",
         "config": {
-            "collection_name": "test1",
+            "collection_name": "experiment",
             "host": "localhost",
             "port": 6333,
-            "embedding_model_dims": 1024,
+            "embedding_model_dims": 3072,
         }
     },
     "llm": {
@@ -48,30 +46,17 @@ config = {
         }
     },
     "embedder": {
-        "provider": "ollama",
+        "provider": "gemini",
         "config": {
-            "model": "mxbai-embed-large:latest",
+            "model": "models/gemini-embedding-exp-03-07",
         }
     }
 }
-# mem0 = Memory.from_config(config)
+mem0 = Memory.from_config(config)
 
 # 读取角色设定文件 (保持不变)
-with open("../Prompt/Character/Lily.txt", "r", encoding="utf-8") as file:
+with open("../Prompt/Character/Lily_en.txt", "r") as file:
     character_profile = file.read()
-
-
-# 查询长期记忆 (保持不变)
-def query_long_term_memory_input(user_id, user_input):
-    related_memory = []
-    for collection_name in ["Events", "Relationships", "Knowledge", "Goals", "Preferences", "Profile"]:
-        collection = weaviate_client.collections.get(collection_name)
-        existing_mem = collection.query.hybrid(
-            query=f"{user_id}: {user_input}",
-            limit=3
-        )
-        related_memory.append(existing_mem)
-    return related_memory
 
 
 # TODO: check if adding user_id in prompt can let AI distinguish user identity in future memory
@@ -171,47 +156,35 @@ class MetadataParser:
             print(f"错误内容: {self.meta_content}")
 
 
-def split_text_stream(buffer, max_chunk=20, min_pause=3):
-    # 增强版自然停顿符号（带权重机制）
+def split_text_stream(buffer, min_pause=3):
+    # 标点符号及其权重
     pause_rules = [
-        {'pattern': '。', 'weight': 0.95, 'offset': 1},  # 句号
-        {'pattern': '！', 'weight': 0.9, 'offset': 1},  # 感叹号
-        {'pattern': '？', 'weight': 0.9, 'offset': 1},  # 问号
-        {'pattern': '...', 'weight': 0.85, 'offset': 3},  # 中文省略号
-        {'pattern': '……', 'weight': 0.85, 'offset': 2},  # 中文长省略
-        {'pattern': '，', 'weight': 0.7, 'offset': 1},  # 中文逗号
-        {'pattern': ',', 'weight': 0.65, 'offset': 1},  # 英文逗号
-        {'pattern': '、', 'weight': 0.6, 'offset': 1},  # 顿号
+        {'pattern': '.', 'weight': 1.0, 'offset': 1},    # 句号
+        {'pattern': '!', 'weight': 1.0, 'offset': 1},    # 感叹号
+        {'pattern': '?', 'weight': 1.0, 'offset': 1},    # 问号
+        {'pattern': '...', 'weight': 0.9, 'offset': 3},  # 省略号
+        #{'pattern': ',', 'weight': 0.7, 'offset': 1},    # 逗号
+        {'pattern': ';', 'weight': 0.8, 'offset': 1},    # 分号
+        #{'pattern': ':', 'weight': 0.8, 'offset': 1}     # 冒号
     ]
 
-    # 智能寻找最优分割点
-    def find_optimal_split(text):
-        candidates = []
-
-        # 遍历所有可能的断点
-        for i in range(min(len(text), max_chunk + 25)):
+    # 寻找分割点
+    def find_split_point(text):
+        # 遍历文本寻找分割点
+        for i in range(len(text)):
             for rule in pause_rules:
                 pattern_len = len(rule['pattern'])
                 if text[i:i + pattern_len] == rule['pattern']:
-                    score = rule['weight'] * (1 - abs(i - max_chunk) / max_chunk)
+                    # 如果找到标点符号，检查是否满足最小长度要求
                     pos = i + rule['offset']
-                    candidates.append((pos, score))
-                    break  # 优先匹配长pattern
-
-        # 筛选有效候选
-        valid = [c for c in candidates if c[0] >= min_pause and c[0] <= max_chunk + 5]
-        if valid:
-            best = max(valid, key=lambda x: x[1])
-            return best[0]
-
-        # 保底策略：在max_chunk处强制分割
-        return min(max_chunk, len(text))
+                    if pos >= min_pause:
+                        return pos
+        return None
 
     # 执行分割
-    if len(buffer) > max_chunk * 1.2:  # 允许10%溢出
-        split_pos = find_optimal_split(buffer)
-        if split_pos > min_pause:
-            return buffer[:split_pos].strip(), buffer[split_pos:].lstrip()
+    split_pos = find_split_point(buffer)
+    if split_pos is not None:
+        return buffer[:split_pos].strip(), buffer[split_pos:].lstrip()
 
     return None, buffer
 
@@ -292,13 +265,14 @@ async def get_gemini_response_with_history(user_input, user_id, manual_history,
         default_metadata = {"expression": "normal", "motion": "idle"}  # 默认元数据
 
         # 设置更短的文本分段长度，使对话更自然
-        max_chunk_length = 25  # 默认分段长度减少到15个字符
-        min_pause_length = 5  # 默认最小暂停长度保持3个字符
+        max_chunk_length = 15  # 默认分段长度减少到15个字符
+        min_pause_length = 3  # 默认最小暂停长度保持3个字符
 
         # 1. 检索记忆 (中期和长期) -  每次都重新检索 (保持不变)
-        # mid_term_memories = mem0.search(query=user_input, user_id="default_user", limit=3)
-        # memories_str = "\n".join(f"- {entry['memory']}" for entry in mid_term_memories)
-        long_term_memories = query_long_term_memory_input(user_id, user_input)
+        mid_term_memories = mem0.search(query=user_input, user_id=user_id, limit=5)
+        memories_str = "\n".join(f"- {entry['memory']}" for entry in mid_term_memories)
+        # long_term_memories = query_long_term_memory_input(user_id, user_input)
+        print(f"mid_term memory: ",memories_str)
 
         # 1. 构建对话历史的 JSON 结构
         history_json = json.dumps(manual_history, ensure_ascii=False, indent=2)  # 保持 JSON 格式，避免 ASCII 转义
@@ -306,68 +280,72 @@ async def get_gemini_response_with_history(user_input, user_id, manual_history,
 
         # 2. 生成 Prompt - 保持原有格式不变，以确保模型理解
         system_instruction = f"""
-                === 你的角色档案 ===
-                {character_profile}
+                        === Your character profile ===
+                        {character_profile}
 
-                === 当前用户身份 ===
-                **名字**：{user_id}
-                身份：是你曾经的同学。
+                        === Current user identity ===
+                        **Name**: {user_id}
+                        Identity: You are a former classmate.
 
-                === LLM 任务要求 ===
-                你将完全代入你的角色档案，成为你扮演的人，在此基础上：
-                - 像人一样思考。
-                - 基于用户输入和对话历史生成你的回复。
-                - 对话历史中你应该更关注最近的消息，但仍然可以结合整个对话历史来理解上下文。
-                - 请注意，你会尝试联想回忆和目前互动有关的记忆，所以有长期记忆可以参考，但这些记忆中有时存在联想到的无关内容。
-                - 若对话历史和长期记忆信息有冲突，优先使用对话历史的信息。
+                        === LLM Task Requirements ===
+                        You will fully embody your character profile and become the person you are playing. Based on this:
+                        - Think like a human.
+                        - Generate your response based on user input and conversation history.
+                        - In the conversation history, you should pay more attention to recent messages but can still combine the entire conversation history to understand the context.
+                        - Please note that you will try to associate and recall memories related to the current interaction, so there is long-term memory for reference, but these memories sometimes contain irrelevant content that is associated.
+                        - If there is a conflict between conversation history and long-term memory information, prioritize using the information from the conversation history.
 
-                === 回复风格指南 ===
-                - **参考对话历史**：参考近期的对话历史，尤其是最近几十分钟内的，让前后对话自然连贯，但是注意兼顾用户切换话题的意愿。
-                - **保持简短自然**：这是实时对话，请像真人聊天一样简洁自然。
-                - **控制回复长度**：一般情况下，回复保持在3句话以内，除非用户明确要求详细解释。
-                - **像日常对话一样**：使用口语化、轻松的表达方式，避免长篇大论。
-                - **简洁回应**：如果是简单问候或询问，用简短1句话回应即可。
-                - **记住你是真人对话**：真实的人在聊天时很少一次性说很多话。
+                        === Response Style Guide ===
+                        - **Refer to conversation history**: Refer to recent conversation history, especially within the last few tens of minutes, to ensure natural and coherent dialogue. However, also be mindful of the user's intention to switch topics.
+                        - **Keep it short and natural**: This is a real-time conversation, please be concise and natural like a real person chatting.
+                        - **Control response length**: In general, keep responses within 3 sentences unless the user explicitly asks for a detailed explanation.
+                        - **Like everyday conversation**: Use colloquial and relaxed expressions, avoid lengthy discussions.
+                        - **Concise response**: If it's a simple greeting or inquiry, respond with a short 1-sentence answer.
+                        - **Remember you are in a real conversation**: Real people rarely say a lot at once when chatting.
 
-                === 视觉信息处理指南 ===
-                - 你收到的视觉图片输入来自你的摄像头，每次对话时都会获得一张当前摄像头看到的照片。
-                - 重要：仅在以下情况分析视觉信息：
-                  1. 用户明确询问关于视觉内容的问题（如"你看到什么？"、"能描述一下我的样子吗？"）
-                  2. 用户出示特定物品并询问相关信息
-                  3. 用户的问题与环境、外观或视觉上下文直接相关
-                - 如果当前对话主题是抽象概念、情感交流或不涉及视觉内容，请完全忽略图像信息，直接回答问题。
-                - 不需要在回复中提及你看到或没看到图像，除非用户直接询问视觉内容。
-                - 优先考虑对话的文本内容和历史，只有在真正需要时才分析视觉信息。
+                        === Visual Information Processing Guide ===
+                        - The visual image input you receive comes from your camera, and you will get a photo of what the current camera sees with each conversation turn.
+                        - Important: Only analyze visual information in the following situations:
+                          1. The user explicitly asks questions about visual content (e.g., "What do you see?", "Can you describe what I look like?")
+                          2. The user presents specific items and asks for related information
+                          3. The user's question is directly related to the environment, appearance, or visual context
+                        - If the current conversation topic is abstract concepts, emotional exchanges, or does not involve visual content, please completely ignore the image information and answer the question directly.
+                        - There is no need to mention in the response whether you see or do not see the image unless the user directly asks about visual content.
+                        - Prioritize the text content and history of the conversation, and only analyze visual information when it is truly needed.
 
-                - 从以下列表中选择合适的表情名称、动作名称加入到 JSON 结构中。
-                    可用表情：['吐舌', '表情-委屈', '表情-微笑', '表情-怨气', '表情-泪汪汪', '表情-流汗', '表情-流泪', '表情-生气', '表情-脸红', '表情-脸黑', '表情-花花', '表情-钱钱', '表情-？', '记仇', '记仇点击键']
-                    可用动作：["打瞌睡", "待机动作"]
+                        - Choose an appropriate expression name and motion name from the following lists to add to the JSON structure.
+                            Available expressions: ['吐舌', '表情-委屈', '表情-微笑', '表情-怨气', '表情-泪汪汪', '表情-流汗', '表情-流泪', '表情-生气', '表情-脸红', '表情-脸黑', '表情-花花', '表情-钱钱', '表情-？', '记仇', '记仇点击键']
+                            Available motions: ["打瞌睡", "待机动作"]
 
-                请严格按以下格式返回：
-                1. 首先用 ```meta 包裹JSON元数据（包含表情和动作，必须独立成chunk）
-                2. 随后是 ```meta 包裹推理过程
-                3. 最后是自然语言回复
-                ```meta
-                {{ "expression":"表情名称", "motion":"动作名称", "reasoning":"思考过程（拟人化思考）"}}
-                ```
-                [你的自然语言回复]
+                        Please strictly return in the following format:
+                        1. First, wrap the JSON metadata (containing expression and motion, must be a separate chunk) with ```meta
+                        2. Then the natural language response
+                        3. Finally, wrap the reasoning process (optional) with ```meta again
+                        ```meta
+                        {{ "expression":"expression name", "motion":"motion name"}}
+                        ```
+                        [Your natural language response]
 
-                === 动态信息 ===
-                **对话历史**:
-                ```json
-                {history_json}
-                ```
-                **长期记忆**：
-                {long_term_memories}
+                        ```meta
+                        {{ "reasoning":"thought process (anthropomorphic thinking)"}}
+                        ```
 
-                **当前用户输入**:
-                ```text
-                {user_input}
-                ```
+                        === Dynamic Information ===
+                        **Conversation History**:
+                        ```json
+                        {history_json}
+                        ```
+                        **Long-term Memory**:
+                        {memories_str}
 
-                **系统时间**
-                {timestamp}         
-                """
+                        **Current User Input**:
+                        ```text
+                        {user_input}
+                        ```
+
+                        **System Time**
+                        {timestamp}
+                        """
 
         # 3. 准备内容 (parts)
         parts = [{"text": system_instruction}]
@@ -441,7 +419,7 @@ async def get_gemini_response_with_history(user_input, user_id, manual_history,
                 # 快速返回第一个有意义的文本 - 如果满足条件
                 if (len(fast_start_buffer) >= 5 and meta_seen) or len(fast_start_buffer) >= 10:  # 降低到10个字符就开始输出
                     # 检查是否有足够文本可以分割
-                    segment, remaining = split_text_stream(fast_start_buffer, max_chunk=max_chunk_length,
+                    segment, remaining = split_text_stream(fast_start_buffer,
                                                            min_pause=min_pause_length)
                     if segment:
                         first_chunk_time = time.time() - start_time_gemini
@@ -465,7 +443,7 @@ async def get_gemini_response_with_history(user_input, user_id, manual_history,
 
             # 正常处理文本分段，使用较短的分段长度
             while True:
-                segment, remaining = split_text_stream(text_buffer, max_chunk=max_chunk_length,
+                segment, remaining = split_text_stream(text_buffer,
                                                        min_pause=min_pause_length)
                 if not segment:
                     break

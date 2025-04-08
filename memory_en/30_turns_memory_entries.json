@@ -1,0 +1,995 @@
+[
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "Alex",
+      "description": "Alex and his old classmate Wang Siming had a Southeast Asian set meal together at Rice Paper Restaurant. They both liked the sour and spicy flavor and had a great chat.",
+      "date": "2025-04-01T00:00:00Z",
+      "location": "Rice Paper Restaurant",
+      "participants": [
+        "Alex",
+        "Wang Siming"
+      ],
+      "emotionalTone": "Happy",
+      "keyMoments": "Enjoyed the Southeast Asian set meal, both liked the sour and spicy flavor"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "Alex",
+      "preferenceType": "Taste Preference",
+      "preferenceDescription": "Alex likes sour and spicy food",
+      "reasoning": "Had a Southeast Asian set meal with old classmate Wang Siming at Rice Paper Restaurant and felt very happy",
+      "preferenceStrength": "Especially 4",
+      "confidenceLevel": 0.9,
+      "preferenceCreationTime": "2025-04-07T15:27:56Z"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "Wang Siming",
+      "preferenceType": "Taste Preference",
+      "preferenceDescription": "Wang Siming likes sour and spicy food",
+      "reasoning": "Had a Southeast Asian set meal with old classmate Alex at Rice Paper Restaurant, and they both liked it very much",
+      "preferenceStrength": "Especially 4",
+      "confidenceLevel": 0.9,
+      "preferenceCreationTime": "2025-04-07T15:27:56Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "Alex",
+      "description": "Alex went to a lecture on future AI trends. The speaker predicted that general artificial intelligence might break through within five years.",
+      "date": "2025-04-06T00:00:00Z",
+      "location": "Not mentioned",
+      "participants": [
+        "Alex",
+        "Lecturer"
+      ],
+      "emotionalTone": "Interested",
+      "keyMoments": "General artificial intelligence might break through within five years"
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "Alex",
+      "goalDescription": "Switch career to the AI field",
+      "goalType": "Career Development",
+      "motivation": "Interested in the AI field and attended a lecture on future AI trends",
+      "status": "Planning",
+      "progress": 0.0,
+      "obstacles": [],
+      "startingDate": "2025-04-07T00:00:00Z",
+      "priority": "High"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "Alex",
+      "description": "Alex plans to travel freely to Paris next month, mainly to visit the Louvre and the Eiffel Tower, and has prepared a ten-page travel guide for this.",
+      "date": "2025-05-01T00:00:00Z",
+      "location": "Paris",
+      "participants": [
+        "Alex"
+      ],
+      "emotionalTone": "Anticipating",
+      "keyMoments": "In-depth cultural tour, prepared a ten-page travel guide"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "Alex",
+      "preferenceType": "Travel Preference",
+      "preferenceDescription": "Alex likes in-depth cultural tours and enjoys visiting museums and famous attractions.",
+      "reasoning": "Alex prepared a ten-page travel guide for his free travel to Paris, with the main goals being the Louvre and the Eiffel Tower.",
+      "preferenceStrength": "Especially 4",
+      "confidenceLevel": 0.9,
+      "preferenceCreationTime": "2025-04-07T15:29:11Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "Alex",
+      "description": "Alex recently signed up for private yoga classes, which take place every Tuesday and Thursday after work. The instructor praised Alex's flexibility as being above the average for programmers.",
+      "date": "2025-04-07T00:00:00Z",
+      "location": "Not mentioned",
+      "participants": [
+        "Alex",
+        "Yoga Instructor"
+      ],
+      "emotionalTone": "Positive",
+      "keyMoments": "The instructor praised Alex's good flexibility"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "Alex",
+      "preferenceType": "Exercise Preference",
+      "preferenceDescription": "Alex likes yoga.",
+      "reasoning": "Alex recently signed up for private yoga classes, practices regularly every week, and his flexibility has been affirmed by the instructor.",
+      "preferenceStrength": "Moderate 3",
+      "confidenceLevel": 0.7,
+      "preferenceCreationTime": "2025-04-07T15:29:46Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "Alex",
+      "description": "Alex celebrated his mother's birthday last week, took a walk with her by the West Lake, and discovered that his mother has become obsessed with square dancing and pulled Alex to learn the square dance steps.",
+      "date": "2025-04-01T00:00:00Z",
+      "location": "By the West Lake",
+      "participants": [
+        "Alex",
+        "Alex's Mother"
+      ],
+      "emotionalTone": "Warm",
+      "keyMoments": "Alex's mother became obsessed with square dancing and pulled Alex to learn new steps"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "Alex's Mother",
+      "preferenceType": "Entertainment Activity Preference",
+      "preferenceDescription": "Alex's mother likes square dancing",
+      "reasoning": "Alex's mother has recently become obsessed with square dancing",
+      "preferenceStrength": "Moderate 3",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-07T15:30:19Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "Alex",
+      "description": "Alex met his old classmate Li Hua at the weekend's alumni gathering and learned that Li Hua is engaged in 5G R&D at Huawei and agreed to visit Li Hua's laboratory next week.",
+      "date": "2025-04-06T00:00:00Z",
+      "location": "Not mentioned",
+      "participants": [
+        "Alex",
+        "Li Hua"
+      ],
+      "emotionalTone": "Anticipating",
+      "keyMoments": "Met Li Hua, who is engaged in 5G R&D at Huawei, and agreed to visit the laboratory"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "Li Hua's work information",
+      "content": "Li Hua is engaged in 5G R&D at Huawei.",
+      "source": "Conversation at the alumni gathering",
+      "keywords": [
+        "Li Hua",
+        "Huawei",
+        "5G",
+        "R&D"
+      ],
+      "relevanceScore": 1,
+      "confidenceLevel": 1
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "Alex",
+      "description": "Alex met a lady in a red dress at Starbucks and was recommended to buy 'Sapiens: A Brief History of Humankind'.",
+      "date": "2025-04-07T00:00:00Z",
+      "location": "Starbucks",
+      "participants": [
+        "Alex",
+        "Lady in red dress"
+      ],
+      "emotionalTone": "Neutral",
+      "keyMoments": "Received a recommendation for 'Sapiens: A Brief History of Humankind'"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "Sapiens: A Brief History of Humankind",
+      "content": "A book recommended to entrepreneurs.",
+      "category": "Books",
+      "source": "Recommendation from a lady in a red dress at Starbucks",
+      "keywords": [
+        "Sapiens: A Brief History of Humankind",
+        "Entrepreneurship",
+        "Books"
+      ],
+      "relevanceScore": 1.0,
+      "confidenceLevel": 0.8
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "Python Data Science",
+      "content": "A book about Python data science, which explains the methods of neural network hyperparameter tuning.",
+      "category": "Learning",
+      "source": "User reading",
+      "keywords": [
+        "Python",
+        "Data Science",
+        "Neural Network",
+        "Hyperparameter Tuning"
+      ],
+      "relevanceScore": 1.0,
+      "confidenceLevel": 1.0
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "Alex",
+      "preferenceType": "Book Preference",
+      "preferenceDescription": "Alex thinks the book 'Python Data Science' is practical, especially the content about neural network hyperparameter tuning.",
+      "reasoning": "The neural network hyperparameter tuning methods taught in the book are helpful for Alex's graduation design.",
+      "preferenceStrength": "Moderate 3",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-07T15:31:58Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "Alex",
+      "description": "Alex is preparing for an interview for the position of AI Researcher at Tencent, practicing self-introduction, and plans to focus on patent achievements.",
+      "date": "2025-04-08T00:00:00Z",
+      "location": "Not mentioned",
+      "participants": [
+        "Alex",
+        "Supervisor"
+      ],
+      "emotionalTone": "Anticipating",
+      "keyMoments": "Supervisor suggested emphasizing patent achievements"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "Alex",
+      "preferenceType": "Career Preference",
+      "preferenceDescription": "Alex wants to become an AI researcher.",
+      "reasoning": "Alex is preparing for an interview for the position of AI Researcher at Tencent.",
+      "preferenceStrength": "Especially 4",
+      "confidenceLevel": 0.9,
+      "preferenceCreationTime": "2025-04-07T15:32:49Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "Alex",
+      "description": "Alex watched the movie 'Interstellar' with his girlfriend. His girlfriend was moved to tears by the movie and now often asks Alex about black hole theory.",
+      "date": "2025-03-07T00:00:00Z",
+      "location": "Cinema",
+      "participants": [
+        "Alex",
+        "Alex's Girlfriend"
+      ],
+      "emotionalTone": "Moved",
+      "keyMoments": "Girlfriend cried and her makeup was ruined",
+      "duration": null,
+      "locationDetails": null
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "Black Hole Theory",
+      "content": "Girlfriend became interested in black hole theory, Alex needs to learn relevant knowledge.",
+      "category": "Physics",
+      "source": "Girlfriend's reaction to the movie 'Interstellar'",
+      "keywords": [
+        "Black Hole",
+        "Theory",
+        "Physics",
+        "Interstellar"
+      ],
+      "relevanceScore": 1.0,
+      "confidenceLevel": 0.0
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "Alex",
+      "description": "Alex's whole family went to Chongming Island for a barbecue. His father's newly bought drone almost fell into the reed marsh while taking a family photo.",
+      "date": "2025-04-01T00:00:00Z",
+      "location": "Chongming Island",
+      "participants": [
+        "Alex",
+        "Alex's Father",
+        "Alex's Family"
+      ],
+      "emotionalTone": "Warm",
+      "keyMoments": "The drone almost fell into the reed marsh"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "Alex",
+      "description": "Alex tried a HIIT intense sweat workout at the gym. The coach suggested gaining muscle, body fat percentage 22%.",
+      "date": "2025-04-07T00:00:00Z",
+      "location": "Gym",
+      "participants": [
+        "Alex",
+        "Coach"
+      ],
+      "emotionalTone": "Positive",
+      "keyMoments": "Bought protein powder"
+    }
+  },
+  {
+    "class": "Profile",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "fullName": "Alex",
+      "weight": null,
+      "bloodType": null,
+      "nickname": null,
+      "dateOfBirth": null,
+      "age": null,
+      "gender": null,
+      "height": null,
+      "chronicDiseases": [],
+      "disabilities": [],
+      "allergies": [],
+      "medicalHistory": null,
+      "educationLevel": null,
+      "schoolOrUniversity": null,
+      "jobTitle": null,
+      "companyOrEmployer": null,
+      "jobLevel": null,
+      "socialRole": null,
+      "incomeLevel": null,
+      "financialDebts": null,
+      "currentResidence": null,
+      "hometown": null,
+      "livingWith": null,
+      "housingType": null,
+      "nationality": null,
+      "ethnicity": null,
+      "religion": null,
+      "profileLastUpdated": null
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "Alex",
+      "goalDescription": "Participate in the Shanghai Marathon",
+      "goalType": "Personal Goal",
+      "motivation": "Exercise",
+      "status": "In progress",
+      "progress": 0.2,
+      "obstacles": [],
+      "startingDate": "2025-04-07T00:00:00Z",
+      "endingDate": "2025-12-31T00:00:00Z",
+      "priority": "High"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "Alex",
+      "description": "In order to prepare for the Shanghai Marathon, Alex runs 5 kilometers every morning at 6 o'clock.",
+      "date": "2025-04-07T00:00:00Z",
+      "duration": 50,
+      "location": "Not mentioned",
+      "locationDetails": null,
+      "participants": [
+        "Alex"
+      ],
+      "emotionalTone": "Positive",
+      "keyMoments": "Colleague said Alex has become three shades darker"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "Alex",
+      "description": "Alex met Professor Zhang in the library. Professor Zhang suggested that Alex apply to the MIT Media Lab and affirmed the potential of his AR project.",
+      "date": "2025-04-06T00:00:00Z",
+      "location": "Library",
+      "participants": [
+        "Alex",
+        "Professor Zhang"
+      ],
+      "emotionalTone": "Positive",
+      "keyMoments": "Professor Zhang recommended applying to the MIT Media Lab"
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "Alex",
+      "goalDescription": "Apply to the MIT Media Lab",
+      "goalType": "Career Development",
+      "motivation": "Professor Zhang's recommendation and affirmation of the AR project's potential",
+      "status": "Planning",
+      "progress": 0.0,
+      "obstacles": [],
+      "startingDate": "2025-04-07T00:00:00Z",
+      "priority": "Medium"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "Italian Cuisine Cooking Tips",
+      "content": "Alex learned to cook Italian food and discovered that adding more basil leaves can enhance the flavor, which his girlfriend also appreciated.",
+      "category": "Cooking",
+      "source": "TikTok",
+      "keywords": [
+        "Italian Cuisine",
+        "Cooking",
+        "Basil Leaves"
+      ],
+      "relevanceScore": 1.0,
+      "confidenceLevel": 1.0
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "Alex",
+      "preferenceType": "Taste Preference",
+      "preferenceDescription": "Alex likes to add more basil leaves to Italian dishes",
+      "reasoning": "Alex thinks adding more basil leaves makes it especially fragrant",
+      "preferenceStrength": "Especially 4",
+      "confidenceLevel": 0.9,
+      "preferenceCreationTime": "2025-04-07T15:36:26Z"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "Trello Software",
+      "content": "Trello software is very helpful for project progress management.",
+      "category": "Software",
+      "source": "Recommendation from colleague Qiangzi",
+      "keywords": [
+        "Trello",
+        "Project Management",
+        "Software"
+      ],
+      "relevanceScore": 1.0,
+      "confidenceLevel": 1.0
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "Alex",
+      "preferenceType": "Software Preference",
+      "preferenceDescription": "Alex thinks Trello software is extremely useful.",
+      "reasoning": "After using Trello software, project progress has never been delayed again.",
+      "preferenceStrength": "Strongly 5",
+      "confidenceLevel": 0.9,
+      "preferenceCreationTime": "2025-04-07T15:37:18Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "Alex",
+      "description": "Alex plans to have a barbecue with his university roommate tomorrow to discuss a smart contract project combining AI and blockchain.",
+      "date": "2025-04-08T00:00:00Z",
+      "location": "Not mentioned",
+      "participants": [
+        "Alex",
+        "University Roommate"
+      ],
+      "emotionalTone": "Anticipating",
+      "keyMoments": "Smart contract project combining AI and blockchain"
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "Alex",
+      "goalDescription": "Smart contract project combining AI and blockchain",
+      "goalType": "Career Development",
+      "motivation": "Discuss with university roommate who is involved in blockchain",
+      "status": "Planning",
+      "progress": 0.0,
+      "obstacles": [],
+      "startingDate": "2025-04-07T00:00:00Z",
+      "priority": "Medium"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "Alex",
+      "description": "Alex bought a limited edition AJ Chicago sneaker, which cost him half a month's salary.",
+      "date": "2025-04-07T00:00:00Z",
+      "location": "Not mentioned",
+      "participants": [
+        "Alex"
+      ],
+      "emotionalTone": "Excited",
+      "keyMoments": "Spent half a month's salary to buy a collectible"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "Alex",
+      "preferenceType": "Collection Preference",
+      "preferenceDescription": "Alex likes to collect classic retro AJ sneakers, such as the Chicago limited edition.",
+      "reasoning": "Alex believes the AJ Chicago limited edition is a classic retro and must be collected.",
+      "preferenceStrength": "Especially 4",
+      "confidenceLevel": 0.95,
+      "preferenceCreationTime": "2025-04-07T15:38:38Z"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "Energy-saving effect of office green walls",
+      "content": "Office green walls can reduce energy consumption by 15%.",
+      "category": "Environmental Protection and Energy Saving",
+      "source": "Carbon Neutrality Forum",
+      "keywords": [
+        "Green Wall",
+        "Energy Saving",
+        "Environmental Protection",
+        "Carbon Neutrality"
+      ],
+      "relevanceScore": 1.0,
+      "confidenceLevel": 1.0
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "Alex",
+      "goalDescription": "Convince the boss to install a green wall in the office",
+      "goalType": "Career Development",
+      "motivation": "Reduce company energy consumption and beautify the office environment",
+      "status": "Planning",
+      "progress": 0.0,
+      "obstacles": [],
+      "startingDate": "2025-04-07T00:00:00Z",
+      "priority": "Medium"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "Alex",
+      "description": "Alex discussed fund investment with a friend from investment banking. The friend suggested investing in the STAR Market index through regular investment.",
+      "date": "2025-04-06T00:00:00Z",
+      "location": "Not mentioned",
+      "participants": [
+        "Alex",
+        "Investment Banking Friend"
+      ],
+      "emotionalTone": "Hesitant",
+      "keyMoments": "Friend suggested investing in the STAR Market index through regular investment"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "Investment advice for the STAR Market index",
+      "content": "It is currently the right time to invest in the STAR Market index through regular investment.",
+      "category": "Investment",
+      "source": "Alex's investment banking friend",
+      "keywords": [
+        "STAR Market",
+        "Index",
+        "Regular Investment",
+        "Investment"
+      ],
+      "relevanceScore": 1.0,
+      "confidenceLevel": 0.8
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "Alex",
+      "description": "Alex went stargazing in Sheshan and photographed the Perseids meteor shower. The observatory app showed that this was the largest Perseids meteor shower of the year.",
+      "date": "2025-04-06T00:00:00Z",
+      "location": "Sheshan",
+      "participants": [
+        "Alex"
+      ],
+      "emotionalTone": "Excited",
+      "keyMoments": "Photographed the meteor shower"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "Alex",
+      "preferenceType": "Hobby",
+      "preferenceDescription": "Alex likes stargazing.",
+      "reasoning": "Alex went stargazing in Sheshan last night and photographed the meteor shower.",
+      "preferenceStrength": "Moderate 3",
+      "confidenceLevel": 0.7,
+      "preferenceCreationTime": "2025-04-07T15:40:28Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "Alex",
+      "description": "Alex attended a lecture on positive psychology and learned about ABC emotion therapy.",
+      "date": "2025-04-07T00:00:00Z",
+      "location": "Not mentioned",
+      "participants": [
+        "Alex"
+      ],
+      "emotionalTone": "Positive",
+      "keyMoments": "Tried using ABC emotion therapy and surprisingly didn't get angry when arguing with the client"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "ABC Emotion Therapy",
+      "content": "ABC emotion therapy is a cognitive behavioral therapy used to help people manage emotions.",
+      "category": "Psychology",
+      "source": "Lecture on positive psychology",
+      "keywords": [
+        "ABC Emotion Therapy",
+        "Emotion Management",
+        "Cognitive Behavioral Therapy"
+      ],
+      "relevanceScore": 1.0,
+      "confidenceLevel": 1.0
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "Alex",
+      "description": "Alex plans to have a barbecue at Binjiang Park this weekend and specially bought low-fat beef skewers.",
+      "date": "2025-04-12T00:00:00Z",
+      "location": "Binjiang Park",
+      "participants": [
+        "Alex"
+      ],
+      "emotionalTone": "Anticipating",
+      "keyMoments": "Chose low-fat beef specifically to maintain a low-fat diet for fitness"
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "Alex",
+      "goalDescription": "Maintain fitness",
+      "goalType": "Personal Goal",
+      "motivation": "For health and body management",
+      "status": "In progress",
+      "progress": null,
+      "obstacles": [],
+      "startingDate": null,
+      "priority": null
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "Alex",
+      "description": "Alex tried Green Monday's vegetarian burger and kale juice, found them surprisingly delicious, and believes his healthy eating plan is on track.",
+      "date": "2025-04-07T00:00:00Z",
+      "location": "Green Monday",
+      "participants": [
+        "Alex"
+      ],
+      "emotionalTone": "Positive",
+      "keyMoments": "Enjoyment of vegetarian burger and kale juice"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "Alex",
+      "preferenceType": "Food Preference",
+      "preferenceDescription": "Alex likes Green Monday's vegetarian burger and kale juice.",
+      "reasoning": "Alex found Green Monday's vegetarian burger and kale juice surprisingly delicious.",
+      "preferenceStrength": "Moderate 3",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-07T15:43:30Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "Alex",
+      "description": "Alex attended a mobile photography class, and the teacher commented that his composition has a Wes Anderson style.",
+      "date": "2025-04-07T00:00:00Z",
+      "location": "Mobile Photography Class",
+      "participants": [
+        "Alex",
+        "Photography Teacher"
+      ],
+      "emotionalTone": "Happy",
+      "keyMoments": "Teacher commented that Alex's composition has a Wes Anderson style"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "Wes Anderson style composition",
+      "content": "User Alex's composition was evaluated as having a Wes Anderson style.",
+      "category": "Photography",
+      "source": "Photography Teacher",
+      "keywords": [
+        "Wes Anderson",
+        "Composition",
+        "Photography"
+      ],
+      "relevanceScore": 1.0,
+      "confidenceLevel": 1.0
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "Alex",
+      "description": "Alex chatted with his roommate until 2 am last night. His roommate advised him to give up the 996 work schedule and suggested he study abroad.",
+      "date": "2025-04-06T00:00:00Z",
+      "duration": 120,
+      "location": "Alex's residence",
+      "locationDetails": null,
+      "participants": [
+        "Alex",
+        "Alex's Roommate"
+      ],
+      "emotionalTone": "Excited",
+      "keyMoments": "Roommate advised Alex to give up 996 and study abroad"
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "Alex",
+      "goalDescription": "Study abroad",
+      "goalType": "Personal Goal",
+      "motivation": "Roommate's suggestion and dissatisfaction with the 996 work schedule",
+      "status": "Considering",
+      "progress": 0.0,
+      "obstacles": [],
+      "startingDate": null,
+      "endingDate": null,
+      "priority": null
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "Alex",
+      "description": "Alex is reading 'The History of the Decline and Fall of the Roman Empire' and is inspired by it to write a tweet about the connection between Caesar's reforms and contemporary corporate transformation.",
+      "date": "2025-04-07T00:00:00Z",
+      "participants": [
+        "Alex"
+      ],
+      "emotionalTone": "Excited",
+      "keyMoments": "Connecting Caesar's reforms with contemporary corporate transformation"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "Caesar's Reforms and Contemporary Corporate Transformation",
+      "content": "Alex discovered similarities between Caesar's reforms and contemporary corporate transformation, which can be used as a tweet topic.",
+      "category": "History/Business",
+      "source": "'The History of the Decline and Fall of the Roman Empire'",
+      "keywords": [
+        "Caesar's Reforms",
+        "Corporate Transformation",
+        "The History of the Decline and Fall of the Roman Empire"
+      ],
+      "relevanceScore": 1.0,
+      "confidenceLevel": 0.8
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "Alex",
+      "description": "Alex participated in a team-building escape room last month and found out that Lisa from the finance department is a high-level Murder Mystery Game player.",
+      "date": "2025-03-01T00:00:00Z",
+      "location": "Not mentioned",
+      "participants": [
+        "Alex",
+        "Lisa",
+        "Other department colleagues"
+      ],
+      "emotionalTone": "Positive",
+      "keyMoments": "Discovered that Lisa is a high-level Murder Mystery Game player"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "Alex",
+      "description": "Alex asked Lisa to organize a Murder Mystery Game this week.",
+      "date": "2025-04-12T00:00:00Z",
+      "location": "Not mentioned",
+      "participants": [
+        "Alex",
+        "Lisa"
+      ],
+      "emotionalTone": "Anticipating",
+      "keyMoments": "Playing a Murder Mystery Game with Lisa"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "Lisa's hobby",
+      "content": "Lisa is a high-level Murder Mystery Game player.",
+      "category": "Personal Information",
+      "source": "Department team-building escape room",
+      "keywords": [
+        "Lisa",
+        "Murder Mystery Game",
+        "High-level Player"
+      ],
+      "relevanceScore": 1.0,
+      "confidenceLevel": 1.0
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "Family story of the aunt in Room 301",
+      "content": "The ancestors of the aunt in Room 301 were stewards of Rong Yiren's family.",
+      "source": "User Alex",
+      "keywords": [
+        "Aunt in Room 301",
+        "Rong Yiren",
+        "Steward"
+      ],
+      "confidenceLevel": 0.8
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subjectName": "Alex",
+      "relationshipDescription": "Alex met and talked with the aunt in Room 301 in the community.",
+      "objectName": "Aunt in Room 301",
+      "relationshipType": "Neighbor",
+      "sentiment": "Neutral",
+      "sentimentStrength": 0.1,
+      "relationshipStage": "Initial acquaintance",
+      "lastInteractionDate": "2025-04-07T15:46:20Z",
+      "relationshipCreationTime": "2025-04-07T15:46:20Z"
+    }
+  }
+]

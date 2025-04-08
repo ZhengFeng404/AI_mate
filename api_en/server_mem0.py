@@ -4,7 +4,7 @@ from fastapi import FastAPI, Request, Response, HTTPException
 from fastapi.responses import JSONResponse
 from fastapi.responses import StreamingResponse
 from fastapi.staticfiles import StaticFiles
-from llm_base_handler import llm_response_generation, get_gemini_response_with_history
+from llm_mem0_handler import llm_response_generation, get_gemini_response_with_history
 # from tts_handler import generate_tts, generate_tts_GS  # 这是 async 函数
 from history_manager import load_history, add_to_history
 import os
@@ -489,7 +489,7 @@ if __name__ == '__main__':
                         if chunk["type"] == "segment":
                             collected_response.append(chunk["segment"])
                             chunk["user_id"] = user_id
-                            chunk["ai_id"] = "白百合"
+                            chunk["ai_id"] = "Lily"
                             segment_text = chunk["segment"]
 
                             tts_start_time = time.time()
@@ -515,6 +515,13 @@ if __name__ == '__main__':
                                 user_conversation_turns[user_id] = 0
                             user_conversation_turns[user_id] += 1
                             current_turn = user_conversation_turns[user_id]
+
+                        # 触发记忆存储（每两轮）
+                        if current_turn % 1 == 0:
+                            updated_history = user_chat_sessions.get(user_id, [])
+                            asyncio.create_task(
+                                send_memory_requests(user_id, user_text, full_response, updated_history)
+                            )
 
             return StreamingResponse(generate_stream(), media_type="text/event-stream")
 

@@ -9,34 +9,12 @@ from qdrant_client.http import models
 GEMINI_API_KEY = load_api_key("GEMINI_API_KEY")
 os.environ["GEMINI_API_KEY"] = GEMINI_API_KEY
 
-# 初始化 Qdrant 客户端
-qdrant_client = QdrantClient(host="localhost", port=6333)
-
-# 确保集合存在并具有正确的维度
-collection_name = "experiment"
-try:
-    # 检查集合是否存在
-    collection_info = qdrant_client.get_collection(collection_name)
-    if collection_info.config.params.vectors.size != 3072:
-        # 如果维度不匹配，删除并重新创建集合
-        qdrant_client.delete_collection(collection_name)
-        qdrant_client.create_collection(
-            collection_name=collection_name,
-            vectors_config=models.VectorParams(size=3072, distance=models.Distance.COSINE),
-        )
-except Exception:
-    # 如果集合不存在，创建它
-    qdrant_client.create_collection(
-        collection_name=collection_name,
-        vectors_config=models.VectorParams(size=3072, distance=models.Distance.COSINE),
-    )
-
 # 初始化 Mem0 (同步代码，保持不变)
 config = {
     "vector_store": {
         "provider": "qdrant",  # docker run -p 6333:6333 qdrant/qdrant
         "config": {
-            "collection_name": "experiment",
+            "collection_name": "experiment_en",
             "host": "localhost",
             "port": 6333,
             "embedding_model_dims": 3072,  # 保持与集合配置一致
@@ -60,7 +38,6 @@ config = {
 
 mem0 = Memory.from_config(config)  # 初始化 Mem0 (同步)
 mem0.reset()
-
 def add_to_mem0(user_id, user_input, ai_response, conversation_history):
     try:
         mem0.add(f"user:-> {user_input}\nai:-> {ai_response}", user_id=user_id)

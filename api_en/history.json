@@ -1179,66 +1179,58 @@
             "user_id": "艾利克斯",
             "user_text": "你能用英文翻译一下李白的静夜思吗",
             "ai_response": "Sure, here's atranslation of\"Quiet NightThought\" by LiBai:\n\nBedsidemoonlight,\nIsuspect it isfrost on theground.\nI raisemy head to gazeat the bright moon,Then lower myhead and thinkof home."
-        },
+        }
+    ],
+    "Alex": [
         {
-            "timestamp": "2025-04-08 11:27:59",
-            "user_id": "艾利克斯",
+            "timestamp": "2025-04-08 10:42:43",
+            "user_id": "Alex",
             "user_text": "早上好",
-            "ai_response": "早上好呀，艾利克斯。"
+            "ai_response": "早上好，Alex。"
         },
         {
-            "timestamp": "2025-04-08 11:29:06",
-            "user_id": "艾利克斯",
-            "user_text": "其实也快要吃午饭了",
-            "ai_response": "是啊，时间过得真快。你想好中午吃什么了吗？"
+            "timestamp": "2025-04-08 10:43:25",
+            "user_id": "Alex",
+            "user_text": "guess what i eat for my breakfast",
+            "ai_response": "Hmm, what did you have for breakfast?I'm curious."
         },
         {
-            "timestamp": "2025-04-08 11:29:31",
-            "user_id": "艾利克斯",
-            "user_text": "你推荐一下吧",
-            "ai_response": "你想让我推荐什么呢？比如书籍、电影，或者最近有什么好吃的？"
+            "timestamp": "2025-04-08 10:51:54",
+            "user_id": "Alex",
+            "user_text": "do you like peanuts",
+            "ai_response": "Do you?I find them rather…earthy.I prefer something a little sweeter, myself."
         },
         {
-            "timestamp": "2025-04-08 11:35:45",
-            "user_id": "艾利克斯",
-            "user_text": "你猜猜我想让你推荐什么",
-            "ai_response": "嗯……让我猜猜，艾利克斯，你想让我推荐午餐吃什么？"
+            "timestamp": "2025-04-08 10:53:46",
+            "user_id": "Alex",
+            "user_text": "guess what I like to eat",
+            "ai_response": "Something sweet, perhaps?Like those little pastries you used to bring to class sometimes."
         },
         {
-            "timestamp": "2025-04-08 11:36:21",
-            "user_id": "艾利克斯",
-            "user_text": "对",
-            "ai_response": "对呀，所以你想让我推荐什么午餐呢？"
+            "timestamp": "2025-04-08 10:54:21",
+            "user_id": "Alex",
+            "user_text": "do you remember what i plan to do in the future",
+            "ai_response": "You mentioned wanting to… travel, wasn't it?Something about exploring different cultures, I believe."
         },
         {
-            "timestamp": "2025-04-08 11:37:24",
-            "user_id": "艾利克斯",
-            "user_text": "就是今天的午餐啊",
-            "ai_response": "今天午餐的话，不如试试东南亚菜？我知道有家“RicePaper”餐厅很不错，上次和我的老同学去吃过，酸酸辣辣的很开胃。"
+            "timestamp": "2025-04-08 11:12:58",
+            "user_id": "Alex",
+            "user_text": "hows going",
+            "ai_response": "Things are going quite well, Alex.How about you?"
         },
         {
-            "timestamp": "2025-04-08 11:44:00",
-            "user_id": "艾利克斯",
-            "user_text": "你猜我晚饭会吃什么",
-            "ai_response": "这可让我好好想想……你最近喜欢吃东南亚菜，又提到快要吃午饭了，那晚上会不会想换换口味呢？不如来点清淡的，比如日式料理？"
-        },
+            "timestamp": "2025-04-08 11:13:32",
+            "user_id": "Alex",
+            "user_text": "do you know the weather today",
+            "ai_response": "I'm not sure about the specifics, Alex.Are you planning on going out today?"
+        }
+    ],
+    "Lawrence": [
         {
-            "timestamp": "2025-04-08 11:45:55",
-            "user_id": "艾利克斯",
-            "user_text": "听上去不错，但是太贵了",
-            "ai_response": "啊，这样啊……那你想吃什么价位的呢？我可以再推荐一些其他的。"
-        },
-        {
-            "timestamp": "2025-04-08 11:47:43",
-            "user_id": "艾利克斯",
-            "user_text": "有没有那种能自己做的呢",
-            "ai_response": "当然有啊，自己做饭更有乐趣呢。你想做什么类型的？是想简单快手一些的，还是可以稍微花点心思的？"
-        },
-        {
-            "timestamp": "2025-04-08 11:50:36",
-            "user_id": "艾利克斯",
-            "user_text": "简单一点的",
-            "ai_response": "那今晚就来个番茄炒蛋配米饭怎么样？简单又营养。或者，你也可以试试做个蒜蓉炒青菜，也很方便快捷。"
+            "timestamp": "2025-04-08 11:17:49",
+            "user_id": "Lawrence",
+            "user_text": "hello",
+            "ai_response": "Hello Lawrence.It's been a while."
         }
     ]
 }
