@@ -509,7 +509,7 @@ if __name__ == '__main__':
                             print(f"TTS Generation Duration: {tts_duration:.4f} 秒, 文本: {segment_text}")
 
                             audio_filename = os.path.basename(audio_path)
-                            chunk["audio_url"] = f"http://localhost:5000/audio_cache/{audio_filename}"
+                            chunk["audio_url"] = f"https://picked-evidently-mantis.ngrok-free.app/audio_cache/{audio_filename}"
                             print("chunk", chunk)
                         yield json.dumps(chunk) + "\n"
                 finally:

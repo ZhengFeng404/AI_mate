@@ -3,7 +3,8 @@ import weaviate.classes as wvc  # 导入 v4 版本 client classes 用于配置
 import weaviate.classes.config as wc
 from weaviate.classes.config import Property, DataType, Configure
 
-client = weaviate.connect_to_local()
+client = weaviate.connect_to_local(port=8081,
+    grpc_port=50052,)
 
 # 检查 Collection 是否已存在，如果存在则删除 (方便示例运行，实际应用中按需处理)
 collection_names = ["Events", "Relationships", "Knowledge", "Goals", "Preferences", "Profile"]

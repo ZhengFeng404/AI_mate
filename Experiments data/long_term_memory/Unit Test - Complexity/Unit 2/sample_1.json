@@ -1,0 +1,636 @@
+[
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾伦",
+      "description": "艾伦昨天尝试了“巷子口”新餐厅的红烧肉，并且很喜欢。",
+      "date": "2025-04-13T00:00:00Z",
+      "location": "巷子口餐厅",
+      "participants": [
+        "艾伦"
+      ],
+      "emotionalTone": "积极",
+      "keyMoments": "艾伦对红烧肉的喜爱"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "食物偏好",
+      "preferenceDescription": "艾伦喜欢巷子口餐厅的红烧肉。",
+      "reasoning": "艾伦昨天尝试了巷子口餐厅的红烧肉，表示很喜欢。",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-14T21:40:09Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾伦",
+      "description": "艾伦和他的母亲王芳一起去了世纪公园。",
+      "date": "2025-04-06T00:00:00Z",
+      "location": "世纪公园",
+      "participants": [
+        "艾伦",
+        "王芳"
+      ],
+      "emotionalTone": "积极"
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subjectName": "艾伦",
+      "relationshipDescription": "艾伦的母亲",
+      "objectName": "王芳",
+      "relationshipType": "家人",
+      "sentiment": "喜欢",
+      "sentimentStrength": 0.8,
+      "relationshipStage": "稳定",
+      "lastInteractionDate": "2025-04-13T00:00:00Z",
+      "relationshipCreationTime": "2025-04-14T21:40:58Z"
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "艾伦",
+      "goalDescription": "完成关于Q2市场分析的项目报告",
+      "goalType": "工作目标",
+      "status": "已完成",
+      "progress": 1.0,
+      "startingDate": "2025-04-08T00:00:00Z",
+      "endingDate": "2025-04-14T00:00:00Z"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "王芳的爱好",
+      "content": "王芳喜欢种植多肉植物，她种的熊童子尤其漂亮。",
+      "category": "个人爱好",
+      "source": "艾伦",
+      "keywords": [
+        "王芳",
+        "多肉植物",
+        "熊童子",
+        "种植"
+      ],
+      "relevanceScore": 1,
+      "confidenceLevel": 1.0
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "王芳",
+      "preferenceType": "植物偏好",
+      "preferenceDescription": "王芳喜欢种植多肉植物，尤其喜欢熊童子。",
+      "reasoning": "用户艾伦提到王芳种的熊童子特别漂亮。",
+      "preferenceStrength": "特别4",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-14T21:41:37Z"
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "艾伦",
+      "goalDescription": "赢得下周的“城市杯”篮球比赛",
+      "goalType": "团队目标",
+      "motivation": "希望团队获得胜利",
+      "status": "进行中",
+      "progress": 0.0,
+      "obstacles": [],
+      "startingDate": "2025-04-15T00:00:00Z",
+      "priority": "高"
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subjectName": "艾伦",
+      "relationshipDescription": "艾伦、李雷和韩梅梅是闪电队队员，一起参加城市杯篮球比赛。",
+      "objectName": "李雷",
+      "relationshipType": "队友",
+      "sentiment": "喜欢",
+      "sentimentStrength": 0.7,
+      "relationshipStage": "熟悉",
+      "lastInteractionDate": "2025-04-14T21:41:56Z",
+      "relationshipCreationTime": "2025-04-14T21:41:56Z"
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subjectName": "艾伦",
+      "relationshipDescription": "艾伦、李雷和韩梅梅是闪电队队员，一起参加城市杯篮球比赛。",
+      "objectName": "韩梅梅",
+      "relationshipType": "队友",
+      "sentiment": "喜欢",
+      "sentimentStrength": 0.7,
+      "relationshipStage": "熟悉",
+      "lastInteractionDate": "2025-04-14T21:41:56Z",
+      "relationshipCreationTime": "2025-04-14T21:41:56Z"
+    }
+  },
+  {
+    "class": "Profile",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "fullName": "王涛",
+      "jobTitle": "程序员",
+      "currentResidence": "上海",
+      "socialRole": "同事"
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subjectName": "艾伦",
+      "relationshipDescription": "艾伦的同事，来自上海的程序员。",
+      "objectName": "王涛",
+      "relationshipType": "同事",
+      "sentiment": "无",
+      "sentimentStrength": 0.5,
+      "relationshipStage": "初识",
+      "lastInteractionDate": "2025-04-14T21:42:19Z",
+      "relationshipCreationTime": "2025-04-14T21:42:19Z"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "深呼吸练习的好处",
+      "content": "深呼吸有助于放松，尤其在工作压力大的时候。",
+      "category": "健康",
+      "source": "艾伦",
+      "keywords": [
+        "深呼吸",
+        "放松",
+        "压力管理"
+      ],
+      "relevanceScore": 1.0,
+      "confidenceLevel": 1.0
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "放松方式偏好",
+      "preferenceDescription": "艾伦喜欢在工作压力大时进行深呼吸练习。",
+      "reasoning": "艾伦知道深呼吸有助于放松。",
+      "preferenceStrength": "特别4",
+      "confidenceLevel": 0.9,
+      "preferenceCreationTime": "2025-04-14T21:42:39Z"
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "艾伦",
+      "goalDescription": "将每日糖分摄入减少到25克以下",
+      "goalType": "健康目标",
+      "motivation": "了解到过量摄入糖分的危害",
+      "status": "计划中",
+      "progress": 0.0,
+      "obstacles": [],
+      "startingDate": "2025-04-14T00:00:00Z",
+      "priority": "高"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "饮食偏好",
+      "preferenceDescription": "艾伦打算将每日糖分摄入减少到25克以下。",
+      "reasoning": "艾伦了解到过量摄入糖分的危害。",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2024-08-05T11:30:00Z"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "西班牙语问候",
+      "content": "Hola在西班牙语中是“你好”的意思。",
+      "category": "语言学习",
+      "source": "用户艾伦",
+      "keywords": [
+        "西班牙语",
+        "Hola",
+        "你好",
+        "问候"
+      ],
+      "relevanceScore": 1.0,
+      "confidenceLevel": 1.0
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "语言学习偏好",
+      "preferenceDescription": "艾伦对学习语言有兴趣，学习过基础的西班牙语，知道“Hola”是“你好”的意思。",
+      "reasoning": "用户主动提及学习西班牙语的经历。",
+      "preferenceStrength": "轻微1",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-14T21:43:15Z"
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "艾伦",
+      "goalDescription": "将体脂率降到18%",
+      "goalType": "健康目标",
+      "motivation": "更喜欢自己看起来有肌肉线条的样子",
+      "status": "计划中",
+      "progress": 0.0,
+      "obstacles": [],
+      "startingDate": "2025-04-14T00:00:00Z",
+      "priority": "中"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "身材偏好",
+      "preferenceDescription": "艾伦更喜欢自己看起来有肌肉线条的样子，想将体脂率降到18%。",
+      "reasoning": "艾伦认为拥有清晰的肌肉线条很不错。",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-14T21:43:57Z"
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "艾伦",
+      "goalDescription": "参加10月份的北京马拉松",
+      "goalType": "个人目标",
+      "motivation": "艾伦是拥有5年跑龄的长跑爱好者",
+      "status": "进行中",
+      "progress": 0.5,
+      "obstacles": [],
+      "startingDate": "2025-04-14T00:00:00Z",
+      "endingDate": "2025-10-01T00:00:00Z",
+      "priority": "高"
+    }
+  },
+  {
+    "class": "Profile",
+    "action": "UPDATE",
+    "updated_object_id": "956b5e39-79bb-4586-84e1-32dfdb1a2e3e",
+    "properties_content": {
+      "fullName": "艾伦",
+      "profileLastUpdated": "2025-04-14T21:44:18Z",
+      "hobbies": [
+        "长跑"
+      ]
+    }
+  },
+  {
+    "class": "Profile",
+    "action": "UPDATE",
+    "updated_object_id": "956b5e39-79bb-4586-84e1-32dfdb1a2e3e",
+    "properties_content": {
+      "hobbies": [
+        "长跑",
+        "收集黑胶唱片"
+      ]
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "收藏品偏好",
+      "preferenceDescription": "艾伦喜欢收集黑胶唱片，并且收藏了很多，有一整面墙都是。",
+      "reasoning": "用户主动提及喜欢收集黑胶唱片。",
+      "preferenceStrength": "特别4",
+      "confidenceLevel": 0.9,
+      "preferenceCreationTime": "2025-04-14T21:45:00Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾伦",
+      "description": "艾伦参观了国家博物馆的“古代中国”展，学习了关于汉朝的知识。",
+      "date": "2025-04-14T00:00:00Z",
+      "location": "国家博物馆",
+      "locationDetails": "古代中国展",
+      "participants": [
+        "艾伦"
+      ],
+      "emotionalTone": "积极",
+      "keyMoments": "学习关于汉朝的知识"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "展览偏好",
+      "preferenceDescription": "艾伦对国家博物馆的“古代中国”展感兴趣。",
+      "reasoning": "艾伦参观了该展览并学到了很多关于汉朝的知识。",
+      "preferenceStrength": "有些2",
+      "confidenceLevel": 0.7,
+      "preferenceCreationTime": "2025-04-14T21:45:00Z"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "论文写作规范",
+      "content": "写论文需要引用可靠的文献来源。",
+      "category": "学术规范",
+      "source": "李教授",
+      "keywords": [
+        "论文",
+        "文献",
+        "可靠性",
+        "学术规范",
+        "引用"
+      ],
+      "relevanceScore": 1.0,
+      "confidenceLevel": 1.0
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subjectName": "艾伦",
+      "relationshipDescription": "艾伦的导师是李教授。",
+      "objectName": "李教授",
+      "relationshipType": "师生",
+      "sentiment": "尊敬",
+      "sentimentStrength": 0.8,
+      "relationshipStage": "稳定",
+      "lastInteractionDate": "2025-04-14T21:45:16Z",
+      "relationshipCreationTime": "2025-04-14T21:45:16Z"
+    }
+  },
+  {
+    "class": "Profile",
+    "action": "UPDATE",
+    "updated_object_id": "956b5e39-79bb-4586-84e1-32dfdb1a2e3e",
+    "properties_content": {
+      "currentResidence": "阿姆斯特丹",
+      "profileLastUpdated": "2025-04-14T21:46:11.150980Z"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "居住地偏好",
+      "preferenceDescription": "艾伦于2023年7月搬到阿姆斯特丹居住。",
+      "reasoning": "用户主动提及搬到阿姆斯特丹居住。",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.95,
+      "preferenceCreationTime": "2025-04-14T21:46:13Z"
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "艾伦",
+      "goalDescription": "熟练掌握Python的Pandas库",
+      "goalType": "学习目标",
+      "motivation": "提升数据分析能力",
+      "status": "计划中",
+      "progress": 0.0,
+      "obstacles": [],
+      "startingDate": "2025-04-14T00:00:00Z",
+      "priority": "高"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "技能学习偏好",
+      "preferenceDescription": "艾伦希望熟练掌握 Python 的 Pandas 库。",
+      "reasoning": "艾伦知道需要通过做实际项目来练习 Pandas。",
+      "preferenceStrength": "特别4",
+      "confidenceLevel": 0.9,
+      "preferenceCreationTime": "2025-04-14T21:46:33Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾伦",
+      "description": "艾伦选择在家观看电影《星际穿越》。",
+      "date": "2025-04-13T00:00:00Z",
+      "location": "艾伦家",
+      "participants": [
+        "艾伦"
+      ],
+      "emotionalTone": "平静",
+      "keyMoments": "喜欢安静的环境"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "环境偏好",
+      "preferenceDescription": "艾伦喜欢安静的环境。",
+      "reasoning": "艾伦选择在家看电影而不是出门是因为喜欢安静的环境。",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-14T21:46:53Z"
+    }
+  },
+  {
+    "class": "Profile",
+    "action": "UPDATE",
+    "updated_object_id": "956b5e39-79bb-4586-84e1-32dfdb1a2e3e",
+    "properties_content": {
+      "livingWith": "父亲李建国",
+      "profileLastUpdated": "2025-04-14T21:47:09Z"
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subjectName": "艾伦",
+      "relationshipDescription": "艾伦是独生子女，和父亲李建国关系亲近。",
+      "objectName": "李建国",
+      "relationshipType": "家人",
+      "sentiment": "喜欢",
+      "sentimentStrength": 0.9,
+      "relationshipStage": "稳定",
+      "lastInteractionDate": "2025-04-14T21:47:12Z",
+      "relationshipCreationTime": "2025-04-14T21:47:12Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾伦",
+      "description": "艾伦开始每周去两次健身房进行力量训练。",
+      "date": "2025-04-08T00:00:00Z",
+      "location": "健身房",
+      "participants": [
+        "艾伦"
+      ],
+      "emotionalTone": "积极",
+      "keyMoments": "为了提高基础代谢"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "力量训练与基础代谢",
+      "content": "定期进行力量训练可以提高基础代谢。",
+      "category": "健康",
+      "source": "用户",
+      "keywords": [
+        "力量训练",
+        "基础代谢",
+        "健身"
+      ],
+      "relevanceScore": 1.0,
+      "confidenceLevel": 1.0
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "锻炼方式偏好",
+      "preferenceDescription": "艾伦喜欢力量训练。",
+      "reasoning": "艾伦了解到定期进行力量训练可以提高基础代谢。",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-14T21:47:29Z"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "艾伦和张三的共同爱好",
+      "content": "艾伦和他的朋友张三都喜欢看诺兰导演的科幻电影。",
+      "category": "个人爱好",
+      "source": "艾伦",
+      "keywords": [
+        "艾伦",
+        "张三",
+        "诺兰",
+        "科幻电影",
+        "电影"
+      ],
+      "relevanceScore": 1.0,
+      "confidenceLevel": 1.0
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "电影偏好",
+      "preferenceDescription": "艾伦喜欢看诺兰导演的科幻电影。",
+      "reasoning": "用户主动提及喜欢诺兰导演的科幻电影。",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-14T21:47:47Z"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "张三",
+      "preferenceType": "电影偏好",
+      "preferenceDescription": "张三喜欢看诺兰导演的科幻电影。",
+      "reasoning": "用户主动提及张三喜欢诺兰导演的科幻电影。",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-14T21:47:47Z"
+    }
+  }
+]

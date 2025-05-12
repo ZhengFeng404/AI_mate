@@ -226,12 +226,12 @@ profile_class_definition = {
         },
         {
             "name": "schoolOrUniversity",
-            "dataType": ["text"],
+            "dataType": ["text[]"],
             "description": "当前或过去就读的学校"
         },
         {
             "name": "jobTitle",
-            "dataType": ["text"],
+            "dataType": ["text[]"],
             "description": "职业名称"
         },
         {
@@ -246,7 +246,7 @@ profile_class_definition = {
         },
         {
             "name": "socialRole",
-            "dataType": ["text"],
+            "dataType": ["text[]"],
             "description": "社会角色 (例如：学生、教师、医生、艺术家)"
         },
 
@@ -275,7 +275,7 @@ profile_class_definition = {
         },
         {
             "name": "livingWith",
-            "dataType": ["text"],
+            "dataType": ["text[]"],
             "description": "与谁一起居住 (独居、与家人、与室友)"
         },
         {

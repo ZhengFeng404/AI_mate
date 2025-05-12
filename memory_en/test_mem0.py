@@ -37,7 +37,7 @@ m = Memory.from_config(config)
 #print(all_memories)
 
 m.reset()
-m.delete_all(user_id="艾利克斯")
+m.delete_all(user_id="Alex")
 
 
 related_memories = m.search(query="gym", user_id="Alex", limit=6)

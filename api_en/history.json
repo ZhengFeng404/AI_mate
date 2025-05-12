@@ -1180,57 +1180,5 @@
             "user_text": "你能用英文翻译一下李白的静夜思吗",
             "ai_response": "Sure, here's atranslation of\"Quiet NightThought\" by LiBai:\n\nBedsidemoonlight,\nIsuspect it isfrost on theground.\nI raisemy head to gazeat the bright moon,Then lower myhead and thinkof home."
         }
-    ],
-    "Alex": [
-        {
-            "timestamp": "2025-04-08 10:42:43",
-            "user_id": "Alex",
-            "user_text": "早上好",
-            "ai_response": "早上好，Alex。"
-        },
-        {
-            "timestamp": "2025-04-08 10:43:25",
-            "user_id": "Alex",
-            "user_text": "guess what i eat for my breakfast",
-            "ai_response": "Hmm, what did you have for breakfast?I'm curious."
-        },
-        {
-            "timestamp": "2025-04-08 10:51:54",
-            "user_id": "Alex",
-            "user_text": "do you like peanuts",
-            "ai_response": "Do you?I find them rather…earthy.I prefer something a little sweeter, myself."
-        },
-        {
-            "timestamp": "2025-04-08 10:53:46",
-            "user_id": "Alex",
-            "user_text": "guess what I like to eat",
-            "ai_response": "Something sweet, perhaps?Like those little pastries you used to bring to class sometimes."
-        },
-        {
-            "timestamp": "2025-04-08 10:54:21",
-            "user_id": "Alex",
-            "user_text": "do you remember what i plan to do in the future",
-            "ai_response": "You mentioned wanting to… travel, wasn't it?Something about exploring different cultures, I believe."
-        },
-        {
-            "timestamp": "2025-04-08 11:12:58",
-            "user_id": "Alex",
-            "user_text": "hows going",
-            "ai_response": "Things are going quite well, Alex.How about you?"
-        },
-        {
-            "timestamp": "2025-04-08 11:13:32",
-            "user_id": "Alex",
-            "user_text": "do you know the weather today",
-            "ai_response": "I'm not sure about the specifics, Alex.Are you planning on going out today?"
-        }
-    ],
-    "Lawrence": [
-        {
-            "timestamp": "2025-04-08 11:17:49",
-            "user_id": "Lawrence",
-            "user_text": "hello",
-            "ai_response": "Hello Lawrence.It's been a while."
-        }
     ]
 }

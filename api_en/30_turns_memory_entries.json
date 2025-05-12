@@ -1088,5 +1088,389 @@
       "relevanceScore": 1,
       "confidenceLevel": 1
     }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "Alex",
+      "preferenceType": "Travel",
+      "preferenceDescription": "Interested in travel and exploring different cultures.",
+      "reasoning": "Mentioned in conversation.",
+      "preferenceStrength": "Moderate 3",
+      "confidenceLevel": 0.5,
+      "preferenceCreationTime": "2025-04-09T15:19:32Z"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "Alex's Mom",
+      "preferenceType": "Environmental preference",
+      "preferenceDescription": "Enjoys being by the lake.",
+      "reasoning": "Alex mentioned she enjoyed her birthday by the lake.",
+      "preferenceStrength": "Moderate 3",
+      "confidenceLevel": 0.7,
+      "preferenceCreationTime": "2025-04-09T15:20:43Z"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "Alex's Mother's New Hobby",
+      "content": "Spending time by the lake.",
+      "category": "Personal Interests",
+      "source": "Conversation with Alex",
+      "keywords": [
+        "lake",
+        "tranquility",
+        "hobby",
+        "Alex's mother"
+      ],
+      "relevanceScore": 1.0,
+      "confidenceLevel": 1.0
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "Alex's Mom",
+      "preferenceType": "Leisure Activity",
+      "preferenceDescription": "Spending time by the lake",
+      "reasoning": "She enjoyed her birthday by the lake, suggesting a newfound appreciation for the tranquility.",
+      "preferenceStrength": "Moderate 3",
+      "confidenceLevel": 0.7,
+      "preferenceCreationTime": "2025-04-09T15:21:57Z"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "UserAlex's Mom",
+      "preferenceType": "Activity Preference",
+      "preferenceDescription": "Spending time by the lake",
+      "reasoning": "She seemed to really enjoy the tranquility of it all.",
+      "preferenceStrength": "Moderate 3",
+      "confidenceLevel": 0.7,
+      "preferenceCreationTime": "2025-04-09T15:38:42Z"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "Alex's Mom",
+      "preferenceType": "Activity Preference",
+      "preferenceDescription": "Spending time by the lake",
+      "reasoning": "She seemed quite content there.",
+      "preferenceStrength": "Moderate 3",
+      "confidenceLevel": 0.7,
+      "preferenceCreationTime": "2025-04-09T15:41:26Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "UPDATE",
+    "updated_object_id": "c1b214d1-7a48-441c-82f6-e4d1e07b4ee5",
+    "properties_content": {
+      "subject": "Alex",
+      "description": "Alex celebrated his mother's birthday last week at the West Lake. His mother seemed to find peace and contentment simply being by the lake.",
+      "date": "2025-04-01T00:00:00Z",
+      "location": "West Lake",
+      "participants": [
+        "Alex",
+        "Alex's Mother"
+      ],
+      "emotionalTone": "Peaceful",
+      "keyMoments": "Alex's mother enjoyed the tranquility of the lake."
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "Alex's Mom",
+      "preferenceType": "Leisure Activity",
+      "preferenceDescription": "Spending time by the lake",
+      "reasoning": "She looked content and seemed to enjoy the tranquility.",
+      "preferenceStrength": "Moderate 3",
+      "confidenceLevel": 0.7,
+      "preferenceCreationTime": "2025-04-09T15:43:10Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "Alex",
+      "description": "Alex watched the movie 'Arrival'.",
+      "date": "2025-04-15T00:00:00Z",
+      "location": "Not specified",
+      "participants": [
+        "Alex"
+      ],
+      "emotionalTone": "Interested",
+      "keyMoments": "Recommended by the AI based on Alex's interest in sci-fi and previous enjoyment of 'Interstellar'."
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "Alex",
+      "preferenceType": "Movie Genre",
+      "preferenceDescription": "Likes sci-fi movies.",
+      "reasoning": "Expressed interest in sci-fi movies and asked for recommendations.",
+      "preferenceStrength": "Moderate 3",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-15T14:13:23Z"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "Alex",
+      "preferenceType": "Movie",
+      "preferenceDescription": "Watched 'Interstellar' recently.",
+      "reasoning": "The virtual persona recalled Alex mentioning the movie.",
+      "preferenceStrength": "Moderate 3",
+      "confidenceLevel": 0.7,
+      "preferenceCreationTime": "2025-04-15T14:13:23Z"
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subjectName": "Alex",
+      "relationshipDescription": "Has a girlfriend who is interested in black holes.",
+      "objectName": "Alex's girlfriend",
+      "relationshipType": "Romantic",
+      "sentiment": "like",
+      "sentimentStrength": 0.0,
+      "relationshipStage": "Stable",
+      "lastInteractionDate": "2025-04-15T14:13:23Z",
+      "relationshipCreationTime": "2025-04-15T14:13:23Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "Alex",
+      "description": "Alex watched and enjoyed the movie 'Arrival'.",
+      "date": "2025-04-15T00:00:00Z",
+      "location": "Not specified",
+      "participants": [
+        "Alex"
+      ],
+      "emotionalTone": "Positive",
+      "keyMoments": "Alex inquired about the movie's source material."
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "Arrival - Source Material",
+      "content": "The movie 'Arrival' is based on the short story 'Story of Your Life' by Ted Chiang.",
+      "category": "Literature/Film",
+      "source": "AI Response",
+      "keywords": [
+        "Arrival",
+        "Story of Your Life",
+        "Ted Chiang",
+        "Adaptation",
+        "Sci-fi"
+      ],
+      "relevanceScore": 1.0,
+      "confidenceLevel": 1.0
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "Alex",
+      "description": "Alex wrote a blog post.",
+      "date": "2025-04-15T14:16:12Z",
+      "location": "Not mentioned",
+      "participants": [
+        "Alex"
+      ],
+      "emotionalTone": "Neutral",
+      "keyMoments": "Blog post completion"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "Alex",
+      "preferenceType": "Book",
+      "preferenceDescription": "A history of the Roman Empire",
+      "reasoning": "Alex mentioned being engrossed in reading it.",
+      "preferenceStrength": "Especially 4",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-15T14:17:25Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "Alex",
+      "description": "Alex is planning a get-together with his college roommates tonight.",
+      "date": "2025-04-15T00:00:00Z",
+      "location": "Not specified",
+      "participants": [
+        "Alex",
+        "College roommates"
+      ],
+      "emotionalTone": "Pleasant",
+      "keyMoments": "Discussing food preferences"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "Alex",
+      "description": "Alex's girlfriend suggested ordering pizza, which made Alex sad.",
+      "date": "2025-04-15T14:24:30Z",
+      "location": "Unspecified",
+      "participants": [
+        "Alex",
+        "Alex's Girlfriend"
+      ],
+      "emotionalTone": "Sad",
+      "keyMoments": "Girlfriend suggested ordering pizza"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "Alex",
+      "preferenceType": "Food preference",
+      "preferenceDescription": "Alex likes to use basil leaves in his Italian dishes.",
+      "reasoning": "He learned this from his cooking teacher and believes it makes his dishes fragrant.",
+      "preferenceStrength": "Moderate 3",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-15T14:26:57Z"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "Alex's girlfriend",
+      "preferenceType": "Food preference",
+      "preferenceDescription": "Alex's girlfriend prefers ordering pizza over Alex's cooking tonight.",
+      "reasoning": "Unknown, possibly due to a different craving or a dislike of Alex's cooking with too much basil.",
+      "preferenceStrength": "Moderate 3",
+      "confidenceLevel": 0.5,
+      "preferenceCreationTime": "2025-04-15T14:26:57Z"
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "Alex",
+      "goalDescription": "Reduce meat consumption",
+      "goalType": "Personal Goal",
+      "motivation": "Unspecified",
+      "status": "Planning",
+      "progress": 0.0,
+      "obstacles": [],
+      "startingDate": "2025-04-15T00:00:00Z",
+      "priority": "Medium"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "Alex",
+      "preferenceType": "Dietary Habit",
+      "preferenceDescription": "Alex is thinking of cutting down on meat consumption.",
+      "reasoning": "Unknown",
+      "preferenceStrength": "Moderate 3",
+      "confidenceLevel": 0.5,
+      "preferenceCreationTime": "2025-04-15T14:28:40Z"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "Alex",
+      "preferenceType": "Restaurant",
+      "preferenceDescription": "Alex seemed to find the vegetarian options at Green Monday quite good.",
+      "reasoning": "Past experience dining there.",
+      "preferenceStrength": "Moderate 3",
+      "confidenceLevel": 0.7,
+      "preferenceCreationTime": "2025-04-15T14:28:40Z"
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "Alex",
+      "goalDescription": "Reduce meat consumption",
+      "goalType": "Dietary",
+      "motivation": "Improve health and potentially support fitness goals",
+      "status": "Considering",
+      "progress": 0.0,
+      "obstacles": [],
+      "startingDate": "2025-04-15T00:00:00Z",
+      "priority": "Medium"
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subjectName": "Alex",
+      "relationshipDescription": "Alex has a girlfriend who is worried about his skin health.",
+      "objectName": "Alex's girlfriend",
+      "relationshipType": "Romantic",
+      "sentiment": "Care",
+      "sentimentStrength": 0.7,
+      "relationshipStage": "Stable",
+      "lastInteractionDate": "2025-04-15T14:34:47Z",
+      "relationshipCreationTime": "2025-04-15T14:34:47Z"
+    }
   }
 ]

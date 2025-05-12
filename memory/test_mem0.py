@@ -33,12 +33,12 @@ config = {
 }
 
 m = Memory.from_config(config)
-#all_memories = m.get_all(user_id="艾利克斯")
-#print(all_memories)
+all_memories = m.get_all(user_id="艾伦")
+print(all_memories)
 
-#m.reset()
+m.reset()
 #m.delete_all(user_id="艾利克斯")
 
 
-related_memories = m.search(query="熬夜", user_id="艾利克斯", limit=6)
-print(related_memories)
+#related_memories = m.search(query="同事", user_id="艾利克斯", limit=6)
+#print(related_memories)

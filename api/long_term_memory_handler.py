@@ -122,10 +122,10 @@ async def long_term_memory_async(user_input, ai_response, conversation_history, 
         {{
             "class": "Events" / "Knowledge" / "Goals" / "Profile",
             "action": "ADD" / "UPDATE",
-            "updated_object_id": "" // 如果是ADD操作，则留空；如果是UPDATE操作，则录入对应的被更新的记忆条目的uuid
+            "updated_object_id": "" (如果是ADD操作，则留空；如果是UPDATE操作，则录入对应的被更新的记忆条目的uuid)
             "properties_content": {{
-                // 此处填写具体的属性内容，严格遵循 class 结构
-                // 如果是时间日期类型的属性，格式应该是RFC3339格式，YYYY-MM-DDTHH:mm:ssZ
+                (此处填写具体的属性内容，严格遵循 class 结构)
+                (如果是时间日期类型的属性，格式应该是RFC3339格式，YYYY-MM-DDTHH:mm:ssZ)
             }}
         }}
         \`\`\`
@@ -208,7 +208,7 @@ async def long_term_memory_async(user_input, ai_response, conversation_history, 
                     "motivation": "用户在猫咖啡馆喜欢上了一只橘猫，决定先养猫而不是兔子。",
                     "status": "计划中",
                     "progress": 0.0,
-                    "obstacles": ["需要找到合适的猫舍或领养渠道", "需要准备养猫的环境"],  // 如果不需要obstacles了，可以更新为空字符串 ""
+                    "obstacles": ["需要找到合适的猫舍或领养渠道", "需要准备养猫的环境"],  (如果不需要obstacles了，可以更新为空字符串) ""
                     "startingDate": "2024-08-10T00:00:00Z",
                     "priority": "高"
                 }}
@@ -287,10 +287,10 @@ async def long_term_memory_async(user_input, ai_response, conversation_history, 
         {{
             "class": "Relationships" / "Preferences",
             "action": "ADD" / "UPDATE",
-            "updated_object_id": "" // 如果是ADD操作，则留空；如果是UPDATE操作，则录入对应的被更新的记忆条目的uuid
+            "updated_object_id": "" (如果是ADD操作，则留空；如果是UPDATE操作，则录入对应的被更新的记忆条目的uuid)
             "properties_content": {{
-                // 此处填写具体的属性内容，严格遵循 class 结构
-                // 如果是时间日期类型的属性，格式应该是RFC3339格式，YYYY-MM-DDTHH:mm:ssZ
+                (此处填写具体的属性内容，严格遵循 class 结构)
+                (如果是时间日期类型的属性，格式应该是RFC3339格式，YYYY-MM-DDTHH:mm:ssZ)
             }}
         }}
         \`\`\`
@@ -315,7 +315,7 @@ async def long_term_memory_async(user_input, ai_response, conversation_history, 
                     "reasoning": "橘猫一直蹭用户，让用户觉得很可爱。",
                     "preferenceStrength": "特别4",
                     "confidenceLevel": 0.9
-                    “preferenceCreationTime”: "2024-08-011T10:00:00Z"  // 注意此处时间日期格式的正确性，应该是YYYY-MM-DDTHH:mm:ssZ
+                    “preferenceCreationTime”: "2024-08-011T10:00:00Z"  (注意此处时间日期格式的正确性，应该是YYYY-MM-DDTHH:mm:ssZ)
                 }}
             }}
         ]
@@ -409,7 +409,7 @@ async def long_term_memory_async(user_input, ai_response, conversation_history, 
         try:
             memory_entries_json = json.loads(json_str_to_parse)
 
-            file_path = "30_turns_memory_entries.json"  # 你可以自定义文件名和路径
+            file_path = "20_turns_memory_entries.json"  # 你可以自定义文件名和路径
 
             def save_memory_entries(new_entries, filename):
                 """纯追加模式存储，保留所有历史记录"""

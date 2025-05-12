@@ -1,0 +1,706 @@
+[
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾伦",
+      "description": "艾伦在阿姆斯特丹参加了一个为期两天的编程马拉松。",
+      "date": "2025-04-08T00:00:00Z",
+      "duration": 48,
+      "location": "阿姆斯特丹",
+      "participants": [
+        "艾伦"
+      ],
+      "emotionalTone": "积极",
+      "keyMoments": "艾伦的目标是完成一个基本功能的演示。"
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "艾伦",
+      "goalDescription": "在编程马拉松中完成一个基本功能的演示。",
+      "goalType": "短期目标",
+      "motivation": "学习编程",
+      "status": "已完成",
+      "progress": 1.0,
+      "startingDate": "2025-04-08T00:00:00Z",
+      "endingDate": "2025-04-10T00:00:00Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "王阿姨",
+      "description": "王阿姨年轻时作为背包客去过巴黎旅行，那里的艺术博物馆让她印象深刻。",
+      "date": "",
+      "location": "巴黎",
+      "participants": [
+        "王阿姨"
+      ],
+      "emotionalTone": "积极",
+      "keyMoments": "艺术博物馆"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "王阿姨",
+      "preferenceType": "旅行偏好",
+      "preferenceDescription": "王阿姨年轻时喜欢背包旅行，并且对巴黎的艺术博物馆印象深刻。",
+      "reasoning": "巴黎浓厚的艺术氛围吸引了她。",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.7,
+      "preferenceCreationTime": "2025-04-18T12:20:37Z"
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "艾伦",
+      "goalDescription": "学习并通过潜水执照考试",
+      "goalType": "今年的目标",
+      "motivation": "喜欢尝试新鲜事物，享受挑战带来的成就感",
+      "status": "计划中",
+      "progress": 0.0,
+      "obstacles": [],
+      "startingDate": "2025-01-01T00:00:00Z",
+      "priority": "中"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "活动偏好",
+      "preferenceDescription": "艾伦喜欢尝试新鲜事物并享受挑战带来的成就感。",
+      "reasoning": "艾伦追求新鲜事物和挑战带来的成就感。",
+      "preferenceStrength": "特别4",
+      "confidenceLevel": 0.9,
+      "preferenceCreationTime": "2025-04-18T12:20:55Z"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "技能学习",
+      "preferenceDescription": "艾伦今年的目标是学习并通过潜水执照考试。",
+      "reasoning": "艾伦喜欢尝试新鲜事物并享受挑战带来的成就感。",
+      "preferenceStrength": "特别4",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-18T12:20:55Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾伦",
+      "description": "艾伦和项目经理李华开会复盘，李华提醒艾伦项目交付后收集用户反馈的重要性。",
+      "date": "2025-04-17T00:00:00Z",
+      "participants": [
+        "艾伦",
+        "李华"
+      ],
+      "emotionalTone": "中性",
+      "keyMoments": "项目交付后的用户反馈收集对于产品迭代至关重要"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "用户反馈的重要性",
+      "content": "项目交付后的用户反馈收集对于产品迭代至关重要，可以帮助改进产品并满足用户需求。",
+      "category": "产品管理",
+      "source": "李华(艾伦的项目经理)",
+      "keywords": [
+        "用户反馈",
+        "产品迭代",
+        "项目交付"
+      ]
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "艾伦",
+      "goalDescription": "找到一份市场营销领域的实习工作",
+      "goalType": "短期目标",
+      "motivation": "作为一名大三学生，积累实践经验",
+      "status": "计划中",
+      "progress": 0.0,
+      "obstacles": [],
+      "startingDate": "2025-04-18T00:00:00Z",
+      "priority": "高"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "职业发展",
+      "preferenceDescription": "艾伦想在市场营销领域找到一份实习工作。",
+      "reasoning": "艾伦是大三学生，暑假希望获得实习经验。",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-18T12:21:33Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾伦",
+      "description": "艾伦睡前阅读纸质书半小时。",
+      "date": "2025-04-17T00:00:00Z",
+      "duration": 30,
+      "location": "艾伦的住所",
+      "participants": [
+        "艾伦"
+      ],
+      "emotionalTone": "平静",
+      "keyMoments": "放下手机阅读纸质书"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "规律作息和睡前阅读的益处",
+      "content": "规律的作息能提高白天的精神状态，睡前阅读纸质书有助于放松。",
+      "category": "生活方式",
+      "source": "艾伦",
+      "keywords": [
+        "规律作息",
+        "精神状态",
+        "睡前阅读",
+        "放松"
+      ],
+      "relevanceScore": null,
+      "confidenceLevel": 1.0
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾伦",
+      "description": "艾伦的团队计划下个月去巴塞罗那进行团建活动。艾伦希望借此机会与新加入的设计师小张增进了解。",
+      "date": "2025-05-01T00:00:00Z",
+      "location": "巴塞罗那",
+      "participants": [
+        "艾伦",
+        "小张",
+        "艾伦的团队"
+      ],
+      "emotionalTone": "期待",
+      "keyMoments": "艾伦希望与小张增进了解"
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subjectName": "艾伦",
+      "relationshipDescription": "艾伦想借巴塞罗那团建的机会和小张增进了解。",
+      "objectName": "小张",
+      "relationshipType": "同事",
+      "sentiment": "友好",
+      "sentimentStrength": 0.5,
+      "relationshipStage": "初识",
+      "lastInteractionDate": "2025-04-18T12:22:22Z",
+      "relationshipCreationTime": "2025-04-18T12:22:22Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾伦",
+      "description": "艾伦几乎每年四月都会去库肯霍夫公园欣赏郁金香花海。",
+      "date": "2025-04-01T00:00:00Z",
+      "location": "库肯霍夫公园",
+      "participants": [
+        "艾伦"
+      ],
+      "emotionalTone": "喜爱",
+      "keyMoments": "欣赏郁金香花海"
+    }
+  },
+  {
+    "class": "Profile",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "fullName": "艾伦",
+      "currentResidence": "荷兰",
+      "profileLastUpdated": "2025-04-18T12:22:42.110892Z"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "季节偏好",
+      "preferenceDescription": "艾伦非常喜欢荷兰的春天，尤其喜欢在春天去库肯霍夫公园欣赏郁金香花海。",
+      "reasoning": "因为可以看到成片的郁金香花海",
+      "preferenceStrength": "特别4",
+      "confidenceLevel": 0.9,
+      "preferenceCreationTime": "2025-04-18T12:22:46Z"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "地点偏好",
+      "preferenceDescription": "艾伦很喜欢库肯霍夫公园。",
+      "reasoning": "艾伦几乎每年四月都会去库肯霍夫公园欣赏郁金香。",
+      "preferenceStrength": "特别4",
+      "confidenceLevel": 0.9,
+      "preferenceCreationTime": "2025-04-18T12:22:46Z"
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "艾伦",
+      "goalDescription": "提升公开演讲能力",
+      "goalType": "短期目标",
+      "motivation": "获得真实的反馈，提升演讲能力",
+      "status": "进行中",
+      "progress": 0.0,
+      "obstacles": [],
+      "startingDate": "2025-04-18T12:23:01Z",
+      "priority": "高"
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subjectName": "艾伦",
+      "relationshipDescription": "艾伦和陈默是好朋友，艾伦邀请陈默来听他的公开演讲练习。",
+      "objectName": "陈默",
+      "relationshipType": "朋友",
+      "sentiment": "信任",
+      "sentimentStrength": 0.9,
+      "relationshipStage": "稳定",
+      "lastInteractionDate": "2025-04-18T12:23:04Z",
+      "relationshipCreationTime": "2025-04-18T12:23:04Z"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "技能提升",
+      "preferenceDescription": "艾伦计划在下个季度提升自己的公开演讲能力。",
+      "reasoning": "艾伦认为获得真实的反馈对提升公开演讲能力至关重要。",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-18T12:23:04Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾伦",
+      "description": "艾伦在公司附近新开的越南河粉店吃午餐，觉得味道很正宗，并由此想起越南菜注重使用新鲜香草来平衡风味。",
+      "date": "2025-04-18T00:00:00Z",
+      "location": "公司附近的越南河粉店",
+      "participants": [
+        "艾伦"
+      ],
+      "emotionalTone": "积极",
+      "keyMoments": "越南河粉味道正宗"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "食物偏好",
+      "preferenceDescription": "艾伦喜欢正宗的越南河粉",
+      "reasoning": "公司附近新开的越南河粉店味道很正宗",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-18T12:23:25Z"
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "艾伦和李雷",
+      "goalDescription": "一起去英国看一场英超联赛的现场比赛",
+      "goalType": "娱乐/休闲",
+      "motivation": "他们都是狂热的足球迷",
+      "status": "计划中",
+      "progress": 0.0,
+      "obstacles": [
+        "需要存够足够的钱",
+        "需要购买球票和安排行程"
+      ],
+      "startingDate": "2025-04-18T00:00:00Z",
+      "endingDate": "2026-04-18T00:00:00Z",
+      "priority": "高"
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subjectName": "艾伦",
+      "relationshipDescription": "艾伦和李雷是兄弟，他们都是狂热的足球迷。",
+      "objectName": "李雷",
+      "relationshipType": "家人",
+      "sentiment": "喜欢",
+      "sentimentStrength": 0.9,
+      "relationshipStage": "稳定",
+      "lastInteractionDate": "2025-04-18T12:23:52Z",
+      "relationshipCreationTime": "2025-04-18T12:23:52Z"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "运动偏好",
+      "preferenceDescription": "艾伦和李雷都是狂热的足球迷，喜欢看英超联赛。",
+      "reasoning": "他们计划一起存钱去看英超现场比赛。",
+      "preferenceStrength": "强烈5",
+      "confidenceLevel": 0.9,
+      "preferenceCreationTime": "2025-04-18T12:23:52Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾伦",
+      "description": "艾伦完成了第一次10公里长跑，感觉状态不错。",
+      "date": "2025-04-17T00:00:00Z",
+      "location": null,
+      "participants": [
+        "艾伦"
+      ],
+      "emotionalTone": "积极",
+      "keyMoments": "首次完成10公里长跑"
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "艾伦",
+      "goalDescription": "今年底完成半程马拉松",
+      "goalType": "个人目标",
+      "motivation": "挑战自我",
+      "status": "进行中",
+      "progress": 0.3,
+      "obstacles": [],
+      "startingDate": "2025-04-18T00:00:00Z",
+      "endingDate": "2025-12-31T00:00:00Z",
+      "priority": "高"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "自带购物袋的环保益处",
+      "content": "自带购物袋去超市购物比使用一次性塑料袋更加环保。",
+      "category": "环保",
+      "source": "用户艾伦",
+      "keywords": [
+        "购物袋",
+        "环保",
+        "超市"
+      ],
+      "relevanceScore": null,
+      "confidenceLevel": 1.0
+    }
+  },
+  {
+    "class": "Profile",
+    "action": "UPDATE",
+    "updated_object_id": "83dec8d5-b8d9-4b63-961c-0723e600dec6",
+    "properties_content": {
+      "livingWith": "妻子"
+    }
+  },
+  {
+    "class": "Profile",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "fullName": "王芳",
+      "nickname": null,
+      "dateOfBirth": null,
+      "age": null,
+      "gender": "女",
+      "height": null,
+      "weight": null,
+      "chronicDiseases": [],
+      "disabilities": [],
+      "allergies": [],
+      "bloodType": null,
+      "medicalHistory": null,
+      "educationLevel": null,
+      "schoolOrUniversity": null,
+      "jobTitle": null,
+      "companyOrEmployer": null,
+      "jobLevel": null,
+      "socialRole": "妻子",
+      "incomeLevel": null,
+      "financialDebts": null,
+      "currentResidence": null,
+      "hometown": null,
+      "livingWith": null,
+      "housingType": null,
+      "nationality": null,
+      "ethnicity": null,
+      "religion": null,
+      "profileLastUpdated": "2025-04-18T12:24:31.524054Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾伦",
+      "description": "艾伦上周末参加了一个朋友举办的大型生日派对，认识了一些新朋友，但感觉很累。",
+      "date": "2025-04-13T00:00:00Z",
+      "location": "朋友的生日派对",
+      "participants": [
+        "艾伦",
+        "艾伦的朋友们",
+        "新朋友们"
+      ],
+      "emotionalTone": "疲惫",
+      "keyMoments": "认识了一些新朋友"
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subjectName": "艾伦",
+      "relationshipDescription": "艾伦参加了朋友举办的生日派对，并认识了一些新朋友。",
+      "objectName": "艾伦的新朋友们",
+      "relationshipType": "朋友",
+      "sentiment": "友好",
+      "sentimentStrength": 0.2,
+      "relationshipStage": "初识",
+      "lastInteractionDate": "2025-04-18T12:24:56Z",
+      "relationshipCreationTime": "2025-04-18T12:24:56Z"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "简洁高效的代码的重要性",
+      "content": "简洁高效的代码对后期维护至关重要，良好的代码结构能大大减少后期维护的成本。",
+      "category": "软件工程",
+      "source": "艾伦",
+      "keywords": [
+        "简洁",
+        "高效",
+        "代码",
+        "维护",
+        "代码结构"
+      ],
+      "relevanceScore": null,
+      "confidenceLevel": 1.0
+    }
+  },
+  {
+    "class": "Profile",
+    "action": "UPDATE",
+    "updated_object_id": "83dec8d5-b8d9-4b63-961c-0723e600dec6",
+    "properties_content": {
+      "fullName": "艾伦",
+      "jobTitle": "资深工程师",
+      "socialRole": "工程师",
+      "profileLastUpdated": "2025-04-18T12:25:53.196958Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾伦",
+      "description": "艾伦收到了大学同学张伟从意大利寄来的明信片，感到温暖和惊喜。",
+      "date": "2025-04-18T00:00:00Z",
+      "participants": [
+        "艾伦",
+        "张伟"
+      ],
+      "emotionalTone": "积极",
+      "keyMoments": "收到手写祝福和分享"
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subjectName": "艾伦",
+      "relationshipDescription": "艾伦和张伟是大学同学，艾伦收到张伟从意大利寄来的明信片，感到温暖和惊喜。",
+      "objectName": "张伟",
+      "relationshipType": "朋友",
+      "sentiment": "喜欢",
+      "sentimentStrength": 0.7,
+      "relationshipStage": "稳定",
+      "lastInteractionDate": "2025-04-18T12:26:16Z",
+      "relationshipCreationTime": "2025-04-18T12:26:16Z"
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "艾伦",
+      "goalDescription": "系统学习投资理财知识",
+      "goalType": "学习/技能提升",
+      "motivation": "实现长期的财务规划",
+      "status": "进行中",
+      "progress": 0.1,
+      "obstacles": [],
+      "startingDate": "2025-04-11T00:00:00Z",
+      "priority": "高"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "技能学习",
+      "preferenceDescription": "艾伦想系统地学习投资理财知识。",
+      "reasoning": "艾伦认为投资理财知识对实现长期的财务规划很重要。",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.9,
+      "preferenceCreationTime": "2025-04-18T12:26:39Z"
+    }
+  },
+  {
+    "class": "Profile",
+    "action": "UPDATE",
+    "updated_object_id": "83dec8d5-b8d9-4b63-961c-0723e600dec6",
+    "properties_content": {
+      "socialRole": [
+        "工程师",
+        "姐姐"
+      ]
+    }
+  },
+  {
+    "class": "Profile",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "fullName": "小明",
+      "nickname": "小明",
+      "gender": "男",
+      "socialRole": "弟弟"
+    }
+  },
+  {
+    "class": "Profile",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "fullName": "小红",
+      "nickname": "小红",
+      "gender": "女",
+      "socialRole": "妹妹"
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subjectName": "艾伦",
+      "relationshipDescription": "艾伦是小明和小红的姐姐，她很照顾弟弟妹妹，经常主动帮助他们解决问题。",
+      "objectName": "小明",
+      "relationshipType": "家人",
+      "sentiment": "喜欢",
+      "sentimentStrength": 0.8,
+      "relationshipStage": "稳定",
+      "lastInteractionDate": "2025-04-18T12:26:55Z",
+      "relationshipCreationTime": "2025-04-18T12:26:55Z"
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subjectName": "艾伦",
+      "relationshipDescription": "艾伦是小明和小红的姐姐，她很照顾弟弟妹妹，经常主动帮助他们解决问题。",
+      "objectName": "小红",
+      "relationshipType": "家人",
+      "sentiment": "喜欢",
+      "sentimentStrength": 0.8,
+      "relationshipStage": "稳定",
+      "lastInteractionDate": "2025-04-18T12:26:55Z",
+      "relationshipCreationTime": "2025-04-18T12:26:55Z"
+    }
+  }
+]

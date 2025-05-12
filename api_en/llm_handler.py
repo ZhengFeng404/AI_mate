@@ -26,7 +26,7 @@ weaviate_client = weaviate.connect_to_local(port=8081,
 GEMINI_API_KEY = load_api_key("GEMINI_API_KEY")
 # client = genai.Client(api_key=GEMINI_API_KEY)
 os.environ["GEMINI_API_KEY"] = GEMINI_API_KEY
-model = genai.GenerativeModel('gemini-1.5-pro') # gemini-2.5-pro-exp-03-25
+model = genai.GenerativeModel('gemini-2.5-pro-exp-03-25') # gemini-2.5-pro-exp-03-25
 
 # 初始化 Mem0 (保持不变)
 config = {
@@ -292,6 +292,7 @@ async def get_gemini_response_with_history(user_input, user_id, manual_history,
         timestamp = datetime.now().isoformat()
 
         # 2. 生成 Prompt - 保持原有格式不变，以确保模型理解
+        # deleted prompt: - If there is a conflict between conversation history and long-term memory information, prioritize using the information from the conversation history.
         system_instruction = f"""
                         === Your character profile ===
                         {character_profile}
@@ -306,8 +307,8 @@ async def get_gemini_response_with_history(user_input, user_id, manual_history,
                         - Generate your response based on user input and conversation history.
                         - In the conversation history, you should pay more attention to recent messages but can still combine the entire conversation history to understand the context.
                         - Please note that you will try to associate and recall memories related to the current interaction, so there is long-term memory for reference, but these memories sometimes contain irrelevant content that is associated.
-                        - If there is a conflict between conversation history and long-term memory information, prioritize using the information from the conversation history.
-
+                        
+                        
                         === Response Style Guide ===
                         - **Refer to conversation history**: Refer to recent conversation history, especially within the last few tens of minutes, to ensure natural and coherent dialogue. However, also be mindful of the user's intention to switch topics.
                         - **Keep it short and natural**: This is a real-time conversation, please be concise and natural like a real person chatting.

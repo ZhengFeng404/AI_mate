@@ -1,0 +1,734 @@
+[
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾伦",
+      "description": "艾伦和朋友李雷去吃了海底捞火锅，他们都觉得番茄锅底特别好吃，服务也很好。",
+      "date": "2025-04-17T00:00:00Z",
+      "location": "海底捞火锅店",
+      "participants": [
+        "艾伦",
+        "李雷"
+      ],
+      "emotionalTone": "积极",
+      "keyMoments": "番茄锅底好吃，服务好"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "食物偏好",
+      "preferenceDescription": "艾伦和他的朋友李雷都觉得海底捞的番茄锅底特别好吃。",
+      "reasoning": "在海底捞的用餐体验，特别是番茄锅底的口味和良好的服务。",
+      "preferenceStrength": "特别4",
+      "confidenceLevel": 0.9,
+      "preferenceCreationTime": "2025-04-18T11:24:01Z"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "李雷",
+      "preferenceType": "食物偏好",
+      "preferenceDescription": "李雷觉得海底捞的番茄锅底特别好吃。",
+      "reasoning": "在海底捞的用餐体验，特别是番茄锅底的口味。",
+      "preferenceStrength": "特别4",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-18T11:24:01Z"
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "艾伦",
+      "goalDescription": "学习Python编程",
+      "goalType": "学习目标",
+      "motivation": "提升编程技能，并且认为作为计算机科学专业的毕业生，自己能够更快上手。",
+      "status": "计划中",
+      "progress": 0,
+      "obstacles": [],
+      "startingDate": "2025-01-01T00:00:00Z",
+      "priority": "高"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "学习目标",
+      "preferenceDescription": "学习Python编程",
+      "reasoning": "艾伦认为学习Python编程需要很强的逻辑思维能力，而他作为计算机科学专业的毕业生，应该能更快上手。",
+      "preferenceStrength": "特别4",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-18T11:24:26Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾伦",
+      "description": "艾伦带他五岁的儿子小明去了科技馆，这是小明第一次接触那么多互动展品。",
+      "date": "2025-04-08T00:00:00Z",
+      "location": "科技馆",
+      "participants": [
+        "艾伦",
+        "小明"
+      ],
+      "emotionalTone": "积极"
+    }
+  },
+  {
+    "class": "Profile",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "fullName": "小明",
+      "age": 5,
+      "socialRole": "儿童"
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subjectName": "艾伦",
+      "relationshipDescription": "艾伦的儿子，五岁。",
+      "objectName": "小明",
+      "relationshipType": "家人",
+      "sentiment": "喜欢",
+      "sentimentStrength": 0.9,
+      "relationshipStage": "稳定",
+      "lastInteractionDate": "2025-04-18T11:24:46Z",
+      "relationshipCreationTime": "2025-04-18T11:24:46Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾伦",
+      "description": "艾伦计划去新开的市图书馆办卡并借书阅读。",
+      "date": "2025-04-20T00:00:00Z",
+      "location": "市图书馆",
+      "participants": [
+        "艾伦"
+      ],
+      "emotionalTone": "平静",
+      "keyMoments": "办卡，借书"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "爱好",
+      "preferenceDescription": "艾伦喜欢安静地阅读。",
+      "reasoning": "艾伦计划去图书馆办卡借书回家看。",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-18T11:25:03Z"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "保持身材的方法",
+      "content": "坚持运动可以保持身材。",
+      "source": "艾伦的姐姐",
+      "keywords": [
+        "保持身材",
+        "运动"
+      ]
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "生活方式",
+      "preferenceDescription": "艾伦更喜欢周末宅在家里放松。",
+      "reasoning": "艾伦认为周末宅在家里更放松。",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-18T11:25:24Z"
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "艾伦",
+      "goalDescription": "出版一本自己的绘本",
+      "goalType": "事业目标",
+      "motivation": "想出版自己的绘本",
+      "status": "进行中",
+      "progress": 0.0,
+      "obstacles": [],
+      "startingDate": "2025-01-01T00:00:00Z",
+      "endingDate": "2025-12-31T00:00:00Z",
+      "priority": "高"
+    }
+  },
+  {
+    "class": "Profile",
+    "action": "UPDATE",
+    "updated_object_id": "9c98fe6c-67ef-474b-acaa-eaa671fcc1d1",
+    "properties_content": {
+      "jobTitle": "自由插画师",
+      "socialRole": "艺术家",
+      "profileLastUpdated": "2025-04-18T11:25:45.774087Z"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "职业目标",
+      "preferenceDescription": "艾伦的目标是今年内出版一本自己的绘本。",
+      "reasoning": "艾伦是一名自由插画师，热爱画画和构思故事。",
+      "preferenceStrength": "强烈5",
+      "confidenceLevel": 0.9,
+      "preferenceCreationTime": "2025-04-18T11:25:51Z"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "海洋塑料污染",
+      "content": "微塑料对海洋生物的危害非常大。",
+      "category": "环保",
+      "source": "纪录片",
+      "keywords": [
+        "海洋污染",
+        "微塑料",
+        "海洋生物"
+      ],
+      "relevanceScore": null,
+      "confidenceLevel": 1
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "艾伦",
+      "goalDescription": "不再使用一次性塑料制品",
+      "goalType": "生活目标",
+      "motivation": "看了关于海洋塑料污染的纪录片，了解到微塑料对海洋生物的危害",
+      "status": "进行中",
+      "progress": 0,
+      "obstacles": [],
+      "startingDate": "2025-04-18T00:00:00Z",
+      "endingDate": null,
+      "priority": "高"
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "艾伦和王伟",
+      "goalDescription": "新App在年底前达到10万用户",
+      "goalType": "事业目标",
+      "motivation": "渴望成功，看好市场方向",
+      "status": "进行中",
+      "progress": 0.0,
+      "obstacles": [],
+      "startingDate": "2025-04-18T00:00:00Z",
+      "endingDate": "2025-12-31T00:00:00Z",
+      "priority": "高"
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subjectName": "艾伦",
+      "relationshipDescription": "艾伦的创业伙伴。",
+      "objectName": "王伟",
+      "relationshipType": "同事",
+      "sentiment": "信任",
+      "sentimentStrength": 0.8,
+      "relationshipStage": "稳定",
+      "lastInteractionDate": "2025-04-18T11:26:38Z",
+      "relationshipCreationTime": "2025-04-18T11:26:38Z"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "职业目标",
+      "preferenceDescription": "艾伦和王伟希望他们的新App在年底前达到10万用户。",
+      "reasoning": "他们渴望成功，并且看好这个市场方向。",
+      "preferenceStrength": "强烈5",
+      "confidenceLevel": 0.9,
+      "preferenceCreationTime": "2025-04-18T11:26:38Z"
+    }
+  },
+  {
+    "class": "Profile",
+    "action": "UPDATE",
+    "updated_object_id": "9c98fe6c-67ef-474b-acaa-eaa671fcc1d1",
+    "properties_content": {
+      "currentResidence": "阿姆斯特丹",
+      "housingType": "运河边的房子",
+      "profileLastUpdated": "2025-04-18T11:26:51.734514Z"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "居住地偏好",
+      "preferenceDescription": "艾伦喜欢住在阿姆斯特丹的运河边。",
+      "reasoning": "艾伦提到住在运河边很有意思，并描述了运河的景色和特色。",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.7,
+      "preferenceCreationTime": "2025-04-18T11:26:54Z"
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "艾伦",
+      "goalDescription": "和室友张萌一起领养一只小猫",
+      "goalType": "生活目标",
+      "motivation": "喜欢小动物，特别是猫",
+      "status": "计划中",
+      "progress": 0.0,
+      "obstacles": [],
+      "startingDate": "2025-05-18T00:00:00Z",
+      "priority": "中"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "动物偏好",
+      "preferenceDescription": "艾伦很喜欢小动物，特别是猫。",
+      "reasoning": "艾伦喜欢小动物，计划领养一只猫。",
+      "preferenceStrength": "特别4",
+      "confidenceLevel": 0.9,
+      "preferenceCreationTime": "2025-04-18T11:27:15Z"
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subjectName": "艾伦",
+      "relationshipDescription": "艾伦的室友。",
+      "objectName": "张萌",
+      "relationshipType": "室友",
+      "sentiment": "喜欢",
+      "sentimentStrength": 0.7,
+      "relationshipStage": "稳定",
+      "lastInteractionDate": "2025-04-18T11:27:15Z",
+      "relationshipCreationTime": "2025-04-18T11:27:15Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾伦",
+      "description": "艾伦参加了公司的烧烤派对，认识了一些新同事，但感觉社交场合有些耗费精力。",
+      "date": "2025-04-12T00:00:00Z",
+      "location": "公司",
+      "locationDetails": "烧烤派对",
+      "participants": [
+        "艾伦",
+        "艾伦的同事"
+      ],
+      "emotionalTone": "略感疲惫",
+      "keyMoments": "认识新同事"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "社交偏好",
+      "preferenceDescription": "艾伦更喜欢独自在家放松，不太喜欢热闹的社交场合。",
+      "reasoning": "艾伦觉得社交场合耗费精力。",
+      "preferenceStrength": "有些2",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-18T11:27:35Z"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "好的建筑设计",
+      "content": "好的建筑设计需要同时考虑美观和实用性。",
+      "category": "建筑设计",
+      "source": "艾伦的哥哥李刚和他的妻子王丽",
+      "keywords": [
+        "建筑设计",
+        "美观",
+        "实用性"
+      ],
+      "relevanceScore": null,
+      "confidenceLevel": 1.0
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subjectName": "艾伦",
+      "relationshipDescription": "艾伦的哥哥，建筑师。",
+      "objectName": "李刚",
+      "relationshipType": "家人",
+      "sentiment": "喜欢",
+      "sentimentStrength": 0.7,
+      "relationshipStage": "稳定",
+      "lastInteractionDate": "2025-04-18T11:27:52Z",
+      "relationshipCreationTime": "2025-04-18T11:27:52Z"
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subjectName": "艾伦",
+      "relationshipDescription": "艾伦的嫂子，李刚的妻子，建筑师。",
+      "objectName": "王丽",
+      "relationshipType": "家人",
+      "sentiment": "喜欢",
+      "sentimentStrength": 0.7,
+      "relationshipStage": "稳定",
+      "lastInteractionDate": "2025-04-18T11:27:52Z",
+      "relationshipCreationTime": "2025-04-18T11:27:52Z"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "李刚 & 王丽",
+      "preferenceType": "建筑设计理念",
+      "preferenceDescription": "好的建筑设计需要同时考虑美观和实用性。",
+      "reasoning": "职业是建筑师",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-18T11:27:52Z"
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "艾伦",
+      "goalDescription": "完成MBA学业并找到一份管理层的工作",
+      "goalType": "事业目标",
+      "motivation": "艾伦一直很有事业心",
+      "status": "进行中",
+      "progress": 0.0,
+      "obstacles": [],
+      "startingDate": "2025-04-18T00:00:00Z",
+      "priority": "高"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "职业目标",
+      "preferenceDescription": "艾伦的主要目标是完成MBA学业并找到一份管理层的工作。",
+      "reasoning": "艾伦一直是个很有事业心的人。",
+      "preferenceStrength": "强烈5",
+      "confidenceLevel": 0.95,
+      "preferenceCreationTime": "2025-04-18T11:28:11Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾伦",
+      "description": "艾伦在家冲了一杯埃塞俄比亚耶加雪菲手冲咖啡，并觉得味道不错。",
+      "date": "2025-04-18T15:00:00Z",
+      "location": "艾伦的家",
+      "participants": [
+        "艾伦"
+      ],
+      "emotionalTone": "满意",
+      "keyMoments": "艾伦喜欢耶加雪菲手冲咖啡"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "艾伦喜欢的咖啡",
+      "content": "艾伦喜欢喝手冲咖啡，尤其偏爱埃塞俄比亚的耶加雪菲。",
+      "category": "饮食偏好",
+      "source": "艾伦",
+      "keywords": [
+        "咖啡",
+        "手冲咖啡",
+        "耶加雪菲",
+        "埃塞俄比亚"
+      ],
+      "relevanceScore": null,
+      "confidenceLevel": 1.0
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "咖啡偏好",
+      "preferenceDescription": "艾伦喜欢喝手冲咖啡，尤其偏爱埃塞俄比亚的耶加雪菲。",
+      "reasoning": "艾伦今天下午自己冲了一杯耶加雪菲，觉得味道不错。",
+      "preferenceStrength": "特别4",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-18T11:28:32Z"
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "艾伦",
+      "goalDescription": "养成每天早上6点起床后冥想15分钟的习惯",
+      "goalType": "生活目标",
+      "motivation": "坚持早起对身体好，冥想可以帮助集中注意力",
+      "status": "计划中",
+      "progress": 0.0,
+      "obstacles": [],
+      "startingDate": "2025-04-18T00:00:00Z",
+      "priority": "中"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "生活习惯",
+      "preferenceDescription": "艾伦希望养成每天早上6点起床后冥想15分钟的习惯。",
+      "reasoning": "艾伦认为坚持早起对身体好，冥想可以帮助集中注意力。",
+      "preferenceStrength": "特别4",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-18T11:28:47Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾伦",
+      "description": "艾伦的团队发布了一个重要的新功能。",
+      "date": "2025-04-17T00:00:00Z",
+      "participants": [
+        "艾伦",
+        "艾伦的团队"
+      ],
+      "emotionalTone": "积极",
+      "keyMoments": "发布重要的新功能"
+    }
+  },
+  {
+    "class": "Profile",
+    "action": "UPDATE",
+    "updated_object_id": "9c98fe6c-67ef-474b-acaa-eaa671fcc1d1",
+    "properties_content": {
+      "fullName": "艾伦",
+      "age": 30,
+      "jobTitle": "产品经理",
+      "companyOrEmployer": "互联网公司",
+      "profileLastUpdated": "2025-04-18T11:29:00Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾伦",
+      "description": "艾伦和导师刘教授线上开会讨论了论文进展，刘教授建议艾伦下周提交初稿。",
+      "date": "2025-04-18T00:00:00Z",
+      "location": "线上",
+      "participants": [
+        "艾伦",
+        "刘教授"
+      ],
+      "emotionalTone": "正常",
+      "keyMoments": "刘教授建议下周提交论文初稿"
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "艾伦",
+      "goalDescription": "完成论文初稿",
+      "goalType": "学习目标",
+      "motivation": "导师刘教授建议下周提交论文初稿",
+      "status": "进行中",
+      "progress": 0.0,
+      "obstacles": [],
+      "startingDate": "2025-04-18T00:00:00Z",
+      "endingDate": "2025-04-25T00:00:00Z",
+      "priority": "高"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "艾伦对历史纪录片的兴趣",
+      "content": "艾伦喜欢研究历史纪录片，尤其对关于二战的纪录片感兴趣。",
+      "category": "兴趣爱好",
+      "source": "用户本人",
+      "keywords": [
+        "历史纪录片",
+        "二战"
+      ],
+      "relevanceScore": null,
+      "confidenceLevel": 1.0
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "艾伦的爷爷",
+      "content": "艾伦的爷爷曾经是一名军人，并给艾伦讲过很多关于二战的故事。",
+      "category": "家庭成员",
+      "source": "用户本人",
+      "keywords": [
+        "军人",
+        "二战"
+      ],
+      "relevanceScore": null,
+      "confidenceLevel": 1.0
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾伦",
+      "description": "艾伦计划下个月去看望住在老家的外婆，并给她一个惊喜，因为她马上要过80岁生日了。",
+      "date": "2025-05-01T00:00:00Z",
+      "location": "艾伦外婆家",
+      "participants": [
+        "艾伦",
+        "艾伦的外婆"
+      ],
+      "emotionalTone": "积极",
+      "keyMoments": "艾伦想给外婆一个惊喜"
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subjectName": "艾伦",
+      "relationshipDescription": "艾伦的外婆，即将过80岁生日。",
+      "objectName": "外婆",
+      "relationshipType": "家人",
+      "sentiment": "喜欢",
+      "sentimentStrength": 0.9,
+      "relationshipStage": "稳定",
+      "lastInteractionDate": "2025-04-18T11:30:03Z",
+      "relationshipCreationTime": "2025-04-18T11:30:03Z"
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "艾伦",
+      "goalDescription": "每小时休息远眺",
+      "goalType": "生活目标",
+      "motivation": "保护视力，因为长时间看屏幕对视力不好",
+      "status": "进行中",
+      "progress": 0.0,
+      "obstacles": [],
+      "startingDate": "2025-04-17T00:00:00Z",
+      "priority": "中"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "健康偏好",
+      "preferenceDescription": "艾伦重视保护视力。",
+      "reasoning": "艾伦知道长时间看屏幕对视力不好，因此设置了每小时休息远眺的提醒。",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-18T11:30:18Z"
+    }
+  }
+]

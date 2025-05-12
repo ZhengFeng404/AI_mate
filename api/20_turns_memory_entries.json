@@ -1,0 +1,1369 @@
+[
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾伦",
+      "description": "艾伦在阿姆斯特丹参加了一个为期两天的编程马拉松，目标是完成一个基本功能的演示。",
+      "date": "2025-04-11T00:00:00Z",
+      "duration": 48,
+      "location": "阿姆斯特丹",
+      "participants": [
+        "艾伦"
+      ],
+      "emotionalTone": "积极",
+      "keyMoments": "编程马拉松"
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "艾伦",
+      "goalDescription": "在编程马拉松中完成一个基本功能的演示。",
+      "goalType": "短期目标",
+      "motivation": "提升编程技能",
+      "status": "已完成",
+      "progress": 1.0,
+      "obstacles": [],
+      "startingDate": "2025-04-11T00:00:00Z",
+      "endingDate": "2025-04-12T00:00:00Z",
+      "priority": "高"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "王阿姨",
+      "description": "王阿姨年轻时作为背包客去过巴黎旅行，那里的艺术博物馆让她印象深刻。",
+      "date": "",
+      "location": "巴黎",
+      "participants": [
+        "王阿姨"
+      ],
+      "emotionalTone": "正面",
+      "keyMoments": "艺术博物馆"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "王阿姨",
+      "preferenceType": "旅行经历偏好",
+      "preferenceDescription": "王阿姨年轻时喜欢巴黎的艺术博物馆",
+      "reasoning": "巴黎浓厚的艺术氛围给王阿姨留下了美好的回忆。",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.7,
+      "preferenceCreationTime": "2025-04-18T13:20:27Z"
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "艾伦",
+      "goalDescription": "学习并通过潜水执照考试",
+      "goalType": "年度目标",
+      "motivation": "喜欢尝试新鲜事物并享受挑战带来的成就感",
+      "status": "计划中",
+      "progress": 0.0,
+      "obstacles": [],
+      "startingDate": "2025-01-01T00:00:00Z",
+      "priority": "高"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "活动偏好",
+      "preferenceDescription": "艾伦喜欢尝试新鲜事物并享受挑战带来的成就感。",
+      "reasoning": "艾伦认为尝试新鲜事物和挑战能带来成就感。",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-18T13:22:33Z"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "目标",
+      "preferenceDescription": "艾伦今年的目标是学习并通过潜水执照考试。",
+      "reasoning": "艾伦喜欢尝试新鲜事物并享受挑战带来的成就感。",
+      "preferenceStrength": "特别4",
+      "confidenceLevel": 0.9,
+      "preferenceCreationTime": "2025-04-18T13:22:33Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾伦",
+      "description": "艾伦和项目经理李华开会复盘，李华提醒艾伦项目交付后用户反馈收集的重要性。",
+      "date": "2025-04-17T00:00:00Z",
+      "participants": [
+        "艾伦",
+        "李华"
+      ],
+      "emotionalTone": "中性",
+      "keyMoments": "用户反馈对于产品迭代至关重要"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "用户反馈的重要性",
+      "content": "项目交付后的用户反馈收集，对于产品迭代至关重要。",
+      "source": "李华",
+      "keywords": [
+        "用户反馈",
+        "产品迭代",
+        "项目交付"
+      ],
+      "relevanceScore": 1,
+      "confidenceLevel": 0.9
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "艾伦",
+      "goalDescription": "找到一份市场营销领域的实习工作",
+      "goalType": "短期目标",
+      "motivation": "作为一名大三学生，艾伦希望在暑假期间获得实践经验，并提升自己的市场营销技能。",
+      "status": "计划中",
+      "progress": 0.0,
+      "obstacles": [],
+      "startingDate": "2025-04-18T00:00:00Z",
+      "endingDate": null,
+      "priority": "高"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "UPDATE",
+    "updated_object_id": "2bc71acf-6927-4cd2-a7ee-a3c1bf7a2316",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "目标",
+      "preferenceDescription": "艾伦暑假的目标是找到一份市场营销领域的实习工作。",
+      "reasoning": "艾伦是大三学生，希望在暑假找到一份实习工作，最好是能在他感兴趣的市场营销领域。",
+      "preferenceStrength": "特别4",
+      "confidenceLevel": 0.9,
+      "preferenceCreationTime": "2025-04-18T13:23:14Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾伦",
+      "description": "艾伦睡前阅读纸质书半小时。",
+      "date": "2025-04-17T00:00:00Z",
+      "duration": 30,
+      "location": "艾伦的住所",
+      "participants": [
+        "艾伦"
+      ],
+      "emotionalTone": "平静",
+      "keyMoments": "睡前放下手机阅读纸质书"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "生活习惯偏好",
+      "preferenceDescription": "艾伦喜欢睡前阅读纸质书。",
+      "reasoning": "艾伦认为睡前阅读纸质书有助于放松，并提高白天的精神状态。",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-18T13:23:33Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾伦",
+      "description": "艾伦的团队下个月将前往巴塞罗那进行团建活动。艾伦希望借此机会与新加入的设计师小张增进了解。",
+      "date": "2025-05-01T00:00:00Z",
+      "location": "巴塞罗那",
+      "participants": [
+        "艾伦",
+        "小张",
+        "艾伦的团队"
+      ],
+      "emotionalTone": "期待",
+      "keyMoments": "与小张增进了解"
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subjectName": "艾伦",
+      "relationshipDescription": "艾伦和小张是同事关系，艾伦希望增进和新同事小张的了解。",
+      "objectName": "小张",
+      "relationshipType": "同事",
+      "sentiment": "友好",
+      "sentimentStrength": 0.5,
+      "relationshipStage": "初识",
+      "lastInteractionDate": "2025-04-18T13:24:04Z",
+      "relationshipCreationTime": "2025-04-18T13:24:04Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾伦",
+      "description": "艾伦几乎每年四月都会去库肯霍夫公园赏郁金香。",
+      "date": "2025-04-01T00:00:00Z",
+      "location": "库肯霍夫公园",
+      "participants": [
+        "艾伦"
+      ],
+      "emotionalTone": "积极",
+      "keyMoments": "赏郁金香"
+    }
+  },
+  {
+    "class": "Profile",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "currentResidence": "荷兰",
+      "profileLastUpdated": "2025-04-18T13:24:23.792221Z"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "自然景观偏好",
+      "preferenceDescription": "艾伦非常喜欢荷兰的春天，尤其是成片的郁金香花海。",
+      "reasoning": "艾伦在荷兰住了快三年，几乎每年四月都会去库肯霍夫公园赏郁金香。",
+      "preferenceStrength": "特别4",
+      "confidenceLevel": 0.9,
+      "preferenceCreationTime": "2025-04-18T13:25:00Z"
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "艾伦",
+      "goalDescription": "提升公开演讲能力",
+      "goalType": "短期目标",
+      "motivation": "获得真实的反馈，以便更好地提升演讲能力",
+      "status": "进行中",
+      "progress": 0.0,
+      "obstacles": [],
+      "startingDate": "2025-04-18T00:00:00Z",
+      "endingDate": "2025-07-18T00:00:00Z",
+      "priority": "高"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾伦",
+      "description": "艾伦邀请朋友陈默来听他的公开演讲练习，并给予反馈。",
+      "date": "2025-04-18T00:00:00Z",
+      "duration": null,
+      "location": null,
+      "locationDetails": null,
+      "participants": [
+        "艾伦",
+        "陈默"
+      ],
+      "emotionalTone": "积极",
+      "keyMoments": "邀请朋友听练习，获取反馈"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾伦",
+      "description": "艾伦今天午餐在公司附近新开的越南河粉店用餐，觉得味道很正宗，并由此想到了越南菜注重使用新鲜香草的特点。",
+      "date": "2025-04-18T00:00:00Z",
+      "location": "公司附近的越南河粉店",
+      "participants": [
+        "艾伦"
+      ],
+      "emotionalTone": "积极",
+      "keyMoments": "越南河粉味道正宗"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "食物偏好",
+      "preferenceDescription": "艾伦喜欢正宗的越南河粉",
+      "reasoning": "艾伦觉得公司附近新开的越南河粉店味道很正宗",
+      "preferenceStrength": "有些2",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-18T13:25:20Z"
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "艾伦",
+      "goalDescription": "和弟弟李雷一起存钱去英国观看英超联赛现场比赛",
+      "goalType": "年度目标",
+      "motivation": "艾伦和弟弟李雷都是狂热的足球迷",
+      "status": "计划中",
+      "progress": 0.0,
+      "obstacles": [],
+      "startingDate": "2025-04-18T00:00:00Z",
+      "endingDate": "2026-04-18T00:00:00Z",
+      "priority": "高"
+    }
+  },
+  {
+    "class": "Profile",
+    "action": "UPDATE",
+    "updated_object_id": "8680a701-df34-4f64-b252-ce36f9628cf6",
+    "properties_content": {
+      "fullName": null,
+      "nickname": null,
+      "dateOfBirth": null,
+      "age": null,
+      "gender": null,
+      "height": null,
+      "weight": null,
+      "chronicDiseases": [],
+      "disabilities": [],
+      "allergies": [],
+      "bloodType": null,
+      "medicalHistory": null,
+      "educationLevel": null,
+      "schoolOrUniversity": [],
+      "jobTitle": [],
+      "companyOrEmployer": null,
+      "jobLevel": null,
+      "socialRole": [],
+      "incomeLevel": null,
+      "financialDebts": null,
+      "currentResidence": "荷兰",
+      "hometown": null,
+      "livingWith": [
+        "李雷（弟弟）"
+      ],
+      "housingType": null,
+      "nationality": null,
+      "ethnicity": null,
+      "religion": null,
+      "profileLastUpdated": "2025-04-18T13:25:53Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾伦",
+      "description": "艾伦完成了第一次10公里长跑。",
+      "date": "2025-04-17T00:00:00Z",
+      "location": null,
+      "participants": [
+        "艾伦"
+      ],
+      "emotionalTone": "积极",
+      "keyMoments": "第一次完成10公里长跑"
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "艾伦",
+      "goalDescription": "今年底完成半程马拉松",
+      "goalType": "年度目标",
+      "motivation": "锻炼身体",
+      "status": "进行中",
+      "progress": 0.3,
+      "obstacles": [],
+      "startingDate": "2025-04-18T00:00:00Z",
+      "endingDate": "2025-12-31T00:00:00Z",
+      "priority": "高"
+    }
+  },
+  {
+    "class": "Profile",
+    "action": "UPDATE",
+    "updated_object_id": "8680a701-df34-4f64-b252-ce36f9628cf6",
+    "properties_content": {
+      "livingWith": [
+        "王芳(妻子)"
+      ],
+      "profileLastUpdated": "2025-04-18T13:26:49.320226Z"
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subjectName": "艾伦",
+      "relationshipDescription": "艾伦和王芳是夫妻关系，王芳是一位细心体贴的妻子，经常提醒和照顾艾伦。",
+      "objectName": "王芳",
+      "relationshipType": "夫妻",
+      "sentiment": "喜爱",
+      "sentimentStrength": 0.9,
+      "relationshipStage": "稳定",
+      "lastInteractionDate": "2025-04-18T13:26:52Z",
+      "relationshipCreationTime": "2025-04-18T13:26:52Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾伦",
+      "description": "艾伦鼓起勇气参加了一个朋友举办的大型生日派对，认识了一些新朋友，但感觉很累。",
+      "date": "2025-04-13T00:00:00Z",
+      "location": "朋友举办的生日派对",
+      "participants": [
+        "艾伦",
+        "艾伦的朋友们"
+      ],
+      "emotionalTone": "疲惫",
+      "keyMoments": "认识了一些新朋友"
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subjectName": "艾伦",
+      "relationshipDescription": "艾伦参加朋友举办的生日派对，认识了一些新朋友。",
+      "objectName": "艾伦的新朋友们",
+      "relationshipType": "朋友",
+      "sentiment": "友好",
+      "sentimentStrength": 0.5,
+      "relationshipStage": "初识",
+      "lastInteractionDate": "2025-04-18T13:27:13Z",
+      "relationshipCreationTime": "2025-04-18T13:27:13Z"
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "艾伦",
+      "goalDescription": "为父母李建国和王秀英准备结婚三十周年纪念礼物",
+      "goalType": "短期目标",
+      "motivation": "父母即将迎来结婚三十周年纪念日",
+      "status": "进行中",
+      "progress": 0.2,
+      "obstacles": [],
+      "startingDate": "2025-04-18T00:00:00Z",
+      "endingDate": "2025-12-31T00:00:00Z",
+      "priority": "高"
+    }
+  },
+  {
+    "class": "Profile",
+    "action": "UPDATE",
+    "updated_object_id": "8680a701-df34-4f64-b252-ce36f9628cf6",
+    "properties_content": {
+      "fullName": "艾伦",
+      "profileLastUpdated": "2025-04-18T13:27:40Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾伦",
+      "description": "艾伦开始养成每周五下班前花半小时回顾本周工作的习惯。",
+      "date": "2025-04-12T00:00:00Z",
+      "duration": 30,
+      "location": "公司",
+      "participants": [
+        "艾伦"
+      ],
+      "emotionalTone": "积极",
+      "keyMoments": "开始定期复盘总结"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "工作方法偏好",
+      "preferenceDescription": "艾伦喜欢在每周五下班前花半小时复盘总结本周工作。",
+      "reasoning": "艾伦了解到定期复盘总结对于个人能力成长非常有帮助。",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-18T13:28:15Z"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "简洁高效的代码的重要性",
+      "content": "简洁高效的代码对后期维护至关重要，良好的代码结构能大大减少后期维护的成本。",
+      "category": "软件工程",
+      "source": "艾伦",
+      "keywords": [
+        "简洁",
+        "高效",
+        "代码",
+        "维护",
+        "代码结构"
+      ],
+      "relevanceScore": 1.0,
+      "confidenceLevel": 1.0
+    }
+  },
+  {
+    "class": "Profile",
+    "action": "UPDATE",
+    "updated_object_id": "8680a701-df34-4f64-b252-ce36f9628cf6",
+    "properties_content": {
+      "jobTitle": [
+        "软件工程师"
+      ],
+      "jobLevel": "资深",
+      "profileLastUpdated": "2025-04-18T13:28:38.609201Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾伦",
+      "description": "艾伦收到了大学同学张伟从意大利寄来的明信片，感到温暖和惊喜。",
+      "date": "2025-04-18T00:00:00Z",
+      "participants": [
+        "艾伦",
+        "张伟"
+      ],
+      "emotionalTone": "积极",
+      "keyMoments": "收到手写祝福和分享"
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subjectName": "艾伦",
+      "relationshipDescription": "艾伦和张伟是大学同学，艾伦收到张伟从意大利寄来的明信片，感到温暖和惊喜。",
+      "objectName": "张伟",
+      "relationshipType": "朋友",
+      "sentiment": "温暖",
+      "sentimentStrength": 0.7,
+      "relationshipStage": "稳定",
+      "lastInteractionDate": "2025-04-18T13:29:14Z",
+      "relationshipCreationTime": "2025-04-18T13:29:14Z"
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "艾伦",
+      "goalDescription": "系统学习投资理财知识",
+      "goalType": "学习目标",
+      "motivation": "实现长期的财务规划",
+      "status": "进行中",
+      "progress": 0.1,
+      "obstacles": [],
+      "startingDate": "2025-04-11T00:00:00Z",
+      "priority": "高"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "学习偏好",
+      "preferenceDescription": "艾伦希望系统地学习投资理财知识。",
+      "reasoning": "艾伦认为投资理财知识对实现长期的财务规划很重要。",
+      "preferenceStrength": "特别4",
+      "confidenceLevel": 0.9,
+      "preferenceCreationTime": "2025-04-18T13:29:38Z"
+    }
+  },
+  {
+    "class": "Profile",
+    "action": "UPDATE",
+    "updated_object_id": "8680a701-df34-4f64-b252-ce36f9628cf6",
+    "properties_content": {
+      "socialRole": [
+        "姐姐",
+        "长女"
+      ],
+      "profileLastUpdated": "2025-04-18T13:30:01.008855Z"
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subjectName": "艾伦",
+      "relationshipDescription": "艾伦是小明和小林的姐姐，她喜欢照顾弟弟妹妹，经常主动帮助他们解决问题。",
+      "objectName": "小明",
+      "relationshipType": "家人",
+      "sentiment": "喜爱",
+      "sentimentStrength": 0.8,
+      "relationshipStage": "稳定",
+      "lastInteractionDate": "2025-04-18T13:30:03Z",
+      "relationshipCreationTime": "2025-04-18T13:30:03Z"
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subjectName": "艾伦",
+      "relationshipDescription": "艾伦是小明和小林的姐姐，她喜欢照顾弟弟妹妹，经常主动帮助他们解决问题。",
+      "objectName": "小红",
+      "relationshipType": "家人",
+      "sentiment": "喜爱",
+      "sentimentStrength": 0.8,
+      "relationshipStage": "稳定",
+      "lastInteractionDate": "2025-04-18T13:30:03Z",
+      "relationshipCreationTime": "2025-04-18T13:30:03Z"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "性格偏好",
+      "preferenceDescription": "艾伦喜欢照顾别人。",
+      "reasoning": "艾伦是家里的长女，性格上比较喜欢照顾别人。",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.7,
+      "preferenceCreationTime": "2025-04-18T13:30:03Z"
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subjectName": "艾利克斯",
+      "relationshipDescription": "艾利克斯和王思明一起在米纸餐厅吃过饭，两人是老同学。",
+      "objectName": "王思明",
+      "relationshipType": "朋友",
+      "sentiment": "喜欢",
+      "sentimentStrength": 0.7,
+      "relationshipStage": "熟悉",
+      "lastInteractionDate": "2025-04-18T19:27:20Z",
+      "relationshipCreationTime": "2025-04-18T19:27:20Z"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "心理学参考书籍",
+      "content": "社会心理学、认知心理学，以及精神分析、发展心理学等专业书籍。",
+      "category": "心理学",
+      "source": "白百合",
+      "keywords": [
+        "社会心理学",
+        "认知心理学",
+        "精神分析",
+        "发展心理学",
+        "毕业设计"
+      ],
+      "relevanceScore": 1.0,
+      "confidenceLevel": 1.0
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾利克斯",
+      "preferenceType": "书籍偏好",
+      "preferenceDescription": "艾利克斯认为《社会心理学》和《认知心理学》是心理学方面的经典书籍。",
+      "reasoning": "因为艾利克斯正在准备毕业设计，虚拟人格推荐了这两本书。",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-18T19:29:06Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "UPDATE",
+    "updated_object_id": "fc285215-d7ec-46a4-9b2e-24f4fc7752e8",
+    "properties_content": {
+      "subject": "艾利克斯",
+      "description": "艾利克斯全家去崇明岛烧烤，父亲新买的无人机在拍全家福时差点掉进芦苇荡，原因是风大且父亲操作不太熟练。",
+      "date": "2025-04-01T00:00:00Z",
+      "keyMoments": "无人机差点掉进芦苇荡，因风大且父亲操作生疏",
+      "participants": [
+        "艾利克斯",
+        "艾利克斯的父亲",
+        "艾利克斯的家人"
+      ],
+      "location": "崇明岛",
+      "emotionalTone": "紧张后放松",
+      "duration": null,
+      "locationDetails": null
+    }
+  },
+  {
+    "class": "Events",
+    "action": "UPDATE",
+    "updated_object_id": "48e007d1-aff5-478a-97f1-0d04794e1899",
+    "properties_content": {
+      "subject": "艾利克斯的爸爸",
+      "description": "艾利克斯的爸爸操作无人机时因风大且操作不熟练差点使其掉进芦苇荡。",
+      "date": "2025-04-11T00:00:00Z",
+      "location": "郊区的公园",
+      "participants": [
+        "艾利克斯的爸爸"
+      ],
+      "emotionalTone": "惊险",
+      "keyMoments": "差点掉进芦苇荡"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾利克斯的爸爸",
+      "description": "艾利克斯的爸爸的无人机差点掉进芦苇荡，原因是风大且操作不熟练。",
+      "date": "2025-04-11T00:00:00Z",
+      "location": "城西雁荡湖公园",
+      "participants": [
+        "艾利克斯的爸爸"
+      ],
+      "emotionalTone": "惊险",
+      "keyMoments": "无人机差点掉进芦苇荡"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "UPDATE",
+    "updated_object_id": "48e007d1-aff5-478a-97f1-0d04794e1899",
+    "properties_content": {
+      "subject": "艾利克斯的爸爸",
+      "description": "艾利克斯的爸爸的无人机差点掉进芦苇荡，原因是风大且操作不熟练。",
+      "date": "2025-04-11T00:00:00Z",
+      "location": "城西雁荡湖公园",
+      "participants": [
+        "艾利克斯的爸爸"
+      ],
+      "emotionalTone": "惊险",
+      "keyMoments": "无人机差点掉进芦苇荡"
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subjectName": "艾利克斯",
+      "relationshipDescription": "艾利克斯和虚拟人格似乎一起在佘山看过流星雨，并且对那次经历印象深刻。",
+      "objectName": "虚拟人格名字",
+      "relationshipType": "朋友",
+      "sentiment": "喜欢",
+      "sentimentStrength": 0.8,
+      "relationshipStage": "熟悉",
+      "lastInteractionDate": "2025-04-18T19:39:54Z",
+      "relationshipCreationTime": "2025-04-18T19:39:54Z"
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subjectName": "艾利克斯",
+      "relationshipDescription": "艾利克斯打算这周约Lisa一起玩剧本杀，Lisa是艾利克斯的同事，并且是剧本杀高手。",
+      "objectName": "Lisa",
+      "relationshipType": "同事",
+      "sentiment": "喜欢",
+      "sentimentStrength": 0.7,
+      "relationshipStage": "熟悉",
+      "lastInteractionDate": "2025-04-18T19:42:01Z",
+      "relationshipCreationTime": "2025-04-18T19:42:01Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "用户艾利克斯",
+      "description": "用户艾利克斯和Lisa以及其他部门同事一起参加公司上个月的部门团建，玩密室逃脱。Lisa展现出惊人的推理能力和团队合作精神，带领大家找到了关键线索，最终成功逃脱。",
+      "date": "2025-03-01T00:00:00Z",
+      "location": "未提及",
+      "participants": [
+        "用户艾利克斯",
+        "Lisa",
+        "其他部门同事"
+      ],
+      "emotionalTone": "积极",
+      "keyMoments": "Lisa展现出惊人的推理能力和团队合作精神，带领大家成功逃脱。"
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "UPDATE",
+    "updated_object_id": "46039f70-4841-43ef-9fc3-b0cc1420e40b",
+    "properties_content": {
+      "subjectName": "艾利克斯",
+      "relationshipDescription": "艾利克斯和Lisa是同事，Lisa是剧本杀高手，这体现在一次公司团建的密室逃脱游戏中，Lisa展现出惊人的推理能力和团队合作精神，带领团队成功逃脱。艾利克斯打算这周约Lisa一起玩剧本杀。",
+      "objectName": "Lisa",
+      "relationshipType": "同事",
+      "sentiment": "喜欢",
+      "sentimentStrength": 0.7,
+      "relationshipStage": "熟悉",
+      "lastInteractionDate": "2025-04-18T19:44:01Z",
+      "relationshipCreationTime": "2025-04-18T19:42:01Z"
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "艾利克斯",
+      "goalDescription": "制定健身计划",
+      "goalType": "个人目标",
+      "motivation": "查看体脂率数据后，想要健身",
+      "status": "计划中",
+      "progress": 0.0,
+      "obstacles": [],
+      "startingDate": "2025-04-19T00:00:00Z",
+      "priority": "高"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾利克斯",
+      "preferenceType": "运动偏好",
+      "preferenceDescription": "艾利克斯想要去健身。",
+      "reasoning": "因为最近查看了体脂率数据。",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-19T15:38:46Z"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "艾利克斯的体脂率和增肌建议",
+      "content": "艾利克斯的体脂率为22%，教练建议增肌并补充蛋白粉。",
+      "category": "健康",
+      "source": "教练",
+      "keywords": [
+        "体脂率",
+        "增肌",
+        "蛋白粉",
+        "健身"
+      ],
+      "relevanceScore": 1.0,
+      "confidenceLevel": 1.0
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "UPDATE",
+    "updated_object_id": "2fac7e08-848a-4a80-b21f-51d85282fab6",
+    "properties_content": {
+      "owner": "艾利克斯",
+      "goalDescription": "增肌",
+      "goalType": "个人目标",
+      "motivation": "体脂率为22%，教练建议增肌",
+      "status": "计划中",
+      "progress": 0.0,
+      "obstacles": [],
+      "startingDate": "2025-04-19T00:00:00Z",
+      "priority": "高"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾利克斯",
+      "preferenceType": "健身目标",
+      "preferenceDescription": "艾利克斯想要增肌。",
+      "reasoning": "教练根据艾利克斯22%的体脂率建议增肌。",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-19T15:39:36Z"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾利克斯",
+      "preferenceType": "营养补充剂偏好",
+      "preferenceDescription": "艾利克斯需要补充蛋白粉。",
+      "reasoning": "教练建议补充蛋白粉以帮助增肌。",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-19T15:39:36Z"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "UPDATE",
+    "updated_object_id": "4444d4f4-aec0-429e-86da-c735ab616963",
+    "properties_content": {
+      "preferenceOwner": "艾利克斯",
+      "preferenceType": "运动偏好",
+      "preferenceDescription": "艾利克斯想要增肌，计划去健身。",
+      "reasoning": "因为最近查看了体脂率数据，教练建议增肌。",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.9,
+      "preferenceCreationTime": "2025-04-19T15:38:46Z"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "AI领域技术革新周期",
+      "content": "AI领域的技术革新非常快，大的变化大概一到两年就会发生一次。",
+      "category": "AI",
+      "source": "虚拟人格",
+      "keywords": [
+        "AI",
+        "技术革新",
+        "周期"
+      ],
+      "relevanceScore": 1.0,
+      "confidenceLevel": 0.8
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "通用人工智能突破时间预测",
+      "content": "在AI未来趋势讲座上，讲师预测通用人工智能可能五年内突破。",
+      "category": "AI",
+      "source": "AI未来趋势讲座",
+      "keywords": [
+        "通用人工智能",
+        "突破",
+        "预测"
+      ],
+      "relevanceScore": 1.0,
+      "confidenceLevel": 0.8
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾利克斯",
+      "description": "艾利克斯每周二、周四需要加晚班，因此需要调整健身计划和AI研究员面试的学习时间。",
+      "date": "2025-04-16T00:00:00Z",
+      "duration": null,
+      "location": null,
+      "locationDetails": null,
+      "participants": [
+        "艾利克斯"
+      ],
+      "emotionalTone": "中性",
+      "keyMoments": "需要调整健身计划和面试学习时间"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾利克斯",
+      "preferenceType": "健身计划",
+      "preferenceDescription": "艾利克斯每周二、周四晚上去健身房做HIIT。",
+      "reasoning": "为了增肌和保持健康。",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-19T15:47:39Z"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "UPDATE",
+    "updated_object_id": "01e19dee-29cd-4765-a736-c213dc50f126",
+    "properties_content": {
+      "preferenceOwner": "艾利克斯",
+      "preferenceType": "职业偏好",
+      "preferenceDescription": "艾利克斯想成为AI研究员，正在准备面试。",
+      "reasoning": "艾利克斯准备参加腾讯AI研究员岗位的面试，需要重新安排学习时间。",
+      "preferenceStrength": "特别4",
+      "confidenceLevel": 0.9,
+      "preferenceCreationTime": "2025-04-19T15:47:39Z"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾利克斯的女朋友",
+      "preferenceType": "兴趣爱好",
+      "preferenceDescription": "艾利克斯的女朋友对黑洞理论特别着迷。",
+      "reasoning": "三月初和艾利克斯一起看了电影《星际穿越》后，被电影感动哭得梨花带雨，之后就对黑洞理论着迷。",
+      "preferenceStrength": "特别4",
+      "confidenceLevel": 0.9,
+      "preferenceCreationTime": "2025-04-19T15:50:29Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾利克斯",
+      "description": "艾利克斯和家人一起去逛商场，艾利克斯的父亲在路过无人机专卖店时愣了一下。",
+      "date": "2025-04-18T00:00:00Z",
+      "location": "商场",
+      "participants": [
+        "艾利克斯",
+        "艾利克斯的父亲",
+        "艾利克斯的家人"
+      ],
+      "emotionalTone": "平静",
+      "keyMoments": "艾利克斯的父亲看到无人机店时的反应"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾利克斯的父亲",
+      "preferenceType": "物品及活动",
+      "preferenceDescription": "艾利克斯的父亲对无人机有心理阴影。",
+      "reasoning": "因为之前在崇明岛玩无人机时差点掉进芦苇荡。",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-19T15:52:02Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "UPDATE",
+    "updated_object_id": "776cd3fc-5d8b-4c16-8462-15b2b3a8124d",
+    "properties_content": {
+      "subject": "艾利克斯",
+      "description": "艾利克斯计划下个月去巴黎自由行，主要参观卢浮宫和埃菲尔铁塔。",
+      "date": "2025-05-01T00:00:00Z",
+      "location": "巴黎",
+      "participants": [
+        "艾利克斯"
+      ],
+      "emotionalTone": "期待",
+      "keyMoments": "第一次去巴黎自由行"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾利克斯",
+      "preferenceType": "运动时间偏好",
+      "preferenceDescription": "艾利克斯喜欢在每周二和周四下班后去瑜伽私教班上课。",
+      "reasoning": "艾利克斯报名了瑜伽私教班。",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-20T14:27:19Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "UPDATE",
+    "updated_object_id": "db494f6d-cc18-4593-b227-71793e21ff39",
+    "properties_content": {
+      "subject": "艾利克斯",
+      "description": "艾利克斯最近报名参加了瑜伽私教课程，每周二和周四下班后上课。教练称赞艾利克斯的柔韧性超过了程序员的平均水平。",
+      "date": "2025-04-20T00:00:00Z",
+      "keyMoments": "教练称赞艾利克斯柔韧性好，超过程序员平均水平",
+      "participants": [
+        "艾利克斯",
+        "瑜伽教练"
+      ],
+      "emotionalTone": "积极"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "UPDATE",
+    "updated_object_id": "493bd57d-19a6-44af-9603-ba8f99deb9b4",
+    "properties_content": {
+      "preferenceOwner": "艾利克斯",
+      "preferenceType": "运动偏好",
+      "preferenceDescription": "艾利克斯喜欢瑜伽，并且柔韧性很好，超过程序员平均水平。",
+      "reasoning": "艾利克斯最近报了瑜伽私教班，每周坚持练习，柔韧性得到了教练的肯定。",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.9,
+      "preferenceCreationTime": "2025-04-07T15:29:46Z"
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subjectName": "艾利克斯",
+      "relationshipDescription": "艾利克斯认为母亲是很重要的家人，两人一起去西湖边散步。",
+      "objectName": "艾利克斯的母亲",
+      "relationshipType": "家人",
+      "sentiment": "喜欢",
+      "sentimentStrength": 0.9,
+      "relationshipStage": "稳定",
+      "lastInteractionDate": "2025-04-13T00:00:00Z",
+      "relationshipCreationTime": "2025-04-20T14:28:43Z"
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "UPDATE",
+    "updated_object_id": "0db9cc15-fb4b-4f66-8272-3c9747d81914",
+    "properties_content": {
+      "subjectName": "艾利克斯",
+      "relationshipDescription": "艾利克斯很爱她的母亲，母亲教她跳广场舞的新步法。",
+      "objectName": "艾利克斯的母亲",
+      "relationshipType": "家人",
+      "sentiment": "喜爱",
+      "sentimentStrength": 0.95,
+      "relationshipStage": "稳定",
+      "lastInteractionDate": "2025-04-20T14:29:29Z",
+      "relationshipCreationTime": "2025-04-20T14:28:43Z"
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subjectName": "艾利克斯",
+      "relationshipDescription": "艾利克斯在周末同学聚会遇到了李华，李华在华为工作，从事5G研发。",
+      "objectName": "李华",
+      "relationshipType": "同学",
+      "sentiment": "无",
+      "sentimentStrength": 0.5,
+      "relationshipStage": "熟悉",
+      "lastInteractionDate": "2025-04-20T14:30:12Z",
+      "relationshipCreationTime": "2025-04-20T14:30:12Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "UPDATE",
+    "updated_object_id": "80309dc2-1a93-4202-b7d1-39a9bc0fe3a0",
+    "properties_content": {
+      "description": "艾利克斯在星巴克遇到一位穿红裙的女士。",
+      "subject": "艾利克斯",
+      "date": "2025-04-20T00:00:00Z",
+      "duration": null,
+      "keyMoments": null,
+      "locationDetails": null,
+      "participants": [
+        "艾利克斯",
+        "穿红裙的女士"
+      ],
+      "location": "星巴克",
+      "emotionalTone": "中性"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾利克斯",
+      "description": "艾利克斯啃完了一本对毕业设计很有帮助的书《Python数据科学》。",
+      "date": "2025-04-20T00:00:00Z",
+      "location": "未提及",
+      "participants": [
+        "艾利克斯"
+      ],
+      "emotionalTone": "积极",
+      "keyMoments": "学习了神经网络调参方法"
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subjectName": "艾利克斯",
+      "relationshipDescription": "艾利克斯的女友",
+      "objectName": "艾利克斯的女友",
+      "relationshipType": "恋爱",
+      "sentiment": "喜欢",
+      "sentimentStrength": 0.8,
+      "relationshipStage": "稳定",
+      "lastInteractionDate": "2025-04-20T14:33:19Z",
+      "relationshipCreationTime": "2025-04-20T14:33:19Z"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾利克斯的女友",
+      "preferenceType": "电影相关话题",
+      "preferenceDescription": "对《星际穿越》中的黑洞理论感兴趣",
+      "reasoning": "艾利克斯的女友在看完电影后，天天追着艾利克斯讨论相关内容",
+      "preferenceStrength": "特别4",
+      "confidenceLevel": 0.7,
+      "preferenceCreationTime": "2025-04-20T14:33:19Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "UPDATE",
+    "updated_object_id": "4e7e22a3-1f29-469f-bacb-25d9d0e7e4e1",
+    "properties_content": {
+      "description": "艾利克斯购买了AJ芝加哥限定款球鞋，花费了他半个月的工资。",
+      "keyMoments": "花费半个月工资购买收藏品，艾利克斯忘记了花费的金额",
+      "date": "2025-04-07T00:00:00Z",
+      "subject": "艾利克斯",
+      "participants": [
+        "艾利克斯"
+      ],
+      "emotionalTone": "兴奋",
+      "location": "未提及"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "UPDATE",
+    "updated_object_id": "e4e45675-07b0-4523-9888-12a72e318618",
+    "properties_content": {
+      "preferenceOwner": "艾利克斯",
+      "preferenceType": "收藏偏好",
+      "preferenceDescription": "艾利克斯喜欢收藏经典复刻的AJ球鞋，例如芝加哥限定款，并且为此花费了半个月工资。",
+      "reasoning": "艾利克斯认为AJ芝加哥限定款是经典复刻，必须收藏。",
+      "preferenceStrength": "特别4",
+      "confidenceLevel": 0.95,
+      "preferenceCreationTime": "2025-04-07T15:38:38Z"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "UPDATE",
+    "updated_object_id": "9f330764-7d31-4141-a6a3-54074468e381",
+    "properties_content": {
+      "title": "科创板指数投资建议",
+      "content": "艾利克斯的朋友建议他定投科创板指数，认为当前正当时。",
+      "category": "投资",
+      "source": "艾利克斯的投行朋友",
+      "keywords": [
+        "科创板",
+        "指数",
+        "定投",
+        "投资"
+      ],
+      "relevanceScore": 1.0,
+      "confidenceLevel": 0.9
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾利克斯的朋友",
+      "preferenceType": "投资偏好",
+      "preferenceDescription": "艾利克斯的朋友建议定投科创板指数。",
+      "reasoning": "他认为当前正当时。",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.7,
+      "preferenceCreationTime": "2025-05-09T10:55:54Z"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "UPDATE",
+    "updated_object_id": "4bf01dcf-4d30-4eba-b4d1-b4e30fd32c98",
+    "properties_content": {
+      "preferenceOwner": "艾利克斯",
+      "preferenceType": "兴趣爱好",
+      "preferenceDescription": "艾利克斯喜欢观星，尤其喜欢观看流星雨。",
+      "reasoning": "艾利克斯在佘山观星看到了英仙座流星雨，觉得很漂亮。",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-07T15:40:28Z"
+    }
+  }
+]

@@ -305,6 +305,7 @@ async def get_gemini_response_with_history(user_input, user_id, manual_history,
         timestamp = datetime.now().isoformat()
 
         # 2. 生成 Prompt - 保持原有格式不变，以确保模型理解
+        # deleted prompt:                 - 若对话历史和长期记忆信息有冲突，优先使用对话历史的信息。
         system_instruction = f"""
                 === 你的角色档案 ===
                 {character_profile}
@@ -319,7 +320,7 @@ async def get_gemini_response_with_history(user_input, user_id, manual_history,
                 - 基于用户输入和对话历史生成你的回复。
                 - 对话历史中你应该更关注最近的消息，但仍然可以结合整个对话历史来理解上下文。
                 - 请注意，你会尝试联想回忆和目前互动有关的记忆，所以有长期记忆可以参考，但这些记忆中有时存在联想到的无关内容。
-                - 若对话历史和长期记忆信息有冲突，优先使用对话历史的信息。
+
 
                 === 回复风格指南 ===
                 - **参考对话历史**：参考近期的对话历史，尤其是最近几十分钟内的，让前后对话自然连贯，但是注意兼顾用户切换话题的意愿。
@@ -376,24 +377,24 @@ async def get_gemini_response_with_history(user_input, user_id, manual_history,
         recent_history = manual_history[-3:] if len(manual_history) >= 3 else manual_history
         needs_visual = might_need_visual_info(user_input, recent_history)
 
-        if image_base64 and needs_visual:
-            start_time = time.time()
-            print(f"✅ 检测到可能需要视觉信息，将包含图像数据")
-            try:
-                image_data = base64.b64decode(image_base64)
-                image = Image.open(io.BytesIO(image_data))
-                parts.append({
-                    "inline_data": {
-                        "mime_type": "image/jpeg",
-                        "data": image_data
-                    }
-                })
-                print(f"图像处理耗时: {time.time() - start_time:.4f}秒")
-            except Exception as e:
-                print(f"Base64 图像数据解码失败: {str(e)}")
-        else:
-            if image_base64:
-                print(f"⏩ 本次对话可能不需要视觉信息，跳过图像处理")
+        #if image_base64 and needs_visual:
+        #    start_time = time.time()
+        #    print(f"✅ 检测到可能需要视觉信息，将包含图像数据")
+        #    try:
+        #        image_data = base64.b64decode(image_base64)
+        #        image = Image.open(io.BytesIO(image_data))
+        #        parts.append({
+        #            "inline_data": {
+        #                "mime_type": "image/jpeg",
+        #                "data": image_data
+        #            }
+        #        })
+        #       print(f"图像处理耗时: {time.time() - start_time:.4f}秒")
+        #    except Exception as e:
+        #        print(f"Base64 图像数据解码失败: {str(e)}")
+        #else:
+        #    if image_base64:
+        #        print(f"⏩ 本次对话可能不需要视觉信息，跳过图像处理")
 
         # 4. 调用 LLM
         start_time_gemini = time.time()

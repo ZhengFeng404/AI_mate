@@ -1,0 +1,639 @@
+[
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾伦",
+      "description": "艾伦昨天去了新开的乐乐餐厅，并且特别喜欢那里的披萨。",
+      "date": "2025-04-13T00:00:00Z",
+      "location": "乐乐餐厅",
+      "participants": [
+        "艾伦"
+      ],
+      "emotionalTone": "积极",
+      "keyMoments": "艾伦对披萨的喜爱"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "食物偏好",
+      "preferenceDescription": "艾伦特别爱吃乐乐餐厅的披萨。",
+      "reasoning": "艾伦昨天去了新开的乐乐餐厅，并且表示特别爱吃那里的披萨。",
+      "preferenceStrength": "特别4",
+      "confidenceLevel": 0.9,
+      "preferenceCreationTime": "2025-04-14T22:39:26Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾伦",
+      "description": "艾伦和弟弟小刚一起在家看电影。",
+      "date": "2025-04-13T00:00:00Z",
+      "location": "艾伦家",
+      "participants": [
+        "艾伦",
+        "小刚"
+      ],
+      "emotionalTone": "温馨"
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subjectName": "艾伦",
+      "relationshipDescription": "艾伦和他的弟弟小刚一起在家看电影。",
+      "objectName": "小刚",
+      "relationshipType": "家人",
+      "sentiment": "喜欢",
+      "sentimentStrength": 0.7,
+      "relationshipStage": "稳定",
+      "lastInteractionDate": "2025-04-13T00:00:00Z",
+      "relationshipCreationTime": "2025-04-14T22:40:42Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾伦",
+      "description": "艾伦今天加班完成紧急的设计方案。",
+      "date": "2025-04-14T00:00:00Z",
+      "location": "公司",
+      "participants": [
+        "艾伦"
+      ],
+      "emotionalTone": "忙碌",
+      "keyMoments": "完成紧急设计方案"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "工作态度",
+      "preferenceDescription": "艾伦有责任心，会为了完成工作加班。",
+      "reasoning": "艾伦为了完成紧急的设计方案而加班。",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-14T22:41:08Z"
+    }
+  },
+  {
+    "class": "Profile",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "fullName": "王芳",
+      "nickname": "妈妈",
+      "socialRole": "母亲",
+      "livingWith": "丈夫和孩子",
+      "profileLastUpdated": "2025-04-14T22:41:27.858256Z"
+    }
+  },
+  {
+    "class": "Profile",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "nickname": "爸爸",
+      "socialRole": "父亲",
+      "livingWith": "妻子和孩子",
+      "profileLastUpdated": "2025-04-14T22:41:27.858256Z"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "王芳",
+      "preferenceType": "性格偏好",
+      "preferenceDescription": "王芳喜欢安静。",
+      "reasoning": "用户艾伦的描述。",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-14T22:41:31Z"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦的爸爸",
+      "preferenceType": "性格偏好",
+      "preferenceDescription": "艾伦的爸爸喜欢热闹。",
+      "reasoning": "用户艾伦的描述。",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-14T22:41:31Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾伦和李明",
+      "description": "艾伦和搭档李明计划下周发布新产品。",
+      "date": "2025-04-21T00:00:00Z",
+      "participants": [
+        "艾伦",
+        "李明"
+      ],
+      "emotionalTone": "积极",
+      "keyMoments": "新产品发布"
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subjectName": "艾伦",
+      "relationshipDescription": "艾伦和李明是工作搭档，一起合作开发新产品。",
+      "objectName": "李明",
+      "relationshipType": "同事",
+      "sentiment": "无",
+      "sentimentStrength": 0.5,
+      "relationshipStage": "稳定",
+      "lastInteractionDate": "2025-04-14T22:41:49Z",
+      "relationshipCreationTime": "2025-04-14T22:41:49Z"
+    }
+  },
+  {
+    "class": "Profile",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "fullName": "赵娜",
+      "socialRole": "项目经理",
+      "jobLevel": "资深",
+      "companyOrEmployer": "用户同公司"
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subjectName": "艾伦",
+      "relationshipDescription": "艾伦的同事赵娜是个很有经验的项目经理。",
+      "objectName": "赵娜",
+      "relationshipType": "同事",
+      "sentiment": "无",
+      "sentimentStrength": 0.5,
+      "relationshipStage": "稳定",
+      "lastInteractionDate": "2025-04-14T22:42:09Z",
+      "relationshipCreationTime": "2025-04-14T22:42:09Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾伦",
+      "description": "艾伦每天坚持跑步半小时。",
+      "date": "2025-04-14T00:00:00Z",
+      "duration": 30,
+      "location": null,
+      "participants": [
+        "艾伦"
+      ],
+      "emotionalTone": "积极",
+      "keyMoments": null
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "生活习惯",
+      "preferenceDescription": "艾伦坚持每天跑步半小时。",
+      "reasoning": "艾伦知道运动对健康有好处。",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-14T22:42:30Z"
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "艾伦",
+      "goalDescription": "使用番茄工作法进行时间管理",
+      "goalType": "个人目标",
+      "motivation": "了解到时间管理的重要性",
+      "status": "计划中",
+      "progress": 0.0,
+      "obstacles": [],
+      "startingDate": "2025-04-14T00:00:00Z",
+      "priority": "中"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "生活习惯",
+      "preferenceDescription": "艾伦打算开始使用番茄工作法。",
+      "reasoning": "艾伦了解到时间管理的重要性。",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-14T22:42:54Z"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "心理学",
+      "content": "用户艾伦学过心理学，因此比较擅长理解他人情绪。",
+      "category": "心理学",
+      "source": "用户艾伦",
+      "keywords": [
+        "心理学",
+        "情绪理解"
+      ],
+      "relevanceScore": 1,
+      "confidenceLevel": 1
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "技能",
+      "preferenceDescription": "艾伦擅长理解他人情绪。",
+      "reasoning": "因为学习过心理学。",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-14T22:43:17Z"
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "艾伦",
+      "goalDescription": "学好法语",
+      "goalType": "个人目标",
+      "motivation": "喜欢法国文化",
+      "status": "计划中",
+      "progress": 0.0,
+      "obstacles": [],
+      "startingDate": "2025-04-14T00:00:00Z",
+      "priority": "中"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "文化偏好",
+      "preferenceDescription": "艾伦特别喜欢法国文化。",
+      "reasoning": "因为喜欢法国文化，所以想学好法语。",
+      "preferenceStrength": "特别4",
+      "confidenceLevel": 0.9,
+      "preferenceCreationTime": "2025-04-14T22:43:38Z"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "语言学习",
+      "preferenceDescription": "艾伦想学好法语。",
+      "reasoning": "因为喜欢法国文化，所以想学好法语。",
+      "preferenceStrength": "特别4",
+      "confidenceLevel": 0.9,
+      "preferenceCreationTime": "2025-04-14T22:43:38Z"
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "艾伦",
+      "goalDescription": "存钱买房",
+      "goalType": "个人目标",
+      "motivation": "看重家庭稳定",
+      "status": "进行中",
+      "progress": 0.0,
+      "obstacles": [],
+      "startingDate": "2025-04-14T00:00:00Z",
+      "priority": "高"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "价值观",
+      "preferenceDescription": "艾伦很看重家庭稳定。",
+      "reasoning": "艾伦正在努力存钱买房，因为他认为家庭稳定很重要。",
+      "preferenceStrength": "特别4",
+      "confidenceLevel": 0.9,
+      "preferenceCreationTime": "2025-04-14T22:44:02Z"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "用户艾伦的穿衣风格",
+      "content": "用户艾伦偏爱简约风格的衣服。",
+      "category": "时尚",
+      "source": "用户艾伦",
+      "keywords": [
+        "简约风格",
+        "设计师"
+      ],
+      "relevanceScore": 1.0,
+      "confidenceLevel": 1.0
+    }
+  },
+  {
+    "class": "Profile",
+    "action": "UPDATE",
+    "updated_object_id": "115e38f3-bf1a-4379-b5f6-2594db200ea9",
+    "properties_content": {
+      "jobTitle": "设计师",
+      "profileLastUpdated": "2025-04-14T22:44:20.835826Z"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "服饰偏好",
+      "preferenceDescription": "艾伦偏爱简约风格的衣服。",
+      "reasoning": "这很符合他设计师的身份。",
+      "preferenceStrength": "特别4",
+      "confidenceLevel": 0.9,
+      "preferenceCreationTime": "2025-04-14T22:44:24Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾伦",
+      "description": "艾伦在上次旅行中了解了当地的风俗习惯。",
+      "date": "2025-04-13T00:00:00Z",
+      "location": "",
+      "participants": [
+        "艾伦"
+      ],
+      "emotionalTone": "积极",
+      "keyMoments": "了解当地风俗习惯"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "比特币投资风险",
+      "content": "投资比特币风险很高",
+      "category": "投资",
+      "source": "周浩",
+      "keywords": [
+        "比特币",
+        "投资",
+        "风险"
+      ],
+      "relevanceScore": 1,
+      "confidenceLevel": 1
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subjectName": "艾伦",
+      "relationshipDescription": "艾伦的朋友周浩告诉他投资比特币风险很高。",
+      "objectName": "周浩",
+      "relationshipType": "朋友",
+      "sentiment": "无",
+      "sentimentStrength": 0.5,
+      "relationshipStage": "熟悉",
+      "lastInteractionDate": "2025-04-14T22:45:07Z",
+      "relationshipCreationTime": "2025-04-14T22:45:07Z"
+    }
+  },
+  {
+    "class": "Profile",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "currentResidence": "阿姆斯特丹",
+      "jobTitle": "未知",
+      "companyOrEmployer": "未知",
+      "profileLastUpdated": "2025-04-14T22:45:24Z"
+    }
+  },
+  {
+    "class": "Goals",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "owner": "艾伦",
+      "goalDescription": "提升领导力",
+      "goalType": "个人目标",
+      "motivation": "用户艾伦希望提升领导力",
+      "status": "计划中",
+      "progress": 0.0,
+      "obstacles": [],
+      "startingDate": "2025-04-14T22:45:39Z",
+      "priority": "中"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "个人提升目标",
+      "preferenceDescription": "艾伦希望提升领导力。",
+      "reasoning": "艾伦知道提升领导力需要不断学习和实践。",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-14T22:45:42Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾伦",
+      "description": "艾伦因为不喜欢人多的地方，昨天选择去了一个小众画展。",
+      "date": "2025-04-13T00:00:00Z",
+      "location": "小众画展",
+      "participants": [
+        "艾伦"
+      ],
+      "emotionalTone": "平静",
+      "keyMoments": "不喜欢人多的地方"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "场所偏好",
+      "preferenceDescription": "艾伦不喜欢人多的地方",
+      "reasoning": "艾伦觉得人多的地方不舒服",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-14T22:46:03Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾伦",
+      "description": "艾伦作为团队的技术负责人和产品经理张薇合作很愉快。",
+      "date": "2025-04-14T00:00:00Z",
+      "participants": [
+        "艾伦",
+        "张薇"
+      ],
+      "emotionalTone": "积极",
+      "keyMoments": "高效的团队合作"
+    }
+  },
+  {
+    "class": "Relationships",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subjectName": "艾伦",
+      "relationshipDescription": "艾伦和张薇是工作搭档，合作愉快。",
+      "objectName": "张薇",
+      "relationshipType": "同事",
+      "sentiment": "喜欢",
+      "sentimentStrength": 0.7,
+      "relationshipStage": "稳定",
+      "lastInteractionDate": "2025-04-14T22:46:27Z",
+      "relationshipCreationTime": "2025-04-14T22:46:27Z"
+    }
+  },
+  {
+    "class": "Events",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "subject": "艾伦",
+      "description": "艾伦意识到睡眠不足影响效率，昨晚十点就睡觉了。",
+      "date": "2025-04-14T00:00:00Z",
+      "emotionalTone": "积极",
+      "keyMoments": "早睡",
+      "participants": [
+        "艾伦"
+      ],
+      "location": "艾伦的住所"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "生活习惯",
+      "preferenceDescription": "艾伦意识到睡眠不足影响效率，所以昨晚十点就睡觉了。",
+      "reasoning": "睡眠不足影响效率",
+      "preferenceStrength": "中等3",
+      "confidenceLevel": 0.8,
+      "preferenceCreationTime": "2025-04-14T22:46:46Z"
+    }
+  },
+  {
+    "class": "Knowledge",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "title": "艾伦和小雅对小狗的喜爱",
+      "content": "艾伦和她的妹妹小雅都非常喜欢小狗。",
+      "category": "个人爱好",
+      "source": "用户艾伦",
+      "keywords": [
+        "小狗",
+        "宠物",
+        "爱好"
+      ],
+      "relevanceScore": 1.0,
+      "confidenceLevel": 1.0
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "艾伦",
+      "preferenceType": "动物偏好",
+      "preferenceDescription": "艾伦和小雅都非常喜欢小狗。",
+      "reasoning": "未提及",
+      "preferenceStrength": "特别4",
+      "confidenceLevel": 0.9,
+      "preferenceCreationTime": "2025-04-14T22:47:06Z"
+    }
+  },
+  {
+    "class": "Preferences",
+    "action": "ADD",
+    "updated_object_id": "",
+    "properties_content": {
+      "preferenceOwner": "小雅",
+      "preferenceType": "动物偏好",
+      "preferenceDescription": "小雅非常喜欢小狗。",
+      "reasoning": "未提及",
+      "preferenceStrength": "特别4",
+      "confidenceLevel": 0.9,
+      "preferenceCreationTime": "2025-04-14T22:47:06Z"
+    }
+  }
+]

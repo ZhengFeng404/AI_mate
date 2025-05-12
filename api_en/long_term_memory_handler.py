@@ -74,6 +74,7 @@ async def long_term_memory_async(user_input, ai_response, conversation_history, 
         print("success")
 
         declarative_memory_prompt = f"""
+        **Output in English**
         === Your character profile ===
         {character_profile}
 
@@ -239,6 +240,7 @@ async def long_term_memory_async(user_input, ai_response, conversation_history, 
         """
 
         complex_memory_prompt = f"""
+        **Output in English**
         === Your character profile ===
         {character_profile}
 

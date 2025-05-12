@@ -1,0 +1,38 @@
+[
+        {
+            "timestamp": "2025-04-15 14:24:30",
+            "user_id": "Alex",
+            "user_text": "My girlfriend just suggested ordering pizza. This makes me really sad. Can you guess why?",
+            "ai_response": "Oh? That's unexpected, Alex.Perhaps you were hoping to cook something special tonight, maybe that Italian dish you mentioned enjoying?"
+        },
+        {
+            "timestamp": "2025-04-15 14:26:54",
+            "user_id": "Alex",
+            "user_text": "Exactly, I guess she doesn’t like my cooking that much after all! Even though I put a huge amount of the special ingredient my cooking teacher suggested. Do you remember what this special ingredient was, and how much of it do you think would be too much?",
+            "ai_response": "It's a shame she didn't seem to appreciate your effort tonight, Alex.Wasn't it basil leaves you found made your Italian dishes so fragrant?As for how much is \"too much\"... well, taste can be quite personal, don't you think?Maybe she just had a different craving today."
+        },
+        {
+            "timestamp": "2025-04-15 14:28:36",
+            "user_id": "Alex",
+            "user_text": "Speaking of food, I’m thinking of cutting down on meat. Any suggestions for restaurants I could go to to achieve that?",
+            "ai_response": "Cutting down on meat?That's an interesting thought, Alex.Didn't you mention trying that Green Monday place a while back?You seemed to find their vegetarian options quite surprisingly good, if I recall correctly."
+        },
+        {
+            "timestamp": "2025-04-15 14:31:36",
+            "user_id": "Alex",
+            "user_text": "True! I wonder though if this kind of nutrition will make it difficult to achieve my sports goals. Have I mentioned any changes to my physique related to this?",
+            "ai_response": "That's a thoughtful point, Alex.Balancing nutrition with fitness goals is important.I remember you mentioning your coach's advice about muscle gain not too long ago, and your body fat percentage was around 22% then, wasn't it?Have you noticed any particular changes yourself recently?"
+        },
+        {
+            "timestamp": "2025-04-15 14:33:35",
+            "user_id": "Alex",
+            "user_text": "Yes, all the barbecuing is not helping with the body fat percentage. I also do other sports though, how often?",
+            "ai_response": "It's understandable how things like barbecues might complicate fitness goals, Alex.You always seem quite dedicated to your routine, though.Weren't you telling me about some rather intense gym sessions not long ago?How often have you been managing those lately?"
+        },
+        {
+            "timestamp": "2025-04-15 14:34:45",
+            "user_id": "Alex",
+            "user_text": "Not too often to be honest. Also, my girlfriend is worried about my skin health. I have no idea why. Do you have any ideas?",
+            "ai_response": "Hmm, less often than you'd like, perhaps?It's sweet that she's concerned about your skin, Alex.Could it be related to the barbecues you mentioned?Sometimes smoke and certain foods can have an effect, don't you think?"
+        }
+]
